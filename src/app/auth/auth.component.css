@@ -1,0 +1,37 @@
+
+.form-group {
+    position: relative;
+  }
+  
+.btn-font-eye {
+    
+    top: 6vh;
+    right: 1vh;
+    background-color: transparent;
+    color: black;
+    border: none;
+  }
+/*   
+.btn-font-eye {
+    position: absolute;
+    top: 6vh;
+    right: 1vh;
+    background-color: transparent;
+    color: black;
+    border: none;
+  } */
+  
+.letter-icon {
+    position: absolute;
+    top: 6vh;
+    right: 1.5vh;
+    background-color: transparent;
+    color: black;
+    border: none;
+  }
+  a {
+    color: #006eff;
+  }
+  a:hover {
+    cursor: pointer;
+  }

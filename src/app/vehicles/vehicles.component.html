@@ -1,0 +1,42 @@
+<section>
+  <app-filter-menu (filtered)="function($event)"></app-filter-menu>
+</section>
+<!-- <mat-select [(ngModel)]="brand" name="brand" (selectionChange)="filterBrand('brand', brand)">
+  <mat-option *ngFor="let brand of brandList" [value]="brand">{{ brand }}</mat-option>
+</mat-select> -->
+<section class="card mb-3" *ngFor='let vehicle of vehicles | 
+  filter:filters.brand | 
+  filterPriceLow:filters.priceLow | 
+  highestPrice:filters.highestPrice | 
+  lowestMileage:filters.lowestMileage | 
+  highestMileage:filters.highestMileage'>
+  <div class="row no-gutters">
+    <div class="col-md-3 d-flex align-items-center">
+      <img src="{{ vehicle.downloadURL }}" class="card-img px-2 py-2" alt="Zdjęcie pojazdu">
+    </div>
+    <div class="col-md-7 d-flex align-items-center">
+      <div class="card-body py-1 px-2">
+        <h2 class="card-title">{{ vehicle.name | titlecase }}</h2>
+        <p class="card-text">Przebieg: {{ vehicle.carMileage }}km</p>
+        <p class="card-text">
+          <small class="text-muted">{{ vehicle.brand }}</small>
+        </p>
+      </div>
+    </div>
+    <div class="col py-1 px-2 ">
+      <div class="row flex-lg-column">
+        <div class="col d-flex justify-content-start">
+          <b>Cena: {{ vehicle.price }}zł</b>
+        </div>
+        <div class="col">
+          <p class='card-text d-flex justify-content-end'>
+            <small class="align-bottom">Data dodania: {{ vehicle.timestamp.seconds * 1000 | date:'dd-MM-yyyy' }}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="col-4 col-lg-4 col-md-5 col-sm-6 mx-auto my-3">
+  <button type="click" mat-raised-button color="primary" class='btn-block'>Dodaj</button>
+</div>

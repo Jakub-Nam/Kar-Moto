@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col my-2">
+        <ngx-dropzone (change)="onSelectPhoto($event)" [multiple]='oneFile'>
+            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of file" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+        </ngx-dropzone>
+        <ngx-dropzone (change)="onSelectPhotoes($event)" [multiple]='oneFile'>
+            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of file" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+        </ngx-dropzone>
+    </div>
+    <div class="col my-2">
+        <form class='main-form row d-flex flex-column' [formGroup]="this.formService.automotiveForm"
+            (ngSubmit)='onSubmitPushVehicle()'>
+            <div class="form-group col-8 col-lg-10 mx-auto">
+                <div class="row">
+                    <div class="col">
+                        <label for='name'>Nazwa:</label>
+                    </div>
+                    <div class="col">
+                        <input type="text" formControlName='name' id='name' name='name'
+                            placeholder="np. Insignia A LIFT">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-8 col-lg-10 mx-auto">
+                <div class="row">
+                    <div class="col">
+                        <label for='brand'>Marka:</label>
+                    </div>
+                    <div class="col">
+                        <input class='' type="text" formControlName='brand' id='brand' name='brand'
+                            placeholder="np. BMW">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-8 col-lg-10 mx-auto">
+                <div class="row">
+                    <div class="col">
+                        <label for='price'>Cena:</label>
+                    </div>
+                    <div class="col ">
+                        <input type="number" id='price' name='price' formControlName='price' placeholder="np. 75000">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-8 col-lg-10 mx-auto">
+                <div class="row">
+                    <div class="col">
+                        <label for='carMileage'>Przebieg:</label>
+                    </div>
+                    <div class="col ">
+                        <input type="number" id='carMileage' name='carMileage' formControlName='carMileage'
+                            placeholder="np. 200 000">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-8 col-lg-10 mx-auto">
+                <div class="row">
+                    <div class="col">
+                        <label for='productionYear'>Rok produkcji:</label>
+                    </div>
+                    <div class="col ">
+                        <input type="number" id='productionYear' name='productionYear' formControlName='productionYear'
+                            placeholder="YYYY">
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-lg-4 col-md-5 col-sm-6 mx-auto my-3">
+                <button type="submit" mat-raised-button color="primary" class='btn-block'>Dodaj</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div *ngIf="snapshot | async">
+
+
+
+    <!-- <div *ngIf="downloadURL">
+      <h3>Results!</h3>
+      <img [src]="downloadURL"><br>
+      <a [href]="downloadURL" target="_blank" rel="noopener">Download Me!</a>
+    </div>  -->
+</div>

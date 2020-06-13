@@ -1,0 +1,61 @@
+<form>
+  <div class="row justify-content-center flex-wrap">
+    <div class="col-lg-3 col-md-5 col-7 mx-auto">
+      <mat-form-field class='d-flex flex-column justify-self-center px-3'>
+        <mat-label>Marka</mat-label>
+        <mat-select [(ngModel)]="brandModel" name="brandModel">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let brand of brandList" [value]="brand">{{ brand }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-3 col-md-5 col-7 mx-auto">
+      <mat-form-field class='d-flex flex-column justify-self-center px-3'>
+        <mat-label>Cena od</mat-label>
+        <mat-select [(ngModel)]="priceLow" name="priceLow">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let price of pricesLowest" [value]="price">
+            {{ price }} PLN
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class='col-lg-3 col-md-5 col-7 mx-auto'>
+      <mat-form-field class='d-flex flex-column justify-self-center px-3'>
+        <mat-label>Cena do</mat-label>
+        <mat-select [(ngModel)]="highestPrice" name='highestPrice'>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let price of highestPrices" [value]="price">
+            {{ price }} PLN
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class='col-lg-3 col-md-5 col-7 mx-auto'>
+      <mat-form-field class='d-flex flex-column justify-self-center px-3'>
+        <mat-label>Przebieg od</mat-label>
+        <mat-select [(ngModel)]="lowestMileage" name='lowestMileage'>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let mileage of lowestMileages" [value]="mileage">
+            {{ mileage }}km
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class='col-lg-3 col-md-5 col-7 mx-auto'>
+      <mat-form-field class='d-flex flex-column justify-self-center px-3'> 
+        <mat-label>Przebieg do</mat-label>
+        <mat-select [(ngModel)]="highestMileage" name='highestMileage'>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let mileage of lowestMileages" [value]="mileage">
+            {{ mileage }}km
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
