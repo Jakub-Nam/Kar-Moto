@@ -1,0 +1,16 @@
+<ngx-dropzone (change)="onSelectPhotoes($event)" [multiple]>
+    <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemovePhotoes(f)">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-preview>
+</ngx-dropzone>
+<div *ngIf="snapshot | async">
+
+
+
+    <!-- <div *ngIf="downloadURL">
+      <h3>Results!</h3>
+      <img [src]="downloadURL"><br>
+      <a [href]="downloadURL" target="_blank" rel="noopener">Download Me!</a>
+    </div>  -->
+</div>

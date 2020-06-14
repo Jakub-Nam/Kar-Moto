@@ -27,6 +27,7 @@ import { FilterPriceLowPipe } from './shared/filter-pipes/filter-price-low.pipe'
 import { HighestPricePipe } from './shared/filter-pipes/highest-price.pipe';
 import { LowestMileagePipe } from './shared/filter-pipes/lowest-mileage.pipe';
 import { HighestMileagePipe } from './shared/filter-pipes/highest-mileage.pipe';
+import { AdditionalPhotosComponent } from './auth/admin-interface/additional-photos/additional-photos.component';
 
 const appRoutes: Routes = [
   { path: '', component: VehiclesComponent},
@@ -51,7 +52,8 @@ const MaterialComponents = [
     FilterPriceLowPipe,
     HighestPricePipe,
     LowestMileagePipe,
-    HighestMileagePipe
+    HighestMileagePipe,
+    AdditionalPhotosComponent
   ],
   imports: [
     BrowserModule,

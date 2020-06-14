@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutomotiveDatabaseService } from 'src/app/shared/automotive-database.service';
 import { AutomotiveFormService } from 'src/app/shared/automotive-form.service';
-import { AngularFireStorage, createUploadTask } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireUploadTask } from '@angular/fire/storage';
-import { Observable, from } from 'rxjs';
-import { tap, finalize, switchMap, timestamp } from 'rxjs/operators';
-
+import { Observable } from 'rxjs';
+import { tap, finalize } from 'rxjs/operators';
+import { AdditionalPhotosComponent } from './additional-photos/additional-photos.component';
 
 @Component({
   selector: 'app-admin-interface',
@@ -14,15 +14,17 @@ import { tap, finalize, switchMap, timestamp } from 'rxjs/operators';
   styleUrls: ['./admin-interface.component.css']
 })
 export class AdminInterfaceComponent implements OnInit {
+  @ViewChild('AdditionalPhotosComponent') additionalPhotos: AdditionalPhotosComponent;
   oneFile = false;
   isHovering: boolean;
   file: File[] = [];
-  files: File[] = [];
+
   task: AngularFireUploadTask;
   percentage: Observable<number>;
   snapshot: Observable<any>;
   downloadURL: string;
   form;
+  timestamp: number;
   constructor(public automotiveDatabaseService: AutomotiveDatabaseService,
               public formService: AutomotiveFormService,
               private storage: AngularFireStorage,
@@ -35,23 +37,24 @@ export class AdminInterfaceComponent implements OnInit {
   onSelectPhoto(event) {
     this.file.push(...event.addedFiles);
   }
-  onSelectPhotoes(event) {
-    this.files.push(...event.addedFiles);
-    console.log(this.files);
-  }
 
   onSubmitPushVehicle() {
     const file = this.file[0];
-    // the storage path
-    const path = `test/${Date.now()}_${file.name}`;
-    this.startUpload(file, path);
+    this.startUpload(file);
+    // this.startUploadPhotoes(this.files, path);
   }
   onRemove(event) {
     console.log(event);
     this.file.splice(this.file.indexOf(event), 1);
   }
 
-  startUpload(file, path) {
+  startUpload(file) {
+
+    const timestamp = Date.now();
+    this.timestamp = timestamp;
+
+    // the storage path
+    const path = `test/${timestamp}_${file.name}`;
 
     // reference to storage bucket
     const ref = this.storage.ref(path);
@@ -69,17 +72,24 @@ export class AdminInterfaceComponent implements OnInit {
         this.downloadURL = await ref.getDownloadURL().toPromise();
 
         // add data to cloud database
-        this.db.collection('admin').add(
+        this.db.collection('mainData').add(
           {
             name: this.form.value.name,
             brand: this.form.value.brand,
             price: this.form.value.price,
             carMileage: this.form.value.carMileage,
             downloadURL: this.downloadURL,
-            timestamp: new Date()
+            timestamp
           }
         );
       })
     );
+    this.additionalPhotos.pushPhotos();
   }
 }
+
+ // @Input()
+  // set inputTimestamp(inputTimestamp: number) {
+  //   this.inputTimestamp =  inputTimestamp;
+  // }
+  // get inputTimestamp(): number { return this.inputTimestamp; }

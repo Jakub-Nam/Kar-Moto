@@ -6,12 +6,9 @@
                 <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
             </ngx-dropzone-preview>
         </ngx-dropzone>
-        <ngx-dropzone (change)="onSelectPhotoes($event)" [multiple]='oneFile'>
-            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
-            <ngx-dropzone-preview *ngFor="let f of file" [removable]="true" (removed)="onRemove(f)">
-                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-            </ngx-dropzone-preview>
-        </ngx-dropzone>
+        <app-additional-photos #AdditionalPhotosComponent [inputTimestamp]='timestamp'></app-additional-photos>
+       
+
     </div>
     <div class="col my-2">
         <form class='main-form row d-flex flex-column' [formGroup]="this.formService.automotiveForm"
