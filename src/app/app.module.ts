@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { VehiclesComponent } from './vehicles/vehicles.component';
@@ -28,9 +28,12 @@ import { HighestPricePipe } from './shared/filter-pipes/highest-price.pipe';
 import { LowestMileagePipe } from './shared/filter-pipes/lowest-mileage.pipe';
 import { HighestMileagePipe } from './shared/filter-pipes/highest-mileage.pipe';
 import { AdditionalPhotosComponent } from './auth/admin-interface/additional-photos/additional-photos.component';
+import { FooterComponent } from './footer/footer.component';
+import { OneVehicleComponent } from './vehicles/one-vehicle/one-vehicle.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
-  { path: '', component: VehiclesComponent},
+  { path: '', component: VehiclesComponent },
   // { path: '/user', component: AuthComponent}
 ];
 
@@ -53,7 +56,9 @@ const MaterialComponents = [
     HighestPricePipe,
     LowestMileagePipe,
     HighestMileagePipe,
-    AdditionalPhotosComponent
+    AdditionalPhotosComponent,
+    FooterComponent,
+    OneVehicleComponent
   ],
   imports: [
     BrowserModule,
@@ -69,9 +74,10 @@ const MaterialComponents = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    NgbModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

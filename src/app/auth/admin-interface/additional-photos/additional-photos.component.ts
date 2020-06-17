@@ -20,10 +20,10 @@ export class AdditionalPhotosComponent implements OnInit {
   _inputTimestamp = '';
   isHovering: boolean;
   files: File[] = [];
-  task: AngularFireUploadTask;
-  percentage: Observable<number>;
+  // task: AngularFireUploadTask;
+  // percentage: Observable<number>;
   snapshot: Observable<any>;
-  downloadURL: string;
+  // downloadURL: string;
   constructor(public automotiveDatabaseService: AutomotiveDatabaseService,
               public formService: AutomotiveFormService,
               private storage: AngularFireStorage,
@@ -46,8 +46,8 @@ export class AdditionalPhotosComponent implements OnInit {
     }
   }
   startUpload(file) {
-    console.log(this.inputTimestamp, 'INPUCIK');
-    const photoTimestamp = new Date();
+
+    const photoTimestamp = Date.now();
     // the storage path
     const path = `test/${photoTimestamp}_${file.name}`;
 
@@ -55,26 +55,27 @@ export class AdditionalPhotosComponent implements OnInit {
     const ref = this.storage.ref(path);
 
     // the main task
-    this.task = this.storage.upload(path, file);
+    const task: AngularFireUploadTask  = this.storage.upload(path, file);
 
-    // UPLOAD DATA ();
     // progress monitoring
-    // this.percentage = this.task.percentageChanges();
-    console.log(this.inputTimestamp);
-    this.snapshot = this.task.snapshotChanges().pipe(
+    // const percentage = task.percentageChanges();
+
+    const snapshot: Observable<any> = task.snapshotChanges();
+    snapshot.pipe(
       tap(console.log),
+
       // the file's download URL
       finalize(async () => {
-        console.log('pierwszy raaaz 1');
-        this.downloadURL = await ref.getDownloadURL().toPromise();
-
+        const downloadURL = await ref.getDownloadURL().toPromise();
         // add data to cloud database
         this.db.collection(this.inputTimestamp).add(
           {
-            downloadURL: this.downloadURL,
+            downloadURL, // shorthand
+            path // shorthand
           }
         );
       })
-    );
+    ).subscribe();
+
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AutomotiveDatabaseService } from '../shared/automotive-database.service';
 // import * as _ from 'lodash';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
@@ -8,7 +9,9 @@ import { AutomotiveDatabaseService } from '../shared/automotive-database.service
 })
 export class VehiclesComponent implements OnInit {
   vehicles: any;
-
+  showVehicle = false;
+  vehicle;
+  faTrash = faTrash;
   filters = {
     brand: undefined,
     priceLow: undefined,
@@ -30,7 +33,7 @@ export class VehiclesComponent implements OnInit {
         // this.applyFilters();
       });
   }
-  function($event){
+  function($event) {
     // console.log($event.brand, 'LAOAASLASL');
     this.filters.brand = $event.brand;
     this.filters.priceLow = $event.priceLow;
@@ -39,5 +42,31 @@ export class VehiclesComponent implements OnInit {
     this.filters.highestMileage = $event.highestMileage;
     // console.log($event);
   }
+  showOneVehicle(vehicle) {
+    this.vehicle = vehicle;
+    this.showVehicle = !this.showVehicle;
+    console.log(vehicle);
+  }
+  deleteVehicle(vehicle) {
+    // console.log(vehicle.doc.data().downloadURL);
 
+    // delete document in mainData collection in cloud firestore
+    const mainData = 'mainData';
+    this.automotiveService.deleteMainDocument(mainData, vehicle.doc.id);
+
+    // delete main === first photo in storage firestore
+    const path = `${vehicle.doc.data().path}`;
+    this.automotiveService.deleteMainPhotoInStorage(path)
+    .delete()
+    .subscribe();
+
+    // delete all documents in collection of photos URL
+    const collectionId = vehicle.doc.data().timestamp;
+    this.automotiveService.deletePhotosURLs(collectionId);
+
+    // delete all secondary photos in storage firestore
+    this.automotiveService.deleteSecondaryPhotos();
+
+
+  }
 }

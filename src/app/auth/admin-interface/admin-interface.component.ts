@@ -79,7 +79,8 @@ export class AdminInterfaceComponent implements OnInit {
             price: this.form.value.price,
             carMileage: this.form.value.carMileage,
             downloadURL: this.downloadURL,
-            timestamp
+            timestamp, // shorthand
+            path // shorthand
           }
         );
       })
