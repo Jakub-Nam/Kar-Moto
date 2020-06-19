@@ -20,7 +20,7 @@ export class VehiclesComponent implements OnInit {
     highestMileage: undefined
   };
 
-  brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
+  // brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
   constructor(public automotiveService: AutomotiveDatabaseService) { }
 
   ngOnInit(): void {
@@ -50,23 +50,23 @@ export class VehiclesComponent implements OnInit {
   deleteVehicle(vehicle) {
     // console.log(vehicle.doc.data().downloadURL);
 
+    // delete main === first photo in storage firestore
+    const path = `${vehicle.doc.data().path}`;
+    this.automotiveService.deleteMainPhotoInStorage(path)
+      .delete()
+      .subscribe();
+
+    // delete all secondary photos in storage firestore
+    const collectionId = vehicle.doc.data().timestamp;
+    this.automotiveService.deleteSecondaryPhotos(collectionId);
+
     // delete document in mainData collection in cloud firestore
     const mainData = 'mainData';
     this.automotiveService.deleteMainDocument(mainData, vehicle.doc.id);
 
-    // delete main === first photo in storage firestore
-    const path = `${vehicle.doc.data().path}`;
-    this.automotiveService.deleteMainPhotoInStorage(path)
-    .delete()
-    .subscribe();
-
     // delete all documents in collection of photos URL
-    const collectionId = vehicle.doc.data().timestamp;
+    // const collectionId = vehicle.doc.data().timestamp;
     this.automotiveService.deletePhotosURLs(collectionId);
-
-    // delete all secondary photos in storage firestore
-    this.automotiveService.deleteSecondaryPhotos();
-
 
   }
 }

@@ -77,5 +77,4 @@ export class AuthComponent implements OnInit {
     this.isLoginMode = !this.isLoginMode;
     // form.reset();
   }
-
 }

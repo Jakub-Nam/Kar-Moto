@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AutomotiveDatabaseService } from 'src/app/shared/automotive-database.service';
 import { AutomotiveFormService } from 'src/app/shared/automotive-form.service';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 import { AdditionalPhotosComponent } from './additional-photos/additional-photos.component';

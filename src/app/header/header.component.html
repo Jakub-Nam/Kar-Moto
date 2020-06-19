@@ -1,52 +1,55 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <h1 class="navbar-brand mr-4 my-1">
             <a [routerLink]="['/']">
                 KarMoto
             </a>
         </h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" (click)="toggleNavbar = !toggleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div class="collapse navbar-collapse" [ngbCollapse]="!toggleNavbar">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item active mx-1">
-                    <a class="nav-link">Kontakt<span class="sr-only">(current)</span></a>
+                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
+                    <a class="nav-link">Zalogowano<span class="sr-only"></span></a>
                 </li>
-                <li class="nav-item active mx-1">
-                    <a class="nav-link">Lokalizacja<span class="sr-only">(current)</span></a>
+                <!-- <li class="nav-item active">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" data_target="dropdown_target">Kontakt<span
+                            class="caret"></span>
+                    </a>
+                </li> -->
+                <li class="nav-item active mx-1" *ngIf='hideLoginButton'>
+                    <a class="nav-link" [routerLink]="['/logowanie']">Zaloguj/Zarejestruj</a>
                 </li>
-                <li class="nav-item active mx-1">
-                    <a class="nav-link" >Zaloguj<span 
-                            class="sr-only">(current)</span></a>  
+                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
+                    <a class="nav-link" href='#'>Oznaczone</a>
                 </li>
-                <li class="nav-item active mx-1">
-                    <a class="nav-link">Załóż konto<span class="sr-only">(current)</span></a>
+                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
+                    <a class="nav-link" href='#' (click)='logout()'>Wyloguj</a>
                 </li>
-
+                <li ngbDropdown class="nav-item active">
+                    <a class="nav-link" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true"
+                        aria-expanded="false">
+                        Kontakt
+                    </a>
+                    <div ngbDropdownMenu aria-labelledby="navbarDropdownMenuLink">
+                        <address>
+                             Karol Poprawa<br>
+                            tel: +48 509 875 329<br>
+                            e-mail: anita543@wp.pl<br>
+                            ul. Wąska 26,<br>
+                            Odolanów 63-430
+                        </address>
+                    </div>
+                </li>
+                <!-- <li ngbDropdown class="nav-item">
+                    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item>Item 1</button>
+                      <button mat-menu-item>Item 2</button>
+                    </mat-menu>
+                </li> -->
             </ul>
         </div>
     </nav>
 </header>
-<!-- <div class="mapouter">
-    <div class="gmap_canvas"><iframe width="549" height="500" id="gmap_canvas"
-            src="https://maps.google.com/maps?q=odolan%C3%B3w%20ulica%20nowa&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
-            href="https://www.crocothemes.net"></a></div>
-    <style>
-        .mapouter {
-            position: relative;
-            text-align: right;
-            height: 500px;
-            width: 549px;
-        }
-
-        .gmap_canvas {
-            overflow: hidden;
-            background: none !important;
-            height: 500px;
-            width: 549px;
-        }
-    </style>
-</div> -->

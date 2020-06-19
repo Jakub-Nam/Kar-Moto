@@ -1,4 +1,4 @@
-<form class='col-10 mx-auto' #authForm="ngForm" (ngSubmit)='onSubmit(authForm)' *ngIf='!nextComponent'>
+<form class='col-10 mx-auto' #authForm="ngForm" (ngSubmit)='onSubmit(authForm)' *ngIf='!nextComponent' >
     <h3 class='col-8 text-start px-0 py-2'>{{ isLoginMode ? 'Logowanie' : 'Rejestracja' }}</h3>
     <div class="form-group">
         <label for="inputEmail">Adres e-mail</label>

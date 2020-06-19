@@ -17,7 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+// import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { environment } from './environments/environment';
 import { DropzoneDirective } from './dropzone.directive';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
@@ -31,15 +32,16 @@ import { AdditionalPhotosComponent } from './auth/admin-interface/additional-pho
 import { FooterComponent } from './footer/footer.component';
 import { OneVehicleComponent } from './vehicles/one-vehicle/one-vehicle.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   { path: '', component: VehiclesComponent },
-  // { path: '/user', component: AuthComponent}
+  { path: 'logowanie', component: AuthComponent }
 ];
 
-const MaterialComponents = [
+const materialComponents = [
   MatSliderModule,
-  MatButtonModule,
+  MatButtonModule
 ];
 
 @NgModule({
@@ -70,14 +72,15 @@ const MaterialComponents = [
     FontAwesomeModule,
     PasswordStrengthMeterModule,
     HttpClientModule,
-    MaterialComponents,
+    materialComponents,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    AngularFireStorageModule,
+    // AngularFireStorageModule,
     NgxDropzoneModule,
-    NgbModule
+    NgbModule,
+    NgbCollapseModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }, AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

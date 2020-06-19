@@ -23,8 +23,9 @@ export class AuthService {
     signup(email: string, password: string) {
         return this.http.post<AuthResponseData>(
             'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBbSauUr1YkU_v1enIstincLP8-F2aGNLQ',
-            {
+            {// tslint:disable-next-line: object-literal-shorthand
                 email: email,
+                // tslint:disable-next-line: object-literal-shorthand
                 password: password,
                 returnSecureToken: true
             }
@@ -45,8 +46,9 @@ export class AuthService {
         this.email = email;
         return this.http.post<AuthResponseData>(
             'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBbSauUr1YkU_v1enIstincLP8-F2aGNLQ',
-            {
+            {// tslint:disable-next-line: object-literal-shorthand
                 email: email,
+                // tslint:disable-next-line: object-literal-shorthand
                 password: password,
                 returnSecureToken: true
             }
@@ -82,25 +84,26 @@ export class AuthService {
         localStorage.setItem('userData', JSON.stringify(user));
     }
     autoLogin() {
-        const userData: {
-            email: string;
-            id: string;
-            _token: string;
-            _tokenExpirationDate: string;
-        } = JSON.parse(localStorage.getItem('userData'));
-        if (!userData) {
-            return;
-        }
-        const loadedUser = new User(
-            userData.email,
-            userData.id,
-            userData._token,
-            new Date(userData._tokenExpirationDate)
-            );
-        if (loadedUser.token) {
-            this.user.next(loadedUser);
-            this.email = userData.email;
-        } // only true when it s a valid token
+        console.log('aautologin');
+        // const userData: {
+        //     email: string;
+        //     id: string;
+        //     _token: string;
+        //     _tokenExpirationDate: string;
+        // } = JSON.parse(localStorage.getItem('userData'));
+        // if (!userData) {
+        //     return;
+        // }
+        // const loadedUser = new User(
+        //     userData.email,
+        //     userData.id,
+        //     userData._token,
+        //     new Date(userData._tokenExpirationDate)
+        //     );
+        // if (loadedUser.token) {
+        //     this.user.next(loadedUser);
+        //     this.email = userData.email;
+        // } // only true when it s a valid token
     }
 
     logout() {

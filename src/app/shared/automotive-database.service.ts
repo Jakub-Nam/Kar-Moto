@@ -35,6 +35,9 @@ export class AutomotiveDatabaseService {
     console.log('its okayyy');
   }
 
+  // jesli user to wykonam ta funkcje-> a tak naprawde to admin
+  // moge sobie dac ze jezeli (prostrsza wersja) user === true
+  // powiedzmy to moze sobie dodawac do panelu uzytkowniaka glupotki
   deletePhotosURLs(collectionId) {
 
     // delete data (download URLs) from cloud firestore
@@ -57,7 +60,23 @@ export class AutomotiveDatabaseService {
     const storageRef = this.storage.ref(path);
     return storageRef;
   }
-  deleteSecondaryPhotos() {
-    // chce tutaj dac sciezke
+  deleteSecondaryPhotos(collectionId) {
+    this.db.collection(`a${collectionId}`).get().toPromise()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          // usun za pomoca adresow timestamp te image xd
+          const path = doc.data().path;
+          const storageRef = this.storage.ref(path);
+          storageRef.delete();
+
+          // this.db.collection(`a${collectionId}`).doc(doc.id).delete()
+          //   .then(() => {
+          //     console.log('Document successfully deleted!');
+          //   })
+          //   .catch(error => {
+          //     console.error('Error removing document: ', error);
+          //   });
+        });
+      });
   }
 }
