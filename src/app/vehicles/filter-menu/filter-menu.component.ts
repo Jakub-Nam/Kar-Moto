@@ -1,8 +1,4 @@
 import { Component, OnInit, DoCheck, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-// import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-// import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-filter-menu',
@@ -12,21 +8,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class FilterMenuComponent implements OnInit, DoCheck {
   @Output() filtered = new EventEmitter<object>();
 
-  selected = '';
+  // selected = '';
   brandModel: string;
   priceLow: string;
   highestPrice: number;
   lowestMileage: number;
   highestMileage: number;
-
-
-  // form = new FormGroup({
-  //   // brands : new FormControl(),
-  //   priceLowestControl: new FormControl(''),
-  //   priceHighestControl: new FormControl(''),
-  //   mileageLowestControl: new FormControl(''),
-  //   mileageHighestControl: new FormControl('')
-  // });
 
   brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
   pricesLowest: number[] = [1000, 2000, 3000, 4000, 5000, 6000, 8000];

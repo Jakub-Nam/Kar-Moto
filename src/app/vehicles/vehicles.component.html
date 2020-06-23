@@ -1,77 +1,54 @@
-<section class="mapouter mx-auto mb-2">
-  <div class="gmap_canvas">
-    <iframe width="100%" height="100%" id="gmap_canvas"
-      src="https://maps.google.com/maps?q=odolan%C3%B3w%20ulica%20nowa&t=&z=13&ie=UTF8&iwloc=&output=embed"
-      frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
-    </iframe>
-    <a href="https://www.crocothemes.net">
-    </a></div>
-  <style>
-    .mapouter {
-      position: relative;
-      text-align: right;
-      height: 500px;
-      width: 549px;
-    }
-
-    .gmap_canvas {
-      overflow: hidden;
-      background: none !important;
-      height: 500px;
-      width: 549px;
-    }
-  </style>
+<section class="">
+  <div class="row">
+    <div class="col">
+      <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle($event)'></app-one-vehicle>
+    </div>
+  </div>
 </section>
 <section>
   <app-filter-menu (filtered)="function($event)" *ngIf='!showVehicle'></app-filter-menu>
 </section>
-<!-- <mat-select [(ngModel)]="brand" name="brand" (selectionChange)="filterBrand('brand', brand)">
-  <mat-option *ngFor="let brand of brandList" [value]="brand">{{ brand }}</mat-option>
-</mat-select> -->
 <div *ngIf='!showVehicle'>
-  <section class="card mb-3" *ngFor='let vehicle of vehicles | 
-  filter:filters.brand | 
-  filterPriceLow:filters.priceLow | 
-  highestPrice:filters.highestPrice | 
-  lowestMileage:filters.lowestMileage | 
-  highestMileage:filters.highestMileage'>
+  <section class="card mb-3" *ngFor='let vehicle of vehicles | brand:filters.brand' > 
+    <!-- | filterPriceLow:filters.priceLow | 
+    highestPrice:filters.highestPrice | 
+    lowestMileage:filters.lowestMileage | 
+    highestMileage:filters.highestMileage' -->
     <div class="row no-gutters">
-      <div class="col-md-3 d-flex align-items-center">
+      <div class="col-md-3 d-flex ">
+        <!-- align-items-center -->
         <a (click)='showOneVehicle(vehicle)'>
           <img src="{{ vehicle.payload.doc.data().downloadURL }}" class="card-img px-2 py-2" alt="Zdjęcie pojazdu">
         </a>
       </div>
-      <div class="col-md-7 d-flex align-items-center">
-        <div class="card-body py-1 px-2">
-          <h2 class="card-title">{{ vehicle.payload.doc.data().name | titlecase }}</h2>
-          <p class="card-text">Przebieg: {{ vehicle.payload.doc.data().carMileage }}km</p>
-          <p class="card-text">
-            <small class="text-muted">{{ vehicle.payload.doc.data().brand }}</small>
+
+      <div class="col-md-6 d-flex align-items-lg-center">
+        <div class="card-body py-0 px-2">
+          <h2 class="card-title mb-1">{{ vehicle.payload.doc.data().name | titlecase }}</h2>
+          <p class="card-text mb-1">Przebieg: {{ vehicle.payload.doc.data().carMileage }}km</p>
+          <p class="card-text mb-0 pt-lg-2">
+            <small class="text-muted ">{{ vehicle.payload.doc.data().brand }}</small>
+          </p>
+          <p class='card-text pt-lg-2'>
+            <small class="pr-3">Dodano:
+              {{ vehicle.payload.doc.data().timestamp | date:'dd-MM-yyyy' }}</small>
           </p>
         </div>
       </div>
-      <div class="col py-1 px-2 ">
-        <div class="row flex-lg-column">
-          <div class="col d-flex justify-content-start">
-            <b>Cena: {{ vehicle.payload.doc.data().price }}zł</b>
+
+      <div class="col py-0 px-2 px-md-2 parent-trash-button">
+        <div class="row align-items-end">
+          <div class="col d-flex justify-content-md-end justify-content-start px-md-1">
+            <b class='py-md-2 mr-md-2'>Cena: {{ vehicle.payload.doc.data().price }}zł</b>
           </div>
-          <div class="col px-0">
-            <p class='card-text d-flex justify-content-end'>
-              <small class="align-bottom">Data dodania:
-                {{ vehicle.payload.doc.data().timestamp | date:'dd-MM-yyyy' }}</small>
-            </p>
-          </div>
-          <button type='button' class='btn-font-trash' (click)='deleteVehicle(vehicle.payload)'>
-            <fa-icon [icon]="faTrash" class="fas fa-trash mx-2"></fa-icon>
+          <button type='button' class='btn-font-trash px-0 py-0' (click)='deleteVehicle(vehicle.payload)'>
+            <fa-icon [icon]="faTrash" class="fas fa-trash"></fa-icon>
           </button>
         </div>
       </div>
+
     </div>
   </section>
 </div>
-<div class="row">
-  <div class="col">
-    <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle'></app-one-vehicle>
-  </div>
-</div>
+
 <!--  -->

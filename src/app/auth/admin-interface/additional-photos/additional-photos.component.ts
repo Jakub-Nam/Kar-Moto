@@ -5,6 +5,7 @@ import { finalize, tap } from 'rxjs/operators';
 import { AutomotiveDatabaseService } from 'src/app/shared/automotive-database.service';
 import { AutomotiveFormService } from 'src/app/shared/automotive-form.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { indexOf } from 'lodash';
 
 @Component({
   selector: 'app-additional-photos',
@@ -43,6 +44,9 @@ export class AdditionalPhotosComponent implements OnInit {
   pushPhotos() {
     for (const file of this.files) {
       this.startUpload(file);
+      // if (this.files[file] !== this.files.length - 1) { return; }
+      // else { form.clear() }
+      //
     }
   }
   startUpload(file) {

@@ -17,8 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-// import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+// import { AngularFireStorage } from '@angular/fire/storage';
 import { environment } from './environments/environment';
 import { DropzoneDirective } from './dropzone.directive';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
@@ -75,12 +75,12 @@ const materialComponents = [
     materialComponents,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    // AngularFireStorageModule,
+    AngularFireStorageModule,
     NgxDropzoneModule,
     NgbModule,
     NgbCollapseModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }, AngularFireStorage],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

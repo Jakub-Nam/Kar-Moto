@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AutomotiveDatabaseService } from 'src/app/shared/automotive-database.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -9,10 +9,10 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class OneVehicleComponent implements OnInit {
   @Input() vehicle;
-
+  @Output() return = new EventEmitter();
   vehicleURLs;
   constructor(private automotiveService: AutomotiveDatabaseService, config: NgbCarouselConfig) {
-    config.interval = 10000;
+    config.interval = 100000;
     config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = false;
@@ -33,6 +33,10 @@ export class OneVehicleComponent implements OnInit {
           console.log(this.vehicleURLs, 'vehicles');
         // this.applyFilters();
       });
+  }
+
+  returnBtn(e) {
+    this.return.emit(e);
   }
 
 }

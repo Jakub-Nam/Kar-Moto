@@ -1,5 +1,18 @@
+.parent-trash-button {
+    position: relative;
+}
+
 .btn-font-trash {
     background-color: transparent;
     color: black;
     border: none;
+    position: absolute;
+    bottom: 0.3em;
+    right: 0.5em;
 }
+
+img:hover {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    cursor: pointer;
+};

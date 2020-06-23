@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AutomotiveDatabaseService } from '../shared/automotive-database.service';
 // import * as _ from 'lodash';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
@@ -30,22 +31,25 @@ export class VehiclesComponent implements OnInit {
     this.automotiveService.fetchAutomotives().subscribe(
       next => {
         this.vehicles = next;
-        // this.applyFilters();
       });
   }
   function($event) {
-    // console.log($event.brand, 'LAOAASLASL');
+    console.log($event.brand);
     this.filters.brand = $event.brand;
     this.filters.priceLow = $event.priceLow;
     this.filters.highestPrice = $event.highestPrice;
     this.filters.lowestMileage = $event.lowestMileage;
     this.filters.highestMileage = $event.highestMileage;
-    // console.log($event);
+
+    console.log($event.brand);
+    // console.log(this.filters.brand, 'filter');
   }
   showOneVehicle(vehicle) {
     this.vehicle = vehicle;
-    this.showVehicle = !this.showVehicle;
-    console.log(vehicle);
+    this.showVehicle = true;
+  }
+  hideOneVehicle($event) {
+    this.showVehicle = false;
   }
   deleteVehicle(vehicle) {
     // console.log(vehicle.doc.data().downloadURL);
