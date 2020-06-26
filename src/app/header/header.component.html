@@ -10,22 +10,14 @@
         </button>
         <div class="collapse navbar-collapse" [ngbCollapse]="!toggleNavbar">
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
-                    <a class="nav-link">Zalogowano<span class="sr-only"></span></a>
+                <li class="nav-item active mx-1" *ngIf='this.showAdminInterface'>
+                    <a class="nav-link" [routerLink]="['/logowanie']">Dodaj maszynę<span class="sr-only"></span></a>
                 </li>
-                <!-- <li class="nav-item active">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" data_target="dropdown_target">Kontakt<span
-                            class="caret"></span>
-                    </a>
-                </li> -->
                 <li class="nav-item active mx-1" *ngIf='hideLoginButton'>
                     <a class="nav-link" [routerLink]="['/logowanie']">Zaloguj/Zarejestruj</a>
                 </li>
-                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
+                <li class="nav-item active mx-1" *ngIf='this.marked'>
                     <a class="nav-link" href='#'>Oznaczone</a>
-                </li>
-                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
-                    <a class="nav-link" href='#' (click)='logout()'>Wyloguj</a>
                 </li>
                 <li ngbDropdown class="nav-item active">
                     <a class="nav-link" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true"
@@ -42,13 +34,12 @@
                         </address>
                     </div>
                 </li>
-                <!-- <li ngbDropdown class="nav-item">
-                    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-                    <mat-menu #menu="matMenu">
-                      <button mat-menu-item>Item 1</button>
-                      <button mat-menu-item>Item 2</button>
-                    </mat-menu>
-                </li> -->
+                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
+                    <a class="nav-link">Zalogowano<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
+                    <a class="nav-link" href='#' (click)='logout()'>Wyloguj</a>
+                </li>
             </ul>
         </div>
     </nav>

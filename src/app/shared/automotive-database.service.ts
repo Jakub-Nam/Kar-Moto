@@ -16,6 +16,7 @@ export class AutomotiveDatabaseService {
 
   fetchAutomotives() {
     return this.db.collection('mainData').snapshotChanges();
+    
   }
   fetchVehiclePhotos(timestamp) {
     return this.db.collection(timestamp).snapshotChanges();

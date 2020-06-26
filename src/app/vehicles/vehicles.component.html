@@ -1,4 +1,4 @@
-<section class="">
+<section>
   <div class="row">
     <div class="col">
       <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle($event)'></app-one-vehicle>
@@ -16,7 +16,6 @@
     highestMileage:filters.highestMileage' -->
     <div class="row no-gutters">
       <div class="col-md-3 d-flex ">
-        <!-- align-items-center -->
         <a (click)='showOneVehicle(vehicle)'>
           <img src="{{ vehicle.payload.doc.data().downloadURL }}" class="card-img px-2 py-2" alt="Zdjęcie pojazdu">
         </a>
@@ -35,13 +34,12 @@
           </p>
         </div>
       </div>
-
       <div class="col py-0 px-2 px-md-2 parent-trash-button">
         <div class="row align-items-end">
           <div class="col d-flex justify-content-md-end justify-content-start px-md-1">
             <b class='py-md-2 mr-md-2'>Cena: {{ vehicle.payload.doc.data().price }}zł</b>
           </div>
-          <button type='button' class='btn-font-trash px-0 py-0' (click)='deleteVehicle(vehicle.payload)'>
+          <button type='button' class='btn-font-trash px-0 py-0' *ngIf='this.hideTrash' (click)='deleteVehicle(vehicle.payload)'>
             <fa-icon [icon]="faTrash" class="fas fa-trash"></fa-icon>
           </button>
         </div>
@@ -50,5 +48,3 @@
     </div>
   </section>
 </div>
-
-<!--  -->

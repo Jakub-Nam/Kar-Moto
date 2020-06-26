@@ -7,21 +7,29 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  user = null;
   hideLoginButton = true;
   public toggleNavbar = true;
+  showAdminInterface = false;
+  marked = false;
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.user.subscribe(
-      next => { if (next === null) { return; }
-      else { this.changeButtonsVisability(); }
-    }
-    );
+      user => {
+        if (user === null) { return; }
+        else { this.changeButtonsVisability(); }
+
+        if (user.email !== 'kubanam1995@gmail.com' && user.email !== null) { this.marked = true; }
+        else { this.showAdminInterface = true; }
+      });
+
+    this.authService.autoLogin();
   }
   logout() {
     this.authService.logout();
     this.changeButtonsVisability();
+    this.showAdminInterface = false;
+    this.marked = false;
   }
   changeButtonsVisability() {
     this.hideLoginButton = !this.hideLoginButton;

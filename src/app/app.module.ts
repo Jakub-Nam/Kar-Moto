@@ -33,6 +33,7 @@ import { FooterComponent } from './footer/footer.component';
 import { OneVehicleComponent } from './vehicles/one-vehicle/one-vehicle.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 const appRoutes: Routes = [
   { path: '', component: VehiclesComponent },
@@ -76,6 +77,7 @@ const materialComponents = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireStorageModule,
+    AngularFireAuthModule,
     NgxDropzoneModule,
     NgbModule,
     NgbCollapseModule
