@@ -15,18 +15,19 @@ export class AutomotiveDatabaseService {
   ) { }
 
   fetchAutomotives() {
-    return this.db.collection('mainData').snapshotChanges();
-    
+    return this.db.collection('mainData', ref => ref
+    .limit(5)
+    .orderBy('timestamp', 'desc'))
+    .snapshotChanges();
   }
   fetchVehiclePhotos(timestamp) {
     return this.db.collection(timestamp).snapshotChanges();
   }
 
-  deleteMainDocument(mainData, vehicleId) {
+  deleteMainDocument(documentId) {
 
     // delete document in mainData in cloud firestore
-
-    this.db.collection(mainData).doc(vehicleId).delete()
+    this.db.collection('mainData').doc(documentId).delete()
       .then(() => {
         console.log('Document successfully deleted!');
       })
@@ -36,13 +37,9 @@ export class AutomotiveDatabaseService {
     console.log('its okayyy');
   }
 
-  // jesli user to wykonam ta funkcje-> a tak naprawde to admin
-  // moge sobie dac ze jezeli (prostrsza wersja) user === true
-  // powiedzmy to moze sobie dodawac do panelu uzytkowniaka glupotki
   deletePhotosURLs(collectionId) {
 
     // delete data (download URLs) from cloud firestore
-
     this.db.collection(`a${collectionId}`).get().toPromise()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -69,14 +66,6 @@ export class AutomotiveDatabaseService {
           const path = doc.data().path;
           const storageRef = this.storage.ref(path);
           storageRef.delete();
-
-          // this.db.collection(`a${collectionId}`).doc(doc.id).delete()
-          //   .then(() => {
-          //     console.log('Document successfully deleted!');
-          //   })
-          //   .catch(error => {
-          //     console.error('Error removing document: ', error);
-          //   });
         });
       });
   }

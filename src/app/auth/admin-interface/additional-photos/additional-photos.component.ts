@@ -80,6 +80,8 @@ export class AdditionalPhotosComponent implements OnInit {
         );
       })
     ).subscribe();
-
+  }
+  clearDropZone(){
+    this.files = [];
   }
 }

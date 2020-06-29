@@ -25,7 +25,6 @@ export class OneVehicleComponent implements OnInit {
   }
   fetchVehiclePhotos() {
     const timestamp = this.vehicle.payload.doc.data().timestamp;
-    console.log(timestamp, 'halo;');
     this.automotiveService.fetchVehiclePhotos(`a${timestamp}`).subscribe(
       next => {
         this.vehicleURLs = next,

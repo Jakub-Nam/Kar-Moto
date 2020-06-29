@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { AutomotiveDatabaseService } from 'src/app/shared/automotive-database.service';
 import { AutomotiveFormService } from 'src/app/shared/automotive-form.service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 import { AdditionalPhotosComponent } from './additional-photos/additional-photos.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-interface',
@@ -14,10 +15,10 @@ import { AdditionalPhotosComponent } from './additional-photos/additional-photos
 })
 export class AdminInterfaceComponent implements OnInit {
   @ViewChild('AdditionalPhotosComponent') additionalPhotos: AdditionalPhotosComponent;
-  oneFile = false;
+
+  // oneFile = false;
   isHovering: boolean;
   file: File[] = [];
-
   task: AngularFireUploadTask;
   percentage: Observable<number>;
   snapshot: Observable<any>;
@@ -37,17 +38,20 @@ export class AdminInterfaceComponent implements OnInit {
     this.file.push(...event.addedFiles);
   }
 
-  onSubmitPushVehicle() {
-    const file = this.file[0];
-    this.startUpload(file);
+  async onSubmitPushVehicle(myForm: NgForm) {
+    // const file = this.file[0];
+    await this.startUpload(this.file[0], myForm);
     // this.startUploadPhotoes(this.files, path);
+    this.file = [];
+    this.additionalPhotos.clearDropZone();
+
   }
   onRemove(event) {
     console.log(event);
     this.file.splice(this.file.indexOf(event), 1);
   }
 
-  startUpload(file) {
+  startUpload(file, myForm) {
 
     const timestamp = Date.now();
     this.timestamp = timestamp;
@@ -71,7 +75,7 @@ export class AdminInterfaceComponent implements OnInit {
         this.downloadURL = await ref.getDownloadURL().toPromise();
 
         // add data to cloud database
-        this.db.collection('mainData').add(
+        await this.db.collection('mainData').add(
           {
             name: this.form.value.name,
             brand: this.form.value.brand,
@@ -80,8 +84,8 @@ export class AdminInterfaceComponent implements OnInit {
             downloadURL: this.downloadURL,
             timestamp, // shorthand
             path // shorthand
-          }
-        );
+          });
+        myForm.reset();
       })
     );
     this.additionalPhotos.pushPhotos();

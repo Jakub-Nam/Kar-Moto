@@ -4,4 +4,9 @@ h1 a {
 }
 h1 a:hover {
     color: rgba(255, 255, 255, 0.623);
+    cursor: pointer;
+} 
+.nav-item :hover {
+    color: rgba(255, 255, 255, 0.623);
+    cursor: pointer;
 }

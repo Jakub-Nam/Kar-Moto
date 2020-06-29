@@ -1,11 +1,9 @@
-<div class="row">
+<div class="row mb-2">
   <div class="col">
-
     <button (click)='returnBtn($event)' class='btn btn-dark my-3'>powrót</button>
-
   </div>
 </div>
-<div class="row d-flex justify-content-center ">
+<div class="row d-flex flex-column flex-lg-row justify-content-center mb-3">
   <div class='col-9'>
     <ngb-carousel>
       <ng-template ngbSlide>
@@ -22,10 +20,10 @@
       </ng-template>
     </ngb-carousel>
   </div>
-  <div class="col-3">
-    <h2 class="display-4">{{ vehicle.payload.doc.data().name | titlecase }}</h2>
+  <div class="col-lg-3">
+    <h2 class="display-4 my-0">{{ vehicle.payload.doc.data().name | titlecase }}</h2>
     <b>Cena: {{ vehicle.payload.doc.data().price }}zł</b>
-    <p>Przebieg: {{ vehicle.payload.doc.data().carMileage }}km</p>
+    <p class='mb-0'>Przebieg: {{ vehicle.payload.doc.data().carMileage }}km</p>
     <small>{{ vehicle.payload.doc.data().brand }}</small>
     <br>
     <small>Dodano: {{ vehicle.payload.doc.data().timestamp | date:'dd-MM-yyyy' }}</small>

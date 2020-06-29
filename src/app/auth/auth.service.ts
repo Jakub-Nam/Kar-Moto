@@ -14,6 +14,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 //     localId: string;
 //     registered?: boolean;
 // }
+export interface AuthResponseData {
+    email: string;
+    userId: string;
+    idToken: string;
+    expiresIn: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     user = new BehaviorSubject<User>(null);
@@ -34,18 +41,21 @@ export class AuthService {
             });
     }
 
-    login(email: string, password: string) {
-        this.afAuth.signInWithEmailAndPassword(email, password)
-            .catch(error => {
-                console.log(error);
-            })
+    login(email: string, password: string): Promise<any> {
+        return this.afAuth.signInWithEmailAndPassword(email, password)
             .then(userCredential => {
+                const creationTime: number = userCredential.user.metadata.b; // <-here is a problem
+                console.log('creationTinme', creationTime);
                 this.handleAuthentication(
                     userCredential.user.email,
                     userCredential.user.uid,
-                    'xxx', // userCredential.user.getIdToken().then(token => { console.log(token) return token; }
-                    userCredential.user.metadata.b // metadata.creationTime expiresInuser.metadata
+                    'xxx',
+                    creationTime
+                     // metadata.creationTime expiresInuser.metadata
                 );
+            })
+            .catch(error => {
+                console.log(error);
             });
     }
     private handleAuthentication(

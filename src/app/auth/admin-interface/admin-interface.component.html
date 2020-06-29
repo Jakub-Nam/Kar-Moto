@@ -11,8 +11,8 @@
         </div>
     </div>
     <div class="col my-2">
-        <form class='main-form row d-flex flex-column' [formGroup]="this.formService.automotiveForm"
-            (ngSubmit)='onSubmitPushVehicle()'>
+        <form  #myForm="ngForm" class='main-form row d-flex flex-column' [formGroup]="this.formService.automotiveForm"
+            (ngSubmit)='onSubmitPushVehicle(myForm)'>
             <div class="form-group col-8 col-lg-10 mx-auto">
                 <div class="row">
                     <div class="col">

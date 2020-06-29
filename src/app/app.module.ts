@@ -34,6 +34,7 @@ import { OneVehicleComponent } from './vehicles/one-vehicle/one-vehicle.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { PaginationComponent } from './vehicles/pagination/pagination.component';
 
 const appRoutes: Routes = [
   { path: '', component: VehiclesComponent },
@@ -61,7 +62,8 @@ const materialComponents = [
     HighestMileagePipe,
     AdditionalPhotosComponent,
     FooterComponent,
-    OneVehicleComponent
+    OneVehicleComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
