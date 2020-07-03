@@ -1,8 +1,8 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <h1 class="navbar-brand mr-4 my-1">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top col-8 mx-auto px-0">
+        <h1 class="navbar-brand ml-2 my-1">
             <a [routerLink]="['/']">
-                KarMoto
+                Kar-Moto
             </a>
         </h1>
         <button class="navbar-toggler" type="button" (click)="toggleNavbar = !toggleNavbar">
@@ -14,8 +14,9 @@
                     <a class="nav-link" [routerLink]="['/logowanie']">Dodaj maszynę<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active mx-1" *ngIf='hideLoginButton'>
-                    <a class="nav-link" [routerLink]="['/logowanie']">Zaloguj/Zarejestruj</a>
+                    <a class="nav-link" [routerLink]="['/logowanie']" >Zaloguj/Zarejestruj</a>
                 </li>
+
                 <li class="nav-item active mx-1" *ngIf='this.marked'>
                     <a class="nav-link" href='#'>Oznaczone</a>
                 </li>

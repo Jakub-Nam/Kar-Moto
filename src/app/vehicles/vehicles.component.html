@@ -1,16 +1,26 @@
-<section>
-      <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle($event)'></app-one-vehicle>
+<!-- <section *ngIf='zeroVehicles'>
+  <app-zero-vehicles></app-zero-vehicles>
+</section> -->
+
+<section >
+  <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle'></app-filter-menu>
 </section>
 
 <section>
-  <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle'></app-filter-menu>
+  <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle($event)'></app-one-vehicle>
 </section>
+
 <div *ngIf='!showVehicle'>
-  <section class="card mb-3" *ngFor='let vehicle of vehicles | brand:filters.brand' > 
-    <!-- | filterPriceLow:filters.priceLow | 
-    highestPrice:filters.highestPrice | 
-    lowestMileage:filters.lowestMileage | 
-    highestMileage:filters.highestMileage' -->
+  <section class="card mb-3" *ngFor='let vehicle of vehicles | filterBrand: this.filters.brand | 
+  filterPriceLow:filters.priceLow | 
+  highestPrice:filters.highestPrice | 
+  lowestMileage:filters.lowestMileage | 
+  highestMileage:filters.highestMileage'>
+    <!-- brand: filters.brand |
+   filterPriceLow:filters.priceLow | 
+highestPrice:filters.highestPrice | 
+lowestMileage:filters.lowestMileage | 
+highestMileage:filters.highestMileage' -->
     <div class="row no-gutters">
       <div class="col-md-3 d-flex ">
         <a (click)='showOneVehicle(vehicle)'>
@@ -36,7 +46,8 @@
           <div class="col d-flex justify-content-md-end justify-content-start px-md-1">
             <b class='py-md-2 mr-md-2'>Cena: {{ vehicle.payload.doc.data().price }}zł</b>
           </div>
-          <button type='button' class='btn-font-trash px-0 py-0' *ngIf='this.hideTrash' (click)='deleteVehicle(vehicle)'>
+          <button type='button' class='btn-font-trash px-0 py-0' *ngIf='this.hideTrash'
+            (click)='deleteVehicle(vehicle)'>
             <fa-icon [icon]="faTrash" class="fas fa-trash"></fa-icon>
           </button>
         </div>
@@ -45,13 +56,17 @@
     </div>
   </section>
 </div>
-<nav aria-label="pagination" *ngIf='!showVehicle && this.vehicles.length > 4'>
+<!-- *ngIf='!showVehicle && this.vehicles.length > 4' -->
+<!-- <nav aria-label="pagination" > 
   <ul class="pagination justify-content-between">
-    <li class="page-item"> <!-- dissabled ng Class -->
-      <button class="btn btn-secondary" aria-label="previous" tabindex="-1" [disabled]='disablePrev' (click)='prevPage()'>Poprzednia</button>
+    <li class="page-item">
+      
+      <button class="btn btn-secondary" aria-label="previous" tabindex="-1" [disabled]='disablePrev'
+        (click)='prevPage()'>Poprzednia</button>
     </li>
     <li class="page-item">
-      <button class="btn btn-secondary" aria-label="next" [disabled]='disableNext' (click)='nextPage()'>  Następna </button>
+      <button class="btn btn-secondary" aria-label="next" [disabled]='disableNext' (click)='nextPage()'> Następna
+      </button>
     </li>
   </ul>
-</nav>
+</nav> -->

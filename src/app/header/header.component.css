@@ -10,3 +10,6 @@ h1 a:hover {
     color: rgba(255, 255, 255, 0.623);
     cursor: pointer;
 }
+header {
+    position: relative;
+}

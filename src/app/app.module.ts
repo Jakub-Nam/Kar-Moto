@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { AdminInterfaceComponent } from './auth/admin-interface/admin-interface.component';
 import { AuthComponent } from './auth/auth.component';
@@ -35,6 +36,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PaginationComponent } from './vehicles/pagination/pagination.component';
+import { ZeroVehiclesComponent } from './vehicles/zero-vehicles/zero-vehicles.component';
+
 
 const appRoutes: Routes = [
   { path: '', component: VehiclesComponent },
@@ -43,7 +46,8 @@ const appRoutes: Routes = [
 
 const materialComponents = [
   MatSliderModule,
-  MatButtonModule
+  MatButtonModule,
+  MatInputModule
 ];
 
 @NgModule({
@@ -63,7 +67,8 @@ const materialComponents = [
     AdditionalPhotosComponent,
     FooterComponent,
     OneVehicleComponent,
-    PaginationComponent
+    PaginationComponent,
+    ZeroVehiclesComponent
   ],
   imports: [
     BrowserModule,

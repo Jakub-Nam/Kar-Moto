@@ -16,7 +16,7 @@ export class AutomotiveDatabaseService {
 
   fetchAutomotives() {
     return this.db.collection('mainData', ref => ref
-    .limit(5)
+    // .limit(3)
     .orderBy('timestamp', 'desc'))
     .snapshotChanges();
   }

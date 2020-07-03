@@ -15,8 +15,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AdminInterfaceComponent implements OnInit {
   @ViewChild('AdditionalPhotosComponent') additionalPhotos: AdditionalPhotosComponent;
-
-  // oneFile = false;
+  oneFile = false;
   isHovering: boolean;
   file: File[] = [];
   task: AngularFireUploadTask;
@@ -25,6 +24,8 @@ export class AdminInterfaceComponent implements OnInit {
   downloadURL: string;
   form;
   timestamp: number;
+  brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
+
   constructor(public automotiveDatabaseService: AutomotiveDatabaseService,
               public formService: AutomotiveFormService,
               private storage: AngularFireStorage,
@@ -38,7 +39,7 @@ export class AdminInterfaceComponent implements OnInit {
     this.file.push(...event.addedFiles);
   }
 
-  async onSubmitPushVehicle(myForm: NgForm) {
+  async onSubmitPushVehicle(myForm) {
     // const file = this.file[0];
     await this.startUpload(this.file[0], myForm);
     // this.startUploadPhotoes(this.files, path);

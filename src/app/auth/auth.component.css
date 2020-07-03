@@ -1,34 +1,20 @@
-
+/* 
 .form-group {
     position: relative;
-  }
+  } */
   
 .btn-font-eye {
     
-    top: 6vh;
-    right: 1vh;
-    background-color: transparent;
+    /* top: 6vh; */
+    /* right: 1vh; */
+    /* background-color: transparent; */
     color: black;
-    border: none;
+    /* border: none; */
   }
-/*   
-.btn-font-eye {
-    position: absolute;
-    top: 6vh;
-    right: 1vh;
-    background-color: transparent;
-    color: black;
-    border: none;
-  } */
-  
-.letter-icon {
-    position: absolute;
-    top: 6vh;
-    right: 1.5vh;
-    background-color: transparent;
-    color: black;
-    border: none;
-  }
+
+button, fa-icon {
+  color: black;
+}
   a {
     color: #006eff;
   }

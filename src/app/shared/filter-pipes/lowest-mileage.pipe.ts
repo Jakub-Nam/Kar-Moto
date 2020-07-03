@@ -10,7 +10,7 @@ export class LowestMileagePipe implements PipeTransform {
     // tslint:disable-next-line: curly
     if (filterData === undefined) return vehicles;
     return vehicles.filter((vehicle) => {
-      return vehicle.carMileage >= filterData;
+      return vehicle.payload.doc.data().carMileage >= filterData;
     });
 
   }

@@ -28,10 +28,10 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     this.authService.user.subscribe(
-      user => { if (user.email !== 'kubanam1995@gmail.com' ) { return; }
-             else { this.adminInterface = true; }
-  }
-    );
+      user => console.log(user, 'user') );
+      // { if (user.email !== 'kubanam1995@gmail.com' ) { return; }
+      //        else { this.adminInterface = true; }}   );
+
 }
 showPassword() {
   this.hidePassword = !this.hidePassword;

@@ -14,12 +14,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 //     localId: string;
 //     registered?: boolean;
 // }
-export interface AuthResponseData {
-    email: string;
-    userId: string;
-    idToken: string;
-    expiresIn: string;
-}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -44,60 +38,65 @@ export class AuthService {
     login(email: string, password: string): Promise<any> {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then(userCredential => {
-                const creationTime: number = userCredential.user.metadata.b; // <-here is a problem
-                console.log('creationTinme', creationTime);
-                this.handleAuthentication(
-                    userCredential.user.email,
-                    userCredential.user.uid,
-                    'xxx',
-                    creationTime
-                     // metadata.creationTime expiresInuser.metadata
-                );
+                // .getToken().then(function(token){
+                //     $rootScope.userLoginToken = token;
+                // });
+                // const creationTime = Date.now(); // <-here is a problem
+                // this.handleAuthentication(
+                //     userCredential.user.email,
+                //     userCredential.user.uid,
+                //     'xxx',
+                //     creationTime
+                //      // metadata.creationTime expiresInuser.metadata
+                // );
+                window.alert('Zostałeś poprawnie zalogowany');
+
             })
             .catch(error => {
                 console.log(error);
             });
     }
-    private handleAuthentication(
-        email: string,
-        userId: string,
-        token: string,
-        expiresIn: number
-    ) {
-        const expirationDate = new Date(
-            new Date().getTime() + expiresIn * 1000 + 111600000 // expiresIn - default one hour (s), *1000(ms), 111600000ms (31h)
-        );
-        const user = new User(
-            email,
-            userId,
-            token,
-            expirationDate
-        );
-        this.user.next(user);
-        localStorage.setItem('userData', JSON.stringify(user));
-    }
-    autoLogin() {
-        console.log('aautologin');
-        const userData: {
-            email: string;
-            id: string;
-            _token: string;
-            _tokenExpirationDate: string;
-        } = JSON.parse(localStorage.getItem('userData'));
-        if (!userData) {
-            return;
-        }
-        const loadedUser = new User(
-            userData.email,
-            userData.id,
-            userData._token,
-            new Date(userData._tokenExpirationDate)
-        );
-        if (loadedUser.token) {
-            this.user.next(loadedUser);
-            // this.email = userData.email;
-        } // only true when it s a valid token
-    }
+    // private handleAuthentication(
+    //     email: string,
+    //     userId: string,
+    //     token: string,
+    //     expiresIn: any
+    // ) {
+    //     const expirationDate = new Date(
+    //         new Date().getTime() + expiresIn * 1000 + 111600000 // expiresIn - default one hour (s), *1000(ms), 111600000ms (31h)
+    //     );
+    //     const user = new User(
+    //         email,
+    //         userId,
+    //         token,
+    //         expirationDate
+    //     );
+    //     this.user.next(user);
+    //     localStorage.setItem('userData', JSON.stringify(user));
+    // }
+    // autoLogin() {
+    //     console.log('aautologin');
+    //     const userData: {
+    //         email: string;
+    //         id: string;
+    //         _token: string;
+    //         _tokenExpirationDate: string;
+    //     } = JSON.parse(localStorage.getItem('userData'));
+    //     if (!userData) {
+    //         return;
+    //     }
+    //     const loadedUser = new User(
+    //         userData.email,
+    //         userData.id,
+    //         userData._token,
+    //         new Date(userData._tokenExpirationDate)
+    //     );
+    //     if (loadedUser.token) {
+    //         this.user.next(loadedUser);
+    //         console.log('loaded', loadedUser, this.user.value.email, 'ussser');
+    //         // this.email = userData.email;
+    //     } // only true when it s a valid token
+    // }
 
     logout() {
         this.user.next(null);

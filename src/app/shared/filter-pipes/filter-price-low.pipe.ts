@@ -10,7 +10,7 @@ export class FilterPriceLowPipe implements PipeTransform {
     // tslint:disable-next-line: curly
     if (filterData === undefined) return vehicles;
     return vehicles.filter((vehicle) => {
-      return vehicle.price >= filterData;
+      return vehicle.payload.doc.data().price >= filterData;
     });
   }
 
