@@ -12,7 +12,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class VehiclesComponent implements OnInit {
   zeroVehicles = false;
-  allVehicles: any = [];
+  // allVehicles: any = [];
   beginSlice = 0;
   endSlice = 2;
   vehicles: any = [];
@@ -47,16 +47,24 @@ export class VehiclesComponent implements OnInit {
     this.fetchAutomotives();
     this.authService.user.subscribe(
       user => {
+        if (user === null) { return; }
         if (user.email !== 'kubanam1995@gmail.com') { return null; }
         else { this.hideTrash = true; }
       });
-    this.emptyAllVehiclesArray();
+    // ogarne to jak naprawie autologowanie.
+    // this.authService.user.subscribe(
+    //   user => {
+    //     console.log(user, 'user w vehicles')
+    //     if (user.email !== 'kubanam1995@gmail.com') { return null; }
+    //     else { this.hideTrash = true; }
+    //   });
+    // this.emptyAllVehiclesArray();
 
   }
-  emptyAllVehiclesArray() {
-    if (this.allVehicles.length === 0) { this.zeroVehicles = true; }
+  // emptyAllVehiclesArray() {
+  //   if (this.allVehicles.length === 0) { this.zeroVehicles = true; }
 
-  }
+  // }
 
   fetchAutomotives() {
     this.automotiveService.fetchAutomotives()
@@ -66,12 +74,14 @@ export class VehiclesComponent implements OnInit {
           console.log('No Data Avconsoailable'); // dasz tutaj component ze brak towaru, jesli hcecie wiedziec kiedy bedzie, zalogujcie sie
           return false;
         }
-        for (const vehicle of response) {
-          this.allVehicles.push(vehicle);
-          this.vehicles = this.allVehicles;
-          // this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
-          console.log(vehicle);
-        }
+        this.vehicles = response;
+        // for (const vehicle of response) {
+        //   this.vehicles = [];
+        //   this.vehicles.push(vehicle);
+        // this.vehicles = this.allVehicles;
+        // this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
+        // console.log(vehicle);
+        // }
         // push first item to use for Previous action
       }, error => {
         console.log(error);
@@ -85,9 +95,9 @@ export class VehiclesComponent implements OnInit {
         this.endSlice += 2,
         this.disablePrev = false;
     }
-    this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
-    this.paginationClickedCount++;
-    if (this.endSlice > this.allVehicles.length) { return this.disableNext = true; }
+    // this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
+    // this.paginationClickedCount++;
+    // if (this.endSlice > this.allVehicles.length) { return this.disableNext = true; }
 
 
   }
@@ -97,9 +107,9 @@ export class VehiclesComponent implements OnInit {
         this.endSlice -= 2,
         this.disableNext = false;
     }
-    this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
-    this.paginationClickedCount--;
-    if (this.paginationClickedCount === 0) { this.disablePrev = true, this.disableNext = false; }
+    // this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
+    // this.paginationClickedCount--;
+    // if (this.paginationClickedCount === 0) { this.disablePrev = true, this.disableNext = false; }
 
 
 
@@ -140,6 +150,8 @@ export class VehiclesComponent implements OnInit {
     // delete all documents in collection of photos URL
     this.automotiveService.deletePhotosURLs(collectionId);
 
+    // delete from array
+    vehicle.remove();
 
   }
 

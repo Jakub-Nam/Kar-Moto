@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 
 // export interface AuthResponseData {
@@ -19,7 +20,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class AuthService {
     user = new BehaviorSubject<User>(null);
     adminInterface = false;
-    constructor(
+    constructor(private router: Router,
         // tslint:disable-next-line: align
         public afAuth: AngularFireAuth,
         // tslint:disable-next-line: align
@@ -36,25 +37,8 @@ export class AuthService {
     }
 
     login(email: string, password: string): Promise<any> {
-        return this.afAuth.signInWithEmailAndPassword(email, password)
-            .then(userCredential => {
-                // .getToken().then(function(token){
-                //     $rootScope.userLoginToken = token;
-                // });
-                // const creationTime = Date.now(); // <-here is a problem
-                // this.handleAuthentication(
-                //     userCredential.user.email,
-                //     userCredential.user.uid,
-                //     'xxx',
-                //     creationTime
-                //      // metadata.creationTime expiresInuser.metadata
-                // );
-                window.alert('Zostałeś poprawnie zalogowany');
+        return this.afAuth.signInWithEmailAndPassword(email, password);
 
-            })
-            .catch(error => {
-                console.log(error);
-            });
     }
     // private handleAuthentication(
     //     email: string,

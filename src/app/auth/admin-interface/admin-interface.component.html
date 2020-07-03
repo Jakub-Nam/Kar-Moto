@@ -30,10 +30,10 @@
                         <label for='brand'>Marka:</label>
                     </div>
                     <div class="col">
-                        <select class="custom-select" id="brand" name='brand' placeholder="np. BMW" >
-                            <option selected *ngFor='let brand of brandList'>{{ brand }}</option>
-                            <option value="$"></option>
-                        </select>
+                       
+                            <input type="text" class="form-control" id="brand" name='brand' formControlName='brand' placeholder="np. BMW">
+                            
+                  
                         <!-- <div class="input-group-append">
                             <input class='' type="text" formControlName='brand' id='brand' name='brand'
                                 placeholder="np. BMW">

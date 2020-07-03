@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
         else { this.showAdminInterface = true; }
       });
 
-    this.authService.autoLogin();
+    // this.authService.autoLogin();
   }
   logout() {
     this.authService.logout();

@@ -5,7 +5,8 @@
                 Kar-Moto
             </a>
         </h1>
-        <button class="navbar-toggler" type="button" (click)="toggleNavbar = !toggleNavbar">
+        <button class="navbar-toggler" type="button" (click)="toggleNavbar = !toggleNavbar" data-toggle="collapse" 
+        data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" [ngbCollapse]="!toggleNavbar">
@@ -20,20 +21,11 @@
                 <li class="nav-item active mx-1" *ngIf='this.marked'>
                     <a class="nav-link" href='#'>Oznaczone</a>
                 </li>
-                <li ngbDropdown class="nav-item active">
+                <li ngbDropdown class="nav-item active mx-1">
                     <a class="nav-link" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true"
                         aria-expanded="false">
                         Kontakt
                     </a>
-                    <!-- <div ngbDropdownMenu aria-labelledby="navbarDropdownMenuLink">
-                        <address>
-                             Karol Poprawa<br>
-                            tel: +48 509 875 329<br>
-                            e-mail: anita543@wp.pl<br>
-                            ul. Wąska 26,<br>
-                            Odolanów 63-430
-                        </address>
-                    </div> -->
                 </li>
                 <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
                     <a class="nav-link">Zalogowano<span class="sr-only"></span></a>

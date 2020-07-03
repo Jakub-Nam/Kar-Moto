@@ -31,7 +31,7 @@ export class FilterMenuComponent implements OnInit, DoCheck {
       highestMileage: this.highestMileage
     };
     this.filtered.emit(ngModelForm);
-    // console.log(ngModelForm.highestPrice, 'highest price');
+    // console.log(ngModelForm.priceModel, 'highest price');
     return ngModelForm;
   }
 }

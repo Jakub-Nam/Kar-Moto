@@ -22,7 +22,6 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 // import { AngularFireStorage } from '@angular/fire/storage';
 import { environment } from './environments/environment';
 import { DropzoneDirective } from './dropzone.directive';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { FilterMenuComponent } from './vehicles/filter-menu/filter-menu.component';
 import { FilterBrandPipe } from './shared/filter-pipes/filter-brand.pipe';
 import { FilterPriceLowPipe } from './shared/filter-pipes/filter-price-low.pipe';
@@ -89,7 +88,7 @@ const materialComponents = [
     NgbModule,
     NgbCollapseModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
