@@ -52,24 +52,38 @@ export class AuthComponent implements OnInit {
     const password = form.value.password;
     // let authObs: Observable<AuthResponseData>;
 
+    // console.log('TOKEN', userCredential.user.getIdTokenResult().then(
+    //   response => console.log('Afryka', response.token)
+    // ));
     if (this.isLoginMode) {
       // authObs = this.authService.login(email, password);
       this.authService.login(email, password)
-      .then(userCredential => {
+        .then(async userCredential => {
+          console.log(userCredential);
+          // userCredential.user.getIdToken()
+          //   .then(
+          //     response => response
+          //   );
+          let token = '';
+          await userCredential.user.getIdTokenResult().then(
+            response => token = response.token );
 
-        if ( userCredential.user.email !== 'kubanam1995@gmail.com') { this.router.navigate(['/']); }
-        this.adminInterface = true;
-        const user = new User(
+          console.log('token', token);
+          if (userCredential.user.email !== 'kubanam1995@gmail.com') { this.router.navigate(['/']); }
+          this.adminInterface = true;
+          const user = new User(
             userCredential.user.email,
-            'asdf' // id token łosiu
+            userCredential.user.uid,
+            token // id token łosiu
             // userCredential.user.getIdTokenResult
-        );
-        this.authService.user.next(user);
+          );
+          console.log('const user 3x', user);
+          this.authService.user.next(user);
 
-    })
-    .catch(error => {
-        console.log(error);
-    });
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
 
     } else {
