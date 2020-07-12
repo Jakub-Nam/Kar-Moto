@@ -1,11 +1,13 @@
-<!-- <section *ngIf='zeroVehicles'>
+<section *ngIf='zeroVehicles'>
   <app-zero-vehicles></app-zero-vehicles>
-</section> -->
-
-<section>
-  <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle'></app-filter-menu>
 </section>
 
+<section>
+  <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle && !zeroVehicles'></app-filter-menu>
+</section>
+<div class="alert alert-danger" role="alert" *ngIf='this.errorMsg'>
+  Problem z serverem Firebase!
+</div>
 <section>
   <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle($event)'></app-one-vehicle>
 </section>
@@ -16,11 +18,6 @@
   highestPrice:filters.highestPrice | 
   lowestMileage:filters.lowestMileage | 
   highestMileage:filters.highestMileage'>
-    <!-- brand: filters.brand |
-   filterPriceLow:filters.priceLow | 
-highestPrice:filters.highestPrice | 
-lowestMileage:filters.lowestMileage | 
-highestMileage:filters.highestMileage' -->
     <figure>
       <div class="row no-gutters">
         <div class="col-md-3 d-flex ">
@@ -60,6 +57,7 @@ highestMileage:filters.highestMileage' -->
     </figure>
 
   </section>
+
 </div>
 <!-- *ngIf='!showVehicle && this.vehicles.length > 4' -->
 <!-- <nav aria-label="pagination" > 

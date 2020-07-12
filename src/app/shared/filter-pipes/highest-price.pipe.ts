@@ -5,12 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class HighestPricePipe implements PipeTransform {
 
-  transform(vehicles: any, filterData: any): any {
-    // check if search term was used
-    // tslint:disable-next-line: curly
-    if (filterData === undefined) return vehicles;
+  transform(vehicles: any, inputFilterValue: any): any {
+
+    if (inputFilterValue === undefined || inputFilterValue === '' ) {
+      return vehicles;
+    }
     return vehicles.filter((vehicle) => {
-      return vehicle.payload.doc.data().price <= filterData;
+      return vehicle.payload.doc.data().price <= inputFilterValue;
     });
 
   }

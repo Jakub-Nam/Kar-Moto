@@ -14,12 +14,14 @@ export class AutomotiveDatabaseService {
 
   ) { }
 
+
   fetchAutomotives() {
     return this.db.collection('mainData', ref => ref
     // .limit(3)
     .orderBy('timestamp', 'desc'))
     .snapshotChanges();
   }
+
   fetchVehiclePhotos(timestamp) {
     return this.db.collection(timestamp).snapshotChanges();
   }
@@ -34,11 +36,9 @@ export class AutomotiveDatabaseService {
       .catch(error => {
         console.error('Error removing document: ', error);
       });
-    console.log('its okayyy');
   }
 
   deletePhotosURLs(collectionId) {
-
     // delete data (download URLs) from cloud firestore
     this.db.collection(`a${collectionId}`).get().toPromise()
       .then(querySnapshot => {
@@ -53,16 +53,18 @@ export class AutomotiveDatabaseService {
         });
       });
   }
+
   deleteMainPhotoInStorage(path) {
     // delete main photo from storage firestore
     const storageRef = this.storage.ref(path);
     return storageRef;
   }
+
   deleteSecondaryPhotos(collectionId) {
+    // delete secondary/additionals URLs of photos from cloud firestore
     this.db.collection(`a${collectionId}`).get().toPromise()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          // usun za pomoca adresow timestamp te image xd
           const path = doc.data().path;
           const storageRef = this.storage.ref(path);
           storageRef.delete();

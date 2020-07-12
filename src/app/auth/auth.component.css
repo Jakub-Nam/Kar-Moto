@@ -1,23 +1,16 @@
-/* 
-.form-group {
-    position: relative;
-  } */
-  
 .btn-font-eye {
-    
-    /* top: 6vh; */
-    /* right: 1vh; */
-    /* background-color: transparent; */
-    color: black;
-    /* border: none; */
-  }
+  color: black;
+}
 
 button, fa-icon {
   color: black;
 }
-  a {
-    color: #006eff;
-  }
-  a:hover {
-    cursor: pointer;
-  }
+
+a {
+  color: #006eff;
+}
+
+a:hover {
+  cursor: pointer;
+}
+

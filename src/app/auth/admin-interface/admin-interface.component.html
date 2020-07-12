@@ -1,3 +1,12 @@
+<div class="alert alert-success" role="alert" *ngIf='this.vehicleWasSent'>
+    <span>Poprawnie dodano obiekt.</span>
+    <button class='btn btn-success btn-sm mx-2' (click)='hideVehicleWasSentAlert()'>Zamknij</button>
+</div>
+<div class="alert alert-dangeg" role="alert" *ngIf='this.errorMessage'>
+    <span> {{ errorMessage }} </span>
+    <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
+</div>
+<hr>
 <div class="row d-flex flex-column flex-lg-row">
     <div class="col my-2">
         <ngx-dropzone (change)="onSelectPhoto($event)" [multiple]='oneFile'>
@@ -30,14 +39,8 @@
                         <label for='brand'>Marka:</label>
                     </div>
                     <div class="col">
-                       
-                            <input type="text" class="form-control" id="brand" name='brand' formControlName='brand' placeholder="np. BMW">
-                            
-                  
-                        <!-- <div class="input-group-append">
-                            <input class='' type="text" formControlName='brand' id='brand' name='brand'
-                                placeholder="np. BMW">
-                        </div> -->
+                        <input type="text" class="form-control" id="brand" name='brand' formControlName='brand'
+                            placeholder="np. BMW">
                     </div>
                 </div>
             </div>
@@ -47,7 +50,8 @@
                         <label for='price'>Cena:</label>
                     </div>
                     <div class="col ">
-                        <input type="number" class="form-control" id='price' name='price' formControlName='price' placeholder="np. 75000">
+                        <input type="number" class="form-control" id='price' name='price' formControlName='price'
+                            placeholder="np. 75000">
                     </div>
                 </div>
             </div>
@@ -57,8 +61,8 @@
                         <label for='carMileage'>Przebieg:</label>
                     </div>
                     <div class="col ">
-                        <input type="number" class="form-control" id='carMileage' name='carMileage' formControlName='carMileage'
-                            placeholder="np. 200 000">
+                        <input type="number" class="form-control" id='carMileage' name='carMileage'
+                            formControlName='carMileage' placeholder="np. 200 000">
                     </div>
                 </div>
             </div>
@@ -68,30 +72,19 @@
                         <label for='productionYear'>Rok produkcji:</label>
                     </div>
                     <div class="col ">
-                        <input type="number" class="form-control" id='productionYear' name='productionYear' formControlName='productionYear'
-                            placeholder="YYYY">
+                        <input type="number" class="form-control" id='productionYear' name='productionYear'
+                            formControlName='productionYear' placeholder="YYYY">
                     </div>
                 </div>
             </div>
             <div class="col-4 col-lg-4 col-md-5 col-sm-6 mx-auto my-3">
                 <button type="submit" mat-raised-button color="primary" class='btn-block'>Dodaj</button>
             </div>
+            <div class="col-4 col-lg-4 col-md-5 col-sm-6 mx-auto">
+                <button [routerLink]="['/']" mat-raised-button color="primary" class='btn-block'>Powrót</button>
+            </div>
         </form>
-        <div class="col-4 col-lg-4 col-md-5 col-sm-6 mx-auto">
-            <button [routerLink]="['/']" mat-raised-button color="primary" class='btn-block'>powrót</button>
-        </div>
-
     </div>
 </div>
-
-
 <div *ngIf="snapshot | async">
-
-
-
-    <!-- <div *ngIf="downloadURL">
-      <h3>Results!</h3>
-      <img [src]="downloadURL"><br>
-      <a [href]="downloadURL" target="_blank" rel="noopener">Download Me!</a>
-    </div>  -->
 </div>

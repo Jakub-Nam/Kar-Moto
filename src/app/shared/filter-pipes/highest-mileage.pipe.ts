@@ -5,11 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class HighestMileagePipe implements PipeTransform {
 
-  transform(vehicles: any, filterData: any): any {
-
-    if (filterData === undefined) { return vehicles; }
+  transform(vehicles: any,  inputFilterValue: any): any {
+    if ( inputFilterValue === undefined || inputFilterValue === '' ) { return vehicles; }
     return vehicles.filter((vehicle) => {
-      return vehicle.payload.doc.data().carMileage  <= filterData;
+      return vehicle.payload.doc.data().carMileage  <=  inputFilterValue;
     });
   }
 }

@@ -28,16 +28,14 @@ export class VehiclesComponent implements OnInit {
     lowestMileage: undefined,
     highestMileage: undefined
   };
-
+  errorMsg: any;
   // maintain the count of clicks on Next Prev button
   paginationClickedCount = 0;
 
   // disable next and prev buttons
   disableNext = false;
   disablePrev = true;
-  // user = this.auth.user;
 
-  // brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
   constructor(public automotiveService: AutomotiveDatabaseService, private authService: AuthService,
     // tslint:disable-next-line: align
     private route: ActivatedRoute, private router: Router, private db: AngularFirestore) {
@@ -51,40 +49,28 @@ export class VehiclesComponent implements OnInit {
         if (user.email !== 'kubanam1995@gmail.com') { return null; }
         else { this.hideTrash = true; }
       });
-    // ogarne to jak naprawie autologowanie.
-    // this.authService.user.subscribe(
-    //   user => {
-    //     console.log(user, 'user w vehicles')
-    //     if (user.email !== 'kubanam1995@gmail.com') { return null; }
-    //     else { this.hideTrash = true; }
-    //   });
-    // this.emptyAllVehiclesArray();
-
   }
-  // emptyAllVehiclesArray() {
-  //   if (this.allVehicles.length === 0) { this.zeroVehicles = true; }
 
-  // }
+  emptyAllVehiclesArray() {
+    if (this.vehicles.length === 0) { this.zeroVehicles = true; }
+  }
 
   fetchAutomotives() {
     this.automotiveService.fetchAutomotives()
       .subscribe
       (response => {
         if (!response.length) {
-          console.log('No Data Avconsoailable'); // dasz tutaj component ze brak towaru, jesli hcecie wiedziec kiedy bedzie, zalogujcie sie
+          this.vehicles = [];
+          this.zeroVehicles = true; // dasz tutaj component ze brak towaru, jesli hcecie wiedziec kiedy bedzie, zalogujcie sie
           return false;
         }
         this.vehicles = response;
-        // for (const vehicle of response) {
-        //   this.vehicles = [];
-        //   this.vehicles.push(vehicle);
-        // this.vehicles = this.allVehicles;
-        // this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
-        // console.log(vehicle);
-        // }
-        // push first item to use for Previous action
-      }, error => {
-        console.log(error);
+        this.zeroVehicles = false;
+        console.log('vehicles', this.vehicles.length);
+      },
+      error => {
+        this.errorMsg = error,
+          console.log(error);
       });
   }
 
@@ -110,9 +96,6 @@ export class VehiclesComponent implements OnInit {
     // this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
     // this.paginationClickedCount--;
     // if (this.paginationClickedCount === 0) { this.disablePrev = true, this.disableNext = false; }
-
-
-
   }
 
   filtr($event) {
@@ -122,6 +105,7 @@ export class VehiclesComponent implements OnInit {
     this.filters.lowestMileage = $event.lowestMileage;
     this.filters.highestMileage = $event.highestMileage;
   }
+
   showOneVehicle(vehicle) {
     this.vehicle = vehicle;
     this.showVehicle = true;
@@ -132,7 +116,6 @@ export class VehiclesComponent implements OnInit {
   }
 
   deleteVehicle(vehicle) {
-
     // delete main === first photo in storage firestore
     const path = vehicle.payload.doc.data().path;
     this.automotiveService.deleteMainPhotoInStorage(path)
@@ -149,9 +132,6 @@ export class VehiclesComponent implements OnInit {
 
     // delete all documents in collection of photos URL
     this.automotiveService.deletePhotosURLs(collectionId);
-
-    // delete from array
-    vehicle.remove();
 
   }
 

@@ -19,16 +19,9 @@
                     <li class="nav-item active mx-1" *ngIf='hideLoginButton'>
                         <a class="nav-link" [routerLink]="['/logowanie']">Zaloguj/Zarejestruj</a>
                     </li>
-
-                    <li class="nav-item active mx-1" *ngIf='this.marked'>
+                    <!-- <li class="nav-item active mx-1" *ngIf='this.marked'>
                         <a class="nav-link" href='#'>Oznaczone</a>
-                    </li>
-                    <li ngbDropdown class="nav-item active mx-1">
-                        <a class="nav-link" id="navbarDropdownMenuLink" ngbDropdownToggle aria-haspopup="true"
-                            aria-expanded="false">
-                            Kontakt
-                        </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
                         <a class="nav-link">Zalogowano<span class="sr-only"></span></a>
                     </li>

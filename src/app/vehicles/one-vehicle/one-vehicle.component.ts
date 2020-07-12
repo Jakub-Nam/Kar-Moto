@@ -27,10 +27,7 @@ export class OneVehicleComponent implements OnInit {
     const timestamp = this.vehicle.payload.doc.data().timestamp;
     this.automotiveService.fetchVehiclePhotos(`a${timestamp}`).subscribe(
       next => {
-        this.vehicleURLs = next,
-          console.log(next, 'next'),
-          console.log(this.vehicleURLs, 'vehicles');
-        // this.applyFilters();
+        this.vehicleURLs = next;
       });
   }
 

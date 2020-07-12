@@ -3,8 +3,8 @@ import { AutomotiveDatabaseService } from 'src/app/shared/automotive-database.se
 import { AutomotiveFormService } from 'src/app/shared/automotive-form.service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { tap, finalize } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { tap, finalize, catchError } from 'rxjs/operators';
 import { AdditionalPhotosComponent } from './additional-photos/additional-photos.component';
 import { NgForm } from '@angular/forms';
 
@@ -15,6 +15,8 @@ import { NgForm } from '@angular/forms';
 })
 export class AdminInterfaceComponent implements OnInit {
   @ViewChild('AdditionalPhotosComponent') additionalPhotos: AdditionalPhotosComponent;
+  vehicleWasSent = false;
+  error;
   oneFile = false;
   isHovering: boolean;
   file: File[] = [];
@@ -25,6 +27,7 @@ export class AdminInterfaceComponent implements OnInit {
   form;
   timestamp: number;
   brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
+  errorMessage: any;
 
   constructor(public automotiveDatabaseService: AutomotiveDatabaseService,
               public formService: AutomotiveFormService,
@@ -42,13 +45,13 @@ export class AdminInterfaceComponent implements OnInit {
   async onSubmitPushVehicle(myForm) {
     // const file = this.file[0];
     await this.startUpload(this.file[0], myForm);
-    // this.startUploadPhotoes(this.files, path);
     this.file = [];
     this.additionalPhotos.clearDropZone();
 
   }
+
   onRemove(event) {
-    console.log(event);
+    // console.log(event);
     this.file.splice(this.file.indexOf(event), 1);
   }
 
@@ -66,13 +69,10 @@ export class AdminInterfaceComponent implements OnInit {
     // the main task
     this.task = this.storage.upload(path, file);
 
-    // progress monitoring
-    this.percentage = this.task.percentageChanges();
-
     this.snapshot = this.task.snapshotChanges().pipe(
-      tap(console.log),
-      // the file's download URL
+
       finalize(async () => {
+        // the file's download URL
         this.downloadURL = await ref.getDownloadURL().toPromise();
 
         // add data to cloud database
@@ -87,14 +87,22 @@ export class AdminInterfaceComponent implements OnInit {
             path // shorthand
           });
         myForm.reset();
-      })
+        this.vehicleWasSent = true;
+      }),
+      catchError(err => {
+        this.errorMessage = err;
+        // console.log('caught mapping error and rethrowing', err);
+        return throwError(this.errorMessage);
+      }),
     );
     this.additionalPhotos.pushPhotos();
   }
-}
 
- // @Input()
-  // set inputTimestamp(inputTimestamp: number) {
-  //   this.inputTimestamp =  inputTimestamp;
-  // }
-  // get inputTimestamp(): number { return this.inputTimestamp; }
+  hideVehicleWasSentAlert() {
+    this.vehicleWasSent = false;
+  }
+
+  hideErrorAlert() {
+    this.error = null;
+  }
+}

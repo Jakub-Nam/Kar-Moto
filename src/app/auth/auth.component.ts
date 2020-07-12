@@ -14,27 +14,31 @@ import { User } from './user.model';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  hideForm = true;
+  registrationView = false;
+  // hideForm = true;
   hideSpinner = true;
   isLoginMode = true;
   error: string = null;
   faEye = faEye;
   faEyeSlash = faEyeSlash;
   faEnvelope = faEnvelope;
-  hidePassword = this.authService.adminInterface;
+  hidePassword = true;
   passwordStrengthmeter;
   adminInterface = false;
 
   constructor(private authService: AuthService, private router: Router) { }  // private router: Router
 
   ngOnInit() {
-    // this.authService.user.subscribe(
-    //   user => {
-    //     console.log(user, 'zalogowany')
-    //     if (user.email !== 'kubanam1995@gmail.com') { return; }
-    //     else { this.adminInterface = true, console.log(user, 'else') }
-
-    //   }, err => console.log(err));
+    this.authService.user.subscribe(
+      user => {
+        if (user) {
+          if (user.email !== 'kubanam1995@gmail.com') { return; }
+          else {
+            this.adminInterface = true;
+          }
+        }
+        else { return; }
+      }, err => console.log(err));
 
   }
   showPassword() {
@@ -46,7 +50,7 @@ export class AuthComponent implements OnInit {
       return;
     }
     // this.hideSpinner = false;
-    this.hideForm = false;
+    // this.hideForm = false;
 
     const email = form.value.email;
     const password = form.value.password;
@@ -59,27 +63,27 @@ export class AuthComponent implements OnInit {
       // authObs = this.authService.login(email, password);
       this.authService.login(email, password)
         .then(async userCredential => {
-          console.log(userCredential);
-          // userCredential.user.getIdToken()
-          //   .then(
-          //     response => response
-          //   );
-          let token = '';
+          let token: string;
+          let date: Date;
+          console.log('userCREEE', userCredential);
           await userCredential.user.getIdTokenResult().then(
-            response => token = response.token );
+            response => token = response.token);
 
-          console.log('token', token);
+          await userCredential.user.getIdTokenResult().then(
+            response => date = response.expirationTime);
+
           if (userCredential.user.email !== 'kubanam1995@gmail.com') { this.router.navigate(['/']); }
           this.adminInterface = true;
           const user = new User(
             userCredential.user.email,
+            password,
             userCredential.user.uid,
-            token // id token łosiu
-            // userCredential.user.getIdTokenResult
+            token,
+            date
           );
           console.log('const user 3x', user);
           this.authService.user.next(user);
-
+          localStorage.setItem('userData', JSON.stringify(user));
         })
         .catch(error => {
           console.log(error);
@@ -114,7 +118,11 @@ export class AuthComponent implements OnInit {
     form.reset();
   }
   onSwitchMode(form: NgForm) {
-    this.isLoginMode = !this.isLoginMode;
+    // this.isLoginMode = !this.isLoginMode;
+    this.registrationView = true;
     // form.reset();
+  }
+  showRegistrationView(){
+    this.registrationView = true;
   }
 }
