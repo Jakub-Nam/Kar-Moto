@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
-export class AutomotiveDatabaseService {
+export class VehicleDatabaseService {
 
   constructor(private storage: AngularFireStorage,
     // tslint:disable-next-line: align

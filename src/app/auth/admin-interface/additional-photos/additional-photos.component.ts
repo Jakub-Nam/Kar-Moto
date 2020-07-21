@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { finalize, tap } from 'rxjs/operators';
-import { AutomotiveDatabaseService } from 'src/app/shared/automotive-database.service';
-import { AutomotiveFormService } from 'src/app/shared/automotive-form.service';
+import { VehicleDatabaseService } from 'src/app/shared/vehicle-database.service';
+import { VehicleFormService } from 'src/app/shared/vehicle-form.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { indexOf } from 'lodash';
 
@@ -25,8 +25,8 @@ export class AdditionalPhotosComponent implements OnInit {
   // percentage: Observable<number>;
   snapshot: Observable<any>;
   // downloadURL: string;
-  constructor(public automotiveDatabaseService: AutomotiveDatabaseService,
-              public formService: AutomotiveFormService,
+  constructor(public automotiveDatabaseService: VehicleDatabaseService,
+              public formService: VehicleFormService,
               private storage: AngularFireStorage,
               private db: AngularFirestore) { }
 

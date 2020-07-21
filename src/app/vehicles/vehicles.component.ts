@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AutomotiveDatabaseService } from '../shared/automotive-database.service';
+import { VehicleDatabaseService } from '../shared/vehicle-database.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -36,7 +36,7 @@ export class VehiclesComponent implements OnInit {
   disableNext = false;
   disablePrev = true;
 
-  constructor(public automotiveService: AutomotiveDatabaseService, private authService: AuthService,
+  constructor(public automotiveService: VehicleDatabaseService, private authService: AuthService,
     // tslint:disable-next-line: align
     private route: ActivatedRoute, private router: Router, private db: AngularFirestore) {
   }
