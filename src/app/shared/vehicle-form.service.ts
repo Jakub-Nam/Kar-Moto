@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
-export class AutomotiveFormService {
+export class VehicleFormService {
   automotiveForm = new FormGroup({
     name: new FormControl(''),
     brand: new FormControl(''),

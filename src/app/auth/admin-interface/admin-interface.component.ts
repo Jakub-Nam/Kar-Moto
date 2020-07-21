@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
-import { AutomotiveDatabaseService } from 'src/app/shared/automotive-database.service';
-import { AutomotiveFormService } from 'src/app/shared/automotive-form.service';
+import { VehicleDatabaseService } from 'src/app/shared/vehicle-database.service';
+import { VehicleFormService } from 'src/app/shared/vehicle-form.service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, throwError } from 'rxjs';
@@ -29,8 +29,8 @@ export class AdminInterfaceComponent implements OnInit {
   brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
   errorMessage: any;
 
-  constructor(public automotiveDatabaseService: AutomotiveDatabaseService,
-              public formService: AutomotiveFormService,
+  constructor(public automotiveDatabaseService: VehicleDatabaseService,
+              public formService: VehicleFormService,
               private storage: AngularFireStorage,
               private db: AngularFirestore) { }
 
