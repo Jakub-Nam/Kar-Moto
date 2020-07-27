@@ -4,9 +4,9 @@ import { VehicleFormService } from 'src/app/shared/vehicle-form.service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, throwError } from 'rxjs';
-import { tap, finalize, catchError } from 'rxjs/operators';
+import { finalize, catchError } from 'rxjs/operators';
 import { AdditionalPhotosComponent } from './additional-photos/additional-photos.component';
-import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-admin-interface',
