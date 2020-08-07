@@ -5,30 +5,26 @@ import { AngularFirestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
-export class VehicleDatabaseService {
+export class VehicleDbService {
 
-  constructor(private storage: AngularFireStorage,
-    // tslint:disable-next-line: align
+  constructor(
+    private storage: AngularFireStorage,
     private db: AngularFirestore
-    // private authService: AuthService,
-
   ) { }
 
 
-  fetchAutomotives() {
+  fetchAllVehicles() {
     return this.db.collection('mainData', ref => ref
-    // .limit(3)
-    .orderBy('timestamp', 'desc'))
-    .snapshotChanges();
+      .orderBy('timestamp', 'desc'))
+      .snapshotChanges();
   }
 
-  fetchVehiclePhotos(timestamp) {
+  fetchAdditionalVehiclePhotos(timestamp) {
     return this.db.collection(timestamp).snapshotChanges();
   }
 
-  deleteMainDocument(documentId) {
 
-    // delete document in mainData in cloud firestore
+  deleteMainDocument(documentId) {
     this.db.collection('mainData').doc(documentId).delete()
       .then(() => {
         console.log('Document successfully deleted!');
@@ -39,7 +35,6 @@ export class VehicleDatabaseService {
   }
 
   deletePhotosURLs(collectionId) {
-    // delete data (download URLs) from cloud firestore
     this.db.collection(`a${collectionId}`).get().toPromise()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -55,13 +50,12 @@ export class VehicleDatabaseService {
   }
 
   deleteMainPhotoInStorage(path) {
-    // delete main photo from storage firestore
+
     const storageRef = this.storage.ref(path);
     return storageRef;
   }
 
   deleteSecondaryPhotos(collectionId) {
-    // delete secondary/additionals URLs of photos from cloud firestore
     this.db.collection(`a${collectionId}`).get().toPromise()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {

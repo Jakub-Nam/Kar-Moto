@@ -15,7 +15,6 @@ import { User } from './user.model';
 })
 export class AuthComponent implements OnInit {
   registrationView = false;
-  // hideForm = true;
   hideSpinner = true;
   isLoginMode = true;
   error: string = null;
@@ -49,18 +48,11 @@ export class AuthComponent implements OnInit {
     if (!form.valid) {
       return;
     }
-    // this.hideSpinner = false;
-    // this.hideForm = false;
-
     const email = form.value.email;
     const password = form.value.password;
-    // let authObs: Observable<AuthResponseData>;
 
-    // console.log('TOKEN', userCredential.user.getIdTokenResult().then(
-    //   response => console.log('Afryka', response.token)
-    // ));
     if (this.isLoginMode) {
-      // authObs = this.authService.login(email, password);
+
       this.authService.login(email, password)
         .then(async userCredential => {
           let token: string;
@@ -93,34 +85,12 @@ export class AuthComponent implements OnInit {
     } else {
       this.authService.signUp(email, password),
         this.isLoginMode = !this.isLoginMode;
-      // this.hideForm = true;
     }
-    // authObs.subscribe(
-    //   resData => {
-    //     this.hideSpinner = false;
-    //     console.log(resData);
 
-    //     if (resData.email !== 'kubanam1995@gmail.com') {
-    //       this.router.navigate(['/']);
-    //     } else {
-    //       this.nextComponent = !this.nextComponent;
-    //     }
-
-
-    //     // this.router.navigate(['/farms']);
-    //   },
-    //   errorMessage => {
-    //     this.error = errorMessage;
-    //     this.hideSpinner = true;
-    //     this.hideForm = true;
-    //   }
-    // );
     form.reset();
   }
   onSwitchMode(form: NgForm) {
-    // this.isLoginMode = !this.isLoginMode;
     this.registrationView = true;
-    // form.reset();
   }
   showRegistrationView(){
     this.registrationView = true;

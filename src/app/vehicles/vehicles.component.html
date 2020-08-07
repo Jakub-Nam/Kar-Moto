@@ -1,9 +1,9 @@
-<section *ngIf='zeroVehicles'>
+<section *ngIf='zeroVehiclesComponent'>
   <app-zero-vehicles></app-zero-vehicles>
 </section>
 
 <section>
-  <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle && !zeroVehicles'></app-filter-menu>
+  <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle && !zeroVehiclesComponent'></app-filter-menu>
 </section>
 <div class="alert alert-danger" role="alert" *ngIf='this.errorMsg'>
   Problem z serverem Firebase!
@@ -52,24 +52,7 @@
             </button>
           </div>
         </div>
-
       </div>
     </figure>
-
   </section>
-
 </div>
-<!-- *ngIf='!showVehicle && this.vehicles.length > 4' -->
-<!-- <nav aria-label="pagination" > 
-  <ul class="pagination justify-content-between">
-    <li class="page-item">
-      
-      <button class="btn btn-secondary" aria-label="previous" tabindex="-1" [disabled]='disablePrev'
-        (click)='prevPage()'>Poprzednia</button>
-    </li>
-    <li class="page-item">
-      <button class="btn btn-secondary" aria-label="next" [disabled]='disableNext' (click)='nextPage()'> Następna
-      </button>
-    </li>
-  </ul>
-</nav> -->

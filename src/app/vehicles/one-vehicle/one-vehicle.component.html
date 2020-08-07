@@ -8,15 +8,9 @@
     <ngb-carousel>
       <ng-template ngbSlide>
         <img src="{{ vehicle.payload.doc.data().downloadURL }}" class="d-block w-100">
-        <!-- <div class="carousel-caption">  
-                <h3 style="color: yellow">Delhi Metro</h3>  
-            </div>   -->
       </ng-template>
       <ng-template ngbSlide *ngFor='let vehicleURL of vehicleURLs'>
         <img src="{{ vehicleURL.payload.doc.data().downloadURL }}" class="d-block w-100">
-        <!-- <div class="carousel-caption">  
-                <h3 style="color: yellow">Bangalore Metro</h3>  
-            </div>   -->
       </ng-template>
     </ngb-carousel>
   </div>
@@ -29,9 +23,3 @@
     <small>Dodano: {{ vehicle.payload.doc.data().timestamp | date:'dd-MM-yyyy' }}</small>
   </div>
 </div>
-<!-- <div class="carousel-item active">
-    <img class="d-block w-100" src="{{ vehicle.downloadURL }}" alt="First slide">
-  </div>
-  <div class="carousel-item " *ngFor='let vehicleURL of vehicleURLs'>
-    <img class="d-block w-100" src="{{ vehicleURL.downloadURL }}" alt="Second slide">
-  </div> -->

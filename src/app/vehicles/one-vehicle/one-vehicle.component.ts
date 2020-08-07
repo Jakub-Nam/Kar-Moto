@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { VehicleDatabaseService } from 'src/app/shared/vehicle-database.service';
+import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -11,7 +11,7 @@ export class OneVehicleComponent implements OnInit {
   @Input() vehicle;
   @Output() return = new EventEmitter();
   vehicleURLs;
-  constructor(private automotiveService: VehicleDatabaseService, config: NgbCarouselConfig) {
+  constructor(private vehicleDbService: VehicleDbService, config: NgbCarouselConfig) {
     config.interval = 100000;
     config.wrap = true;
     config.keyboard = false;
@@ -20,12 +20,12 @@ export class OneVehicleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchVehiclePhotos();
+    this.fetchAdditionalVehiclePhotos();
 
   }
-  fetchVehiclePhotos() {
+  fetchAdditionalVehiclePhotos() {
     const timestamp = this.vehicle.payload.doc.data().timestamp;
-    this.automotiveService.fetchVehiclePhotos(`a${timestamp}`).subscribe(
+    this.vehicleDbService.fetchAdditionalVehiclePhotos(`a${timestamp}`).subscribe(
       next => {
         this.vehicleURLs = next;
       });

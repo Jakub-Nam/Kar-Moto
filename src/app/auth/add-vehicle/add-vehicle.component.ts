@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
-import { VehicleDatabaseService } from 'src/app/shared/vehicle-database.service';
+import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { VehicleFormService } from 'src/app/shared/vehicle-form.service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -9,11 +9,11 @@ import { AdditionalPhotosComponent } from './additional-photos/additional-photos
 
 
 @Component({
-  selector: 'app-admin-interface',
-  templateUrl: './admin-interface.component.html',
-  styleUrls: ['./admin-interface.component.css']
+  selector: 'app-add-vehicle',
+  templateUrl: './add-vehicle.component.html',
+  styleUrls: ['./add-vehicle.component.css']
 })
-export class AdminInterfaceComponent implements OnInit {
+export class AddVehicleComponent implements OnInit {
   @ViewChild('AdditionalPhotosComponent') additionalPhotos: AdditionalPhotosComponent;
   vehicleWasSent = false;
   error;
@@ -29,10 +29,13 @@ export class AdminInterfaceComponent implements OnInit {
   brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
   errorMessage: any;
 
-  constructor(public automotiveDatabaseService: VehicleDatabaseService,
-              public formService: VehicleFormService,
-              private storage: AngularFireStorage,
-              private db: AngularFirestore) { }
+  constructor(
+    public vehicleDbService: VehicleDbService,
+    public formService: VehicleFormService,
+    private storage: AngularFireStorage,
+    private db: AngularFirestore,
+    private vehicleDb: VehicleDbService
+    ) { }
 
   ngOnInit(): void {
     this.form = this.formService.automotiveForm;
@@ -43,7 +46,6 @@ export class AdminInterfaceComponent implements OnInit {
   }
 
   async onSubmitPushVehicle(myForm) {
-    // const file = this.file[0];
     await this.startUpload(this.file[0], myForm);
     this.file = [];
     this.additionalPhotos.clearDropZone();
@@ -51,7 +53,6 @@ export class AdminInterfaceComponent implements OnInit {
   }
 
   onRemove(event) {
-    // console.log(event);
     this.file.splice(this.file.indexOf(event), 1);
   }
 
@@ -60,22 +61,19 @@ export class AdminInterfaceComponent implements OnInit {
     const timestamp = Date.now();
     this.timestamp = timestamp;
 
-    // the storage path
-    const path = `test/${timestamp}_${file.name}`;
+    const storagePath = `test/${timestamp}_${file.name}`;
 
-    // reference to storage bucket
-    const ref = this.storage.ref(path);
 
-    // the main task
-    this.task = this.storage.upload(path, file);
+    const storageReference = this.storage.ref(storagePath);
+
+    this.task = this.storage.upload(storagePath, file);
 
     this.snapshot = this.task.snapshotChanges().pipe(
 
       finalize(async () => {
-        // the file's download URL
-        this.downloadURL = await ref.getDownloadURL().toPromise();
 
-        // add data to cloud database
+        this.downloadURL = await storageReference.getDownloadURL().toPromise();
+
         await this.db.collection('mainData').add(
           {
             name: this.form.value.name,
@@ -83,15 +81,14 @@ export class AdminInterfaceComponent implements OnInit {
             price: this.form.value.price,
             carMileage: this.form.value.carMileage,
             downloadURL: this.downloadURL,
-            timestamp, // shorthand
-            path // shorthand
+            timestamp,
+            storagePath
           });
         myForm.reset();
         this.vehicleWasSent = true;
       }),
       catchError(err => {
         this.errorMessage = err;
-        // console.log('caught mapping error and rethrowing', err);
         return throwError(this.errorMessage);
       }),
     );

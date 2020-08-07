@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { finalize, tap } from 'rxjs/operators';
-import { VehicleDatabaseService } from 'src/app/shared/vehicle-database.service';
+import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { VehicleFormService } from 'src/app/shared/vehicle-form.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { indexOf } from 'lodash';
+
 
 @Component({
   selector: 'app-additional-photos',
@@ -15,20 +15,21 @@ import { indexOf } from 'lodash';
 export class AdditionalPhotosComponent implements OnInit {
   @Input()
   set inputTimestamp(inputTimestamp: string) {
-    this._inputTimestamp =  `a${inputTimestamp}`;
+    this._inputTimestamp = `a${inputTimestamp}`;
   }
   get inputTimestamp(): string { return this._inputTimestamp; }
   _inputTimestamp = '';
   isHovering: boolean;
   files: File[] = [];
-  // task: AngularFireUploadTask;
-  // percentage: Observable<number>;
+
   snapshot: Observable<any>;
-  // downloadURL: string;
-  constructor(public automotiveDatabaseService: VehicleDatabaseService,
-              public formService: VehicleFormService,
-              private storage: AngularFireStorage,
-              private db: AngularFirestore) { }
+
+  constructor(
+    public vehicleDbService: VehicleDbService,
+    public formService: VehicleFormService,
+    private storage: AngularFireStorage,
+    private db: AngularFirestore
+  ) { }
 
   ngOnInit(): void {
   }
@@ -44,44 +45,34 @@ export class AdditionalPhotosComponent implements OnInit {
   pushPhotos() {
     for (const file of this.files) {
       this.startUpload(file);
-      // if (this.files[file] !== this.files.length - 1) { return; }
-      // else { form.clear() }
-      //
     }
   }
   startUpload(file) {
 
     const photoTimestamp = Date.now();
-    // the storage path
-    const path = `test/${photoTimestamp}_${file.name}`;
 
-    // reference to storage bucket
-    const ref = this.storage.ref(path);
+    const storagePath = `test/${photoTimestamp}_${file.name}`;
 
-    // the main task
-    const task: AngularFireUploadTask  = this.storage.upload(path, file);
+    const storageReference = this.storage.ref(storagePath);
 
-    // progress monitoring
-    // const percentage = task.percentageChanges();
+    const task: AngularFireUploadTask = this.storage.upload(storagePath, file);
 
     const snapshot: Observable<any> = task.snapshotChanges();
     snapshot.pipe(
       tap(console.log),
 
-      // the file's download URL
       finalize(async () => {
-        const downloadURL = await ref.getDownloadURL().toPromise();
-        // add data to cloud database
+        const downloadURL = await storageReference.getDownloadURL().toPromise();
         this.db.collection(this.inputTimestamp).add(
           {
-            downloadURL, // shorthand
-            path // shorthand
+            downloadURL,
+            storagePath
           }
         );
       })
     ).subscribe();
   }
-  clearDropZone(){
+  clearDropZone() {
     this.files = [];
   }
 }

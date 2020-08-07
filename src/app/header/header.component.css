@@ -13,3 +13,6 @@ h1 a:hover {
 header {
     position: relative;
 }
+#disabledAnchor {
+color: rgb(253, 253, 253);
+}

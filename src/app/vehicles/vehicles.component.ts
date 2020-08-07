@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleDatabaseService } from '../shared/vehicle-database.service';
+import { VehicleDbService } from '../shared/vehicle-db.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,8 +11,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./vehicles.component.css']
 })
 export class VehiclesComponent implements OnInit {
-  zeroVehicles = false;
-  // allVehicles: any = [];
+  zeroVehiclesComponent = false;
   beginSlice = 0;
   endSlice = 2;
   vehicles: any = [];
@@ -29,49 +28,53 @@ export class VehiclesComponent implements OnInit {
     highestMileage: undefined
   };
   errorMsg: any;
-  // maintain the count of clicks on Next Prev button
   paginationClickedCount = 0;
 
-  // disable next and prev buttons
   disableNext = false;
   disablePrev = true;
 
-  constructor(public automotiveService: VehicleDatabaseService, private authService: AuthService,
-    // tslint:disable-next-line: align
-    private route: ActivatedRoute, private router: Router, private db: AngularFirestore) {
-  }
+  constructor(
+    public automotiveService: VehicleDbService,
+    private authService: AuthService,
+  ) { }
 
   ngOnInit(): void {
-    this.fetchAutomotives();
+    this.fetchAllVehicles();
     this.authService.user.subscribe(
       user => {
-        if (user === null) { return; }
-        if (user.email !== 'kubanam1995@gmail.com') { return null; }
-        else { this.hideTrash = true; }
+        if (user === null) {
+          return;
+        }
+        if (user.email !== 'kubanam1995@gmail.com') {
+          return null;
+        }
+        else {
+          this.hideTrash = true;
+        }
       });
   }
 
   emptyAllVehiclesArray() {
-    if (this.vehicles.length === 0) { this.zeroVehicles = true; }
+    if (this.vehicles.length === 0) { this.zeroVehiclesComponent = true; }
   }
 
-  fetchAutomotives() {
-    this.automotiveService.fetchAutomotives()
+  fetchAllVehicles() {
+    this.automotiveService.fetchAllVehicles()
       .subscribe
       (response => {
         if (!response.length) {
           this.vehicles = [];
-          this.zeroVehicles = true; // dasz tutaj component ze brak towaru, jesli hcecie wiedziec kiedy bedzie, zalogujcie sie
+          this.zeroVehiclesComponent = true;
           return false;
         }
         this.vehicles = response;
-        this.zeroVehicles = false;
+        this.zeroVehiclesComponent = false;
         console.log('vehicles', this.vehicles.length);
       },
-      error => {
-        this.errorMsg = error,
-          console.log(error);
-      });
+        error => {
+          this.errorMsg = error,
+            console.log(error);
+        });
   }
 
 
@@ -81,11 +84,6 @@ export class VehiclesComponent implements OnInit {
         this.endSlice += 2,
         this.disablePrev = false;
     }
-    // this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
-    // this.paginationClickedCount++;
-    // if (this.endSlice > this.allVehicles.length) { return this.disableNext = true; }
-
-
   }
   prevPage() {
     if (this.paginationClickedCount > 0) {
@@ -93,9 +91,6 @@ export class VehiclesComponent implements OnInit {
         this.endSlice -= 2,
         this.disableNext = false;
     }
-    // this.vehicles = this.allVehicles.slice(this.beginSlice, this.endSlice);
-    // this.paginationClickedCount--;
-    // if (this.paginationClickedCount === 0) { this.disablePrev = true, this.disableNext = false; }
   }
 
   filtr($event) {
@@ -116,23 +111,19 @@ export class VehiclesComponent implements OnInit {
   }
 
   deleteVehicle(vehicle) {
-    // delete main === first photo in storage firestore
-    const path = vehicle.payload.doc.data().path;
-    this.automotiveService.deleteMainPhotoInStorage(path)
+
+    const storagePath = vehicle.payload.doc.data().path;
+    this.automotiveService.deleteMainPhotoInStorage(storagePath)
       .delete()
       .subscribe();
 
-    // delete all secondary photos in storage firestore
     const collectionId = vehicle.payload.doc.data().timestamp;
     this.automotiveService.deleteSecondaryPhotos(collectionId);
 
-    // delete document in mainData collection in cloud firestore
     const documentId = vehicle.payload.doc.id;
     this.automotiveService.deleteMainDocument(documentId);
 
-    // delete all documents in collection of photos URL
     this.automotiveService.deletePhotosURLs(collectionId);
-
   }
 
 }

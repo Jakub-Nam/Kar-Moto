@@ -19,11 +19,8 @@
                     <li class="nav-item active mx-1" *ngIf='hideLoginButton'>
                         <a class="nav-link" [routerLink]="['/logowanie']">Zaloguj/Zarejestruj</a>
                     </li>
-                    <!-- <li class="nav-item active mx-1" *ngIf='this.marked'>
-                        <a class="nav-link" href='#'>Oznaczone</a>
-                    </li> -->
-                    <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
-                        <a class="nav-link">Zalogowano<span class="sr-only"></span></a>
+                    <li class="nav-item mx-1" *ngIf='!hideLoginButton'>
+                        <a class="nav-link disabled" id="disabledAnchor">Zalogowano<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
                         <a class="nav-link" href='#' (click)='logout()'>Wyloguj</a>

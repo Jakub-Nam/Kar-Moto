@@ -10,7 +10,7 @@ export class FilterMenuComponent implements OnInit, DoCheck {
   @Output() filtered = new EventEmitter<object>();
 
   brandModel: string;
-  priceLow: string;
+  lowestPrice: string;
   highestPrice: number;
   lowestMileage: number;
   highestMileage: number;
@@ -23,7 +23,7 @@ export class FilterMenuComponent implements OnInit, DoCheck {
   ngDoCheck() {
     const formValues = {
       brand: this.brandModel,
-      priceLow: this.priceLow,
+      priceLow: this.lowestPrice,
       highestPrice: this.highestPrice,
       lowestMileage: this.lowestMileage,
       highestMileage: this.highestMileage

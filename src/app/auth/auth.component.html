@@ -45,7 +45,7 @@
                     {{ isLoginMode ? 'Zaloguj' : 'Zarejestruj'}}
                 </button>
             </div>
-    
+
         </div>
         <div class="col mx-auto text-center my-2 change-view">
             <strong>{{ isLoginMode ? 'Nie posiadasz konta?' : 'Wróć do panelu' }}</strong>
@@ -53,9 +53,9 @@
             <a (click)='onSwitchMode(authForm)'>{{ isLoginMode ? 'Stwórz konto' : 'logowania' }}</a>
         </div>
     </form>
-    
+
 </div>
 
 <section *ngIf='this.adminInterface'>
-    <app-admin-interface></app-admin-interface>
+    <app-add-vehicle></app-add-vehicle>
 </section>
