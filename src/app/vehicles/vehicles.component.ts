@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleDbService } from '../shared/vehicle-db.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-vehicles',
@@ -34,7 +32,7 @@ export class VehiclesComponent implements OnInit {
   disablePrev = true;
 
   constructor(
-    public automotiveService: VehicleDbService,
+    public vehicleDbService: VehicleDbService,
     private authService: AuthService,
   ) { }
 
@@ -59,7 +57,7 @@ export class VehiclesComponent implements OnInit {
   }
 
   fetchAllVehicles() {
-    this.automotiveService.fetchAllVehicles()
+    this.vehicleDbService.fetchAllVehicles()
       .subscribe
       (response => {
         if (!response.length) {
@@ -113,17 +111,17 @@ export class VehiclesComponent implements OnInit {
   deleteVehicle(vehicle) {
 
     const storagePath = vehicle.payload.doc.data().path;
-    this.automotiveService.deleteMainPhotoInStorage(storagePath)
+    this.vehicleDbService.deleteMainPhotoInStorage(storagePath)
       .delete()
       .subscribe();
 
     const collectionId = vehicle.payload.doc.data().timestamp;
-    this.automotiveService.deleteSecondaryPhotos(collectionId);
+    this.vehicleDbService.deleteSecondaryPhotos(collectionId);
 
     const documentId = vehicle.payload.doc.id;
-    this.automotiveService.deleteMainDocument(documentId);
+    this.vehicleDbService.deleteMainDocument(documentId);
 
-    this.automotiveService.deletePhotosURLs(collectionId);
+    this.vehicleDbService.deletePhotosURLs(collectionId);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from './auth.service'; //  AuthResponseData
+import { AuthService } from './auth.service';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -24,6 +24,7 @@ export class AuthComponent implements OnInit {
   hidePassword = true;
   passwordStrengthmeter;
   adminInterface = false;
+  editProfile = false;
 
   constructor(private authService: AuthService, private router: Router) { }  // private router: Router
 
@@ -36,7 +37,9 @@ export class AuthComponent implements OnInit {
             this.adminInterface = true;
           }
         }
-        else { return; }
+        else {
+          return;
+        }
       }, err => console.log(err));
 
   }
@@ -92,7 +95,11 @@ export class AuthComponent implements OnInit {
   onSwitchMode(form: NgForm) {
     this.registrationView = true;
   }
-  showRegistrationView(){
+  showRegistrationView() {
     this.registrationView = true;
+  }
+  showEditProfileMenu() {
+    this.editProfile = true;
+
   }
 }

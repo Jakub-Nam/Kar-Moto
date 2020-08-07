@@ -6,7 +6,6 @@
     <span> {{ errorMessage }} </span>
     <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
 </div>
-<hr>
 <div class="row d-flex flex-column flex-lg-row">
     <div class="col my-2">
         <ngx-dropzone (change)="onSelectPhoto($event)" [multiple]='oneFile'>

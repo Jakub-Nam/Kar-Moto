@@ -14,10 +14,10 @@
             <div class="collapse navbar-collapse" [ngbCollapse]="!toggleNavbar">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item active mx-1" *ngIf='this.showAdminInterface'>
-                        <a class="nav-link" [routerLink]="['/logowanie']">Dodaj maszynę<span class="sr-only"></span></a>
+                        <a class="nav-link" [routerLink]="['/login']">Panel Użytkownika<span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item active mx-1" *ngIf='hideLoginButton'>
-                        <a class="nav-link" [routerLink]="['/logowanie']">Zaloguj/Zarejestruj</a>
+                        <a class="nav-link" [routerLink]="['/login']">Zaloguj/Zarejestruj</a>
                     </li>
                     <li class="nav-item mx-1" *ngIf='!hideLoginButton'>
                         <a class="nav-link disabled" id="disabledAnchor">Zalogowano<span class="sr-only"></span></a>

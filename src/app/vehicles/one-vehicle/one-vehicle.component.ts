@@ -11,7 +11,10 @@ export class OneVehicleComponent implements OnInit {
   @Input() vehicle;
   @Output() return = new EventEmitter();
   vehicleURLs;
-  constructor(private vehicleDbService: VehicleDbService, config: NgbCarouselConfig) {
+
+  constructor(
+    private vehicleDbService: VehicleDbService,
+    config: NgbCarouselConfig) {
     config.interval = 100000;
     config.wrap = true;
     config.keyboard = false;

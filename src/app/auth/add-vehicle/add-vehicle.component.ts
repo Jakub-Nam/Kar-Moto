@@ -34,7 +34,6 @@ export class AddVehicleComponent implements OnInit {
     public formService: VehicleFormService,
     private storage: AngularFireStorage,
     private db: AngularFirestore,
-    private vehicleDb: VehicleDbService
     ) { }
 
   ngOnInit(): void {

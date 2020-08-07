@@ -36,11 +36,12 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PaginationComponent } from './vehicles/pagination/pagination.component';
 import { ZeroVehiclesComponent } from './vehicles/zero-vehicles/zero-vehicles.component';
 import { RegisterProhibitedComponent } from './auth/register-prohibited/register-prohibited.component';
+import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: VehiclesComponent },
-  { path: 'logowanie', component: AuthComponent }
+  { path: 'login', component: AuthComponent }
 ];
 
 const materialComponents = [
@@ -68,7 +69,8 @@ const materialComponents = [
     OneVehicleComponent,
     PaginationComponent,
     ZeroVehiclesComponent,
-    RegisterProhibitedComponent
+    RegisterProhibitedComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

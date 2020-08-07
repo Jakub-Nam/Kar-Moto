@@ -1,0 +1,72 @@
+<form #form="ngForm" class='main-form row d-flex flex-column' [formGroup]="this.profileForm"
+    (ngSubmit)='onSubmitChangeProfile(form)'>
+    <div class="form-group col-8 col-lg-6 mx-auto">
+        <div class="row">
+            <div class="col">
+                <label for='name'>Imię i Nazwisko:</label>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName='name' id='name' name='name'
+                    placeholder="np. Insignia A LIFT">
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-8 col-lg-10 mx-auto">
+        <div class="row">
+            <div class="col">
+                <label for='email'>Email:</label>
+            </div>
+            <div class="col">
+                <input type="email" class="form-control" id="email" name='email' formControlName='email'
+                    placeholder="np. BMW">
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-8 col-lg-10 mx-auto">
+        <div class="row">
+            <div class="col">
+                <label for='phoneNumber'>Nr telefonu:</label>
+            </div>
+            <div class="col ">
+                <input type="tel" class="form-control" id='phoneNumber' name='phoneNumber' formControlName='phoneNumber'
+                    placeholder="np. 75000">
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-8 col-lg-10 mx-auto">
+        <div class="row">
+            <div class="col">
+                <label for='street'>Ulica:</label>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" id='street' name='street' formControlName='street'
+                    placeholder="np. 200 000">
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-8 col-lg-10 mx-auto">
+        <div class="row">
+            <div class="col">
+                <label for='postCode'>Kod Pocztowy</label>
+            </div>
+            <div class="col">
+                <input type="tel" class="form-control" id='postCode' name='postCode' formControlName='postCode'
+                    placeholder="np. 200 000">
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-8 col-lg-10 mx-auto">
+        <div class="row">
+            <div class="col">
+                <label for='surname'>Miasto:</label>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName='city' id='city' name='city'
+                    placeholder="np. Insignia A LIFT">
+            </div>
+        </div>
+    </div>
+    <div class="col-4 col-lg-4 col-md-5 col-sm-6 mx-auto my-3">
+        <button type="submit" mat-raised-button color="primary" class='btn-block'>Dodaj</button>
+    </div>
+</form>

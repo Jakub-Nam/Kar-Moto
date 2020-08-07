@@ -1,6 +1,15 @@
 <section *ngIf='registrationView'>
     <app-register-prohibited></app-register-prohibited>
 </section>
+<div class="row py-3 mx-0">
+    <div class="col-4 col-lg-4 col-md-5 col-sm-4 mx-left mx-0 px-0">
+        <button mat-raised-button color="primary" (click)='showEditProfileMenu()' class='btn-block mx-0'>Edytuj profil</button>
+    </div>
+
+</div>
+<section *ngIf='this.editProfile'>
+    <app-edit-profile></app-edit-profile>
+</section>
 <div *ngIf='!registrationView'>
     <form class='col-10 col-lg-8 mx-auto' #authForm="ngForm" (ngSubmit)='onSubmit(authForm)' *ngIf='!adminInterface'>
         <h3 class='col-8 text-start px-0 py-2'>{{ isLoginMode ? 'Logowanie' : 'Rejestracja' }}</h3>
