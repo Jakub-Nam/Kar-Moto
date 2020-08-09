@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
   hidePassword = true;
   passwordStrengthmeter;
   adminInterface = false;
-  editProfile = false;
+
 
   constructor(private authService: AuthService, private router: Router) { }  // private router: Router
 
@@ -97,9 +97,5 @@ export class AuthComponent implements OnInit {
   }
   showRegistrationView() {
     this.registrationView = true;
-  }
-  showEditProfileMenu() {
-    this.editProfile = true;
-
   }
 }

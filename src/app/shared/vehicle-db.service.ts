@@ -12,6 +12,10 @@ export class VehicleDbService {
     private db: AngularFirestore
   ) { }
 
+  fetchProfileData() {
+    return this.db.collection('mainData').doc('profileData')
+      .valueChanges();
+  }
 
   fetchAllVehicles() {
     return this.db.collection('mainData', ref => ref
@@ -20,7 +24,8 @@ export class VehicleDbService {
   }
 
   fetchAdditionalVehiclePhotos(timestamp) {
-    return this.db.collection(timestamp).snapshotChanges();
+    return this.db.collection(timestamp)
+      .snapshotChanges();
   }
 
 

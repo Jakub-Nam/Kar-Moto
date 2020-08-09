@@ -14,13 +14,12 @@
                 Zadzwoń lub wyślij wiadomość!
             </p>
             <p class='mb-0'>Kontakt:</p>
-            <address>
-                Karol Poprawa<br>
-                <a href="tel: +48 509 875 329">tel: +48 509 875 329</a><br>
-                <!-- tel: +48 509 875 329<br> -->
-                e-mail: anita543@wp.pl<br>
-                ul. Wąska 26,<br>
-                63-430 Odolanów
+            <address *ngIf='this.profileData'>
+                {{ profileData.userName }}<br>
+                <a href="{{ profileData.phoneNumber }}">{{ profileData.phoneNumber }}</a><br>
+                {{ profileData.email }}<br>
+                {{ profileData.street }},<br>
+                {{ profileData.postCode }} {{ profileData.city}}
             </address>
         </div>
         <div class="w-100"></div>

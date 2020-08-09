@@ -67,7 +67,6 @@ export class VehiclesComponent implements OnInit {
         }
         this.vehicles = response;
         this.zeroVehiclesComponent = false;
-        console.log('vehicles', this.vehicles.length);
       },
         error => {
           this.errorMsg = error,

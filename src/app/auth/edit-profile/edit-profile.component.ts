@@ -17,6 +17,7 @@ export class EditProfileComponent implements OnInit {
     postCode: new FormControl(''),
     city: new FormControl('')
   });
+  editProfile = false;
   constructor(private db: AngularFirestore) { }
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class EditProfileComponent implements OnInit {
   onSubmitChangeProfile(form) {
     this.db.collection('mainData').doc('profileData').set(
       {
-        name: form.value.name,
+        userName: form.value.name,
         phoneNumber: form.value.phoneNumber,
         email: form.value.email,
         street: form.value.street,
@@ -41,5 +42,8 @@ export class EditProfileComponent implements OnInit {
         console.error('Error writing document: ', error);
       });
     form.reset();
+  }
+  showEditProfileMenu() {
+    this.editProfile = !this.editProfile;
   }
 }
