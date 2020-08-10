@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   public toggleNavbar = true;
   showAdminInterface = false;
   marked = false;
+  isNavbarCollapsed = true;
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {

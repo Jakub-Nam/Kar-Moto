@@ -38,7 +38,6 @@ import { ZeroVehiclesComponent } from './vehicles/zero-vehicles/zero-vehicles.co
 import { RegisterProhibitedComponent } from './auth/register-prohibited/register-prohibited.component';
 import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
 
-
 const appRoutes: Routes = [
   { path: '', component: VehiclesComponent },
   { path: 'login', component: AuthComponent }

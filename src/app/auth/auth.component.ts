@@ -32,7 +32,9 @@ export class AuthComponent implements OnInit {
     this.authService.user.subscribe(
       user => {
         if (user) {
-          if (user.email !== 'kubanam1995@gmail.com') { return; }
+          if (user.email !== 'kubanam1995@gmail.com') {
+            return;
+          }
           else {
             this.adminInterface = true;
           }
@@ -68,7 +70,7 @@ export class AuthComponent implements OnInit {
             response => date = response.expirationTime);
 
           if (userCredential.user.email !== 'kubanam1995@gmail.com') { this.router.navigate(['/']); }
-          this.adminInterface = true;
+          // this.adminInterface = true;
           const user = new User(
             userCredential.user.email,
             password,

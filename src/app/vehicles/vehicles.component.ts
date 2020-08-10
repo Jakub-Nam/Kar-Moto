@@ -17,7 +17,7 @@ export class VehiclesComponent implements OnInit {
   config: any;
   vehicle: [];
   faTrash = faTrash;
-  hideTrash = false;
+  showForAdmin = false;
   filters = {
     brand: undefined,
     priceLow: undefined,
@@ -27,9 +27,6 @@ export class VehiclesComponent implements OnInit {
   };
   errorMsg: any;
   paginationClickedCount = 0;
-
-  disableNext = false;
-  disablePrev = true;
 
   constructor(
     public vehicleDbService: VehicleDbService,
@@ -47,7 +44,7 @@ export class VehiclesComponent implements OnInit {
           return null;
         }
         else {
-          this.hideTrash = true;
+          this.showForAdmin = true;
         }
       });
   }
@@ -72,22 +69,6 @@ export class VehiclesComponent implements OnInit {
           this.errorMsg = error,
             console.log(error);
         });
-  }
-
-
-  nextPage() {
-    if (this.paginationClickedCount >= 0) {
-      this.beginSlice += 2,
-        this.endSlice += 2,
-        this.disablePrev = false;
-    }
-  }
-  prevPage() {
-    if (this.paginationClickedCount > 0) {
-      this.beginSlice -= 2,
-        this.endSlice -= 2,
-        this.disableNext = false;
-    }
   }
 
   filtr($event) {

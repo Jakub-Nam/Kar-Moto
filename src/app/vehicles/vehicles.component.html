@@ -25,7 +25,6 @@
             <img src="{{ vehicle.payload.doc.data().downloadURL }}" class="card-img px-2 py-2" alt="Zdjęcie pojazdu">
           </a>
         </div>
-
         <div class="col-md-6 d-flex align-items-lg-center">
           <div class="card-body py-0 px-2">
             <figcaption>
@@ -34,7 +33,7 @@
               <p class="card-text mb-0 pt-lg-2">
                 <small class="text-muted ">{{ vehicle.payload.doc.data().brand }}</small>
               </p>
-              <p class='card-text pt-lg-2'>
+              <p class='card-text pt-lg-2' *ngIf='this.showForAdmin'>
                 <small class="pr-3">Dodano:
                   {{ vehicle.payload.doc.data().timestamp | date:'dd-MM-yyyy' }}</small>
               </p>
@@ -46,7 +45,7 @@
             <div class="col d-flex justify-content-md-end justify-content-start px-md-1">
               <b class='py-md-2 mr-md-2'>Cena: {{ vehicle.payload.doc.data().price }}zł</b>
             </div>
-            <button type='button' class='btn-font-trash px-0 py-0' *ngIf='this.hideTrash'
+            <button type='button' class='btn-font-trash px-0 py-0' *ngIf='this.showForAdmin'
               (click)='deleteVehicle(vehicle)'>
               <fa-icon [icon]="faTrash" class="fas fa-trash"></fa-icon>
             </button>

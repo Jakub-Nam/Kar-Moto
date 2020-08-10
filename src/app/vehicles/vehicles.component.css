@@ -15,4 +15,9 @@ img:hover {
     opacity: 0.3;
     filter: alpha(opacity=30);
     cursor: pointer;
-};
+}
+
+.card:hover {
+    cursor: pointer;
+    background-color: #f5e7e7;
+}
