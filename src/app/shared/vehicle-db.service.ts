@@ -69,5 +69,9 @@ export class VehicleDbService {
           storageRef.delete();
         });
       });
+      // tslint:disable-next-line: align
+    //   .catch (error => {
+    //   console.error('Error removing document: ', error);
+    // });
   }
 }

@@ -3,7 +3,7 @@
 </section>
 <div *ngIf='!registrationView'>
     <form class='col-10 col-lg-8 mx-auto' #authForm="ngForm" (ngSubmit)='onSubmit(authForm)' *ngIf='!adminInterface'>
-        <h3 class='col-8 text-start px-0 py-2'>{{ isLoginMode ? 'Logowanie' : 'Rejestracja' }}</h3>
+        <h3 class='col-8 text-start px-0 py-2'>Logowanie</h3>
         <label for="inputEmail">Adres e-mail</label>
         <div class="input-group">
             <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
@@ -42,15 +42,9 @@
         <div class="col col-sm-5 mx-auto my-2">
             <div class='d-flex justify-content-center'>
                 <button type="submit" mat-raised-button color="primary" [disabled]='!authForm.valid'>
-                    {{ isLoginMode ? 'Zaloguj' : 'Zarejestruj'}}
+                    Zaloguj
                 </button>
             </div>
-
-        </div>
-        <div class="col mx-auto text-center my-2 change-view">
-            <strong>{{ isLoginMode ? 'Nie posiadasz konta?' : 'Wróć do panelu' }}</strong>
-            <br>
-            <a (click)='onSwitchMode(authForm)'>{{ isLoginMode ? 'Stwórz konto' : 'logowania' }}</a>
         </div>
     </form>
 </div>
