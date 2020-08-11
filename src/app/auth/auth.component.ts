@@ -16,7 +16,6 @@ import { User } from './user.model';
 export class AuthComponent implements OnInit {
   registrationView = false;
   hideSpinner = true;
-  isLoginMode = true;
   error: string = null;
   faEye = faEye;
   faEyeSlash = faEyeSlash;
@@ -32,7 +31,9 @@ export class AuthComponent implements OnInit {
     this.authService.user.subscribe(
       user => {
         if (user) {
-          if (user.email !== 'kubanam1995@gmail.com') { return; }
+          if (user.email !== 'kubanam1995@gmail.com') {
+            return;
+          }
           else {
             this.adminInterface = true;
           }
@@ -54,41 +55,31 @@ export class AuthComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
 
-    if (this.isLoginMode) {
+    this.authService.login(email, password)
+      .then(async userCredential => {
+        let token: string;
+        let date: Date;
+        console.log('userCREEE', userCredential);
+        await userCredential.user.getIdTokenResult().then(
+          response => token = response.token);
 
-      this.authService.login(email, password)
-        .then(async userCredential => {
-          let token: string;
-          let date: Date;
-          console.log('userCREEE', userCredential);
-          await userCredential.user.getIdTokenResult().then(
-            response => token = response.token);
+        await userCredential.user.getIdTokenResult().then(
+          response => date = response.expirationTime);
 
-          await userCredential.user.getIdTokenResult().then(
-            response => date = response.expirationTime);
-
-          if (userCredential.user.email !== 'kubanam1995@gmail.com') { this.router.navigate(['/']); }
-          this.adminInterface = true;
-          const user = new User(
-            userCredential.user.email,
-            password,
-            userCredential.user.uid,
-            token,
-            date
-          );
-          console.log('const user 3x', user);
-          this.authService.user.next(user);
-          localStorage.setItem('userData', JSON.stringify(user));
-        })
-        .catch(error => {
-          console.log(error);
-        });
-
-
-    } else {
-      this.authService.signUp(email, password),
-        this.isLoginMode = !this.isLoginMode;
-    }
+        if (userCredential.user.email !== 'kubanam1995@gmail.com') { this.router.navigate(['/']); }
+        const user = new User(
+          userCredential.user.email,
+          password,
+          userCredential.user.uid,
+          token,
+          date
+        );
+        this.authService.user.next(user);
+        localStorage.setItem('userData', JSON.stringify(user));
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
     form.reset();
   }

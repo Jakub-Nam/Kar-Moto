@@ -19,7 +19,6 @@ export class OneVehicleComponent implements OnInit {
     config.wrap = true;
     config.keyboard = false;
     config.pauseOnHover = false;
-
   }
 
   ngOnInit(): void {
