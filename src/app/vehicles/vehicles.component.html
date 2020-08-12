@@ -8,6 +8,7 @@
 <div class="alert alert-danger" role="alert" *ngIf='this.errorMsg'>
   Problem z serverem Firebase!
 </div>
+
 <section>
   <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle($event)'></app-one-vehicle>
 </section>
@@ -33,7 +34,7 @@
               <p class="card-text mb-0 pt-lg-2">
                 <small class="text-muted ">{{ vehicle.payload.doc.data().brand }}</small>
               </p>
-              <p class='card-text pt-lg-2' *ngIf='this.showForAdmin'>
+              <p class='card-text pt-lg-2' *ngIf='showForAdmin'>
                 <small class="pr-3">Dodano:
                   {{ vehicle.payload.doc.data().timestamp | date:'dd-MM-yyyy' }}</small>
               </p>
@@ -45,13 +46,23 @@
             <div class="col d-flex justify-content-md-end justify-content-start px-md-1">
               <b class='py-md-2 mr-md-2'>Cena: {{ vehicle.payload.doc.data().price }}zł</b>
             </div>
-            <button type='button' class='btn-font-trash px-0 py-0' *ngIf='this.showForAdmin'
-              (click)='deleteVehicle(vehicle)'>
+            <button type='button' class='btn-font-trash px-0 py-0' *ngIf='showForAdmin'
+              (click)='toggleDeleteAlert(vehicle)'>
               <fa-icon [icon]="faTrash" class="fas fa-trash"></fa-icon>
             </button>
           </div>
         </div>
       </div>
+      <div class="delete-alert row d-flex flex-column" role="alert" *ngIf='deleteAlert'>
+        <div class="col">
+          <p>Czy na pewno chcesz usunąć ten produkt?</p>
+        </div>
+        <div class="col text-center">
+          <button class='btn btn-dark btn-sm mx-2' (click)='deleteVehicle(vehicle)'>Usuń</button>
+          <button class='btn btn-dark btn-sm mx-2' (click)='toggleDeleteAlert()'>Zachowaj</button>
+        </div>
+      </div>
     </figure>
+    
   </section>
 </div>

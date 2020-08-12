@@ -27,6 +27,7 @@ export class VehiclesComponent implements OnInit {
   };
   errorMsg: any;
   paginationClickedCount = 0;
+  deleteAlert = false;
 
   constructor(
     public vehicleDbService: VehicleDbService,
@@ -81,6 +82,10 @@ export class VehiclesComponent implements OnInit {
     this.filters.highestMileage = $event.highestMileage;
   }
 
+  toggleDeleteAlert() {
+    this.deleteAlert = !this.deleteAlert;
+  }
+
   deleteVehicle(vehicle) {
 
     const storagePath = vehicle.payload.doc.data().path;
@@ -93,15 +98,11 @@ export class VehiclesComponent implements OnInit {
 
 
     const documentId = vehicle.payload.doc.id;
-    this.vehicleDbService.deleteMainDocument(documentId)
-      .then(() => {
-        console.log('Document successfully deleted!');
-      })
-      .catch(error => {
-        console.error('Error removing document: ', error);
-      });
+    this.vehicleDbService.deleteMainDocument(documentId);
+
 
     this.vehicleDbService.deletePhotosURLs(collectionId);
+    this.toggleDeleteAlert();
   }
 
   showOneVehicle(vehicle) {

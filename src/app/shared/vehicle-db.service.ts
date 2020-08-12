@@ -45,7 +45,13 @@ export class VehicleDbService {
   }
 
   deleteMainDocument(documentId) {
-    return this.db.collection('mainData').doc(documentId).delete();
+    this.db.collection('mainData').doc(documentId).delete()
+      .then(() => {
+        console.log('Document successfully deleted!');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
   }
 
   deletePhotosURLs(collectionId) {

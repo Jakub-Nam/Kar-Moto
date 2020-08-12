@@ -21,3 +21,12 @@ img:hover {
     cursor: pointer;
     background-color: #f5e7e7;
 }
+.delete-alert {
+    position: fixed;
+    padding : 2em;
+    top: 40%;
+    left: 25%;
+    background: #dfe4e6;
+    opacity: 0.8;
+    
+}
