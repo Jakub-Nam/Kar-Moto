@@ -49,8 +49,10 @@ export class VehiclesComponent implements OnInit {
       });
   }
 
-  emptyAllVehiclesArray() {
-    if (this.vehicles.length === 0) { this.zeroVehiclesComponent = true; }
+  noneVehicles() {
+    if (this.vehicles.length === 0) {
+      this.zeroVehiclesComponent = true;
+    }
   }
 
   fetchAllVehicles() {
@@ -79,15 +81,6 @@ export class VehiclesComponent implements OnInit {
     this.filters.highestMileage = $event.highestMileage;
   }
 
-  showOneVehicle(vehicle) {
-    this.vehicle = vehicle;
-    this.showVehicle = true;
-  }
-
-  hideOneVehicle($event) {
-    this.showVehicle = false;
-  }
-
   deleteVehicle(vehicle) {
 
     const storagePath = vehicle.payload.doc.data().path;
@@ -104,4 +97,12 @@ export class VehiclesComponent implements OnInit {
     this.vehicleDbService.deletePhotosURLs(collectionId);
   }
 
+  showOneVehicle(vehicle) {
+    this.vehicle = vehicle;
+    this.showVehicle = true;
+  }
+
+  hideOneVehicle($event) {
+    this.showVehicle = false;
+  }
 }

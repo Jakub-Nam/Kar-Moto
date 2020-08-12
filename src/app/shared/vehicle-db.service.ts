@@ -55,7 +55,6 @@ export class VehicleDbService {
   }
 
   deleteMainPhotoInStorage(path) {
-
     const storageRef = this.storage.ref(path);
     return storageRef;
   }
@@ -69,9 +68,5 @@ export class VehicleDbService {
           storageRef.delete();
         });
       });
-      // tslint:disable-next-line: align
-    //   .catch (error => {
-    //   console.error('Error removing document: ', error);
-    // });
   }
 }

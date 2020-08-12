@@ -36,69 +36,68 @@ export class AddVehicleComponent implements OnInit {
     private db: AngularFirestore,
     ) { }
 
-  ngOnInit(): void {
-    this.form = this.formService.automotiveForm;
-  }
+    ngOnInit(): void {
+       this.form = this.formService.automotiveForm;
+     }
 
-  onSelectPhoto(event) {
-    this.file.push(...event.addedFiles);
-  }
+     onSelectPhoto(event) {
+       this.file.push(...event.addedFiles);
+     }
 
-  async onSubmitPushVehicle(myForm) {
-    await this.startUpload(this.file[0], myForm);
-    this.file = [];
-    this.additionalPhotos.clearDropZone();
+     async onSubmitPushVehicle(myForm) {
+       await this.startUpload(this.file[0], myForm);
+       this.file = [];
+       this.additionalPhotos.clearDropZone();
 
-  }
+     }
 
-  onRemove(event) {
-    this.file.splice(this.file.indexOf(event), 1);
-  }
+     onRemove(event) {
+       this.file.splice(this.file.indexOf(event), 1);
+     }
 
-  startUpload(file, myForm) {
+     startUpload(file, myForm) {
 
-    const timestamp = Date.now();
-    this.timestamp = timestamp;
+       const timestamp = Date.now();
+       this.timestamp = timestamp;
 
-    const storagePath = `test/${timestamp}_${file.name}`;
+       const path = `test/${timestamp}_${file.name}`;
 
+       const ref = this.storage.ref(path);
 
-    const storageReference = this.storage.ref(storagePath);
+       this.task = this.storage.upload(path, file);
 
-    this.task = this.storage.upload(storagePath, file);
+       this.snapshot = this.task.snapshotChanges().pipe(
 
-    this.snapshot = this.task.snapshotChanges().pipe(
+         finalize(async () => {
 
-      finalize(async () => {
+           this.downloadURL = await ref.getDownloadURL().toPromise();
 
-        this.downloadURL = await storageReference.getDownloadURL().toPromise();
+           await this.db.collection('mainData').add(
+             {
+               name: this.form.value.name,
+               brand: this.form.value.brand,
+               price: this.form.value.price,
+               carMileage: this.form.value.carMileage,
+               downloadURL: this.downloadURL,
+               timestamp,
+               path
+             });
+           myForm.reset();
+           this.vehicleWasSent = true;
+         }),
+         catchError(err => {
+           this.errorMessage = err;
+           return throwError(this.errorMessage);
+         }),
+       );
+       this.additionalPhotos.pushPhotos();
+     }
 
-        await this.db.collection('mainData').add(
-          {
-            name: this.form.value.name,
-            brand: this.form.value.brand,
-            price: this.form.value.price,
-            carMileage: this.form.value.carMileage,
-            downloadURL: this.downloadURL,
-            timestamp,
-            storagePath
-          });
-        myForm.reset();
-        this.vehicleWasSent = true;
-      }),
-      catchError(err => {
-        this.errorMessage = err;
-        return throwError(this.errorMessage);
-      }),
-    );
-    this.additionalPhotos.pushPhotos();
-  }
+     hideVehicleWasSentAlert() {
+       this.vehicleWasSent = false;
+     }
 
-  hideVehicleWasSentAlert() {
-    this.vehicleWasSent = false;
-  }
-
-  hideErrorAlert() {
-    this.error = null;
-  }
+     hideErrorAlert() {
+       this.error = null;
+     }
 }
