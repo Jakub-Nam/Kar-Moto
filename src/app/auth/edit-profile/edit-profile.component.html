@@ -5,6 +5,14 @@
     </div>
 
 </div>
+<div class="alert alert-success" role="alert" *ngIf='successAlert'>
+    <span>Profil został poprawnie edytowany</span>
+    <button class='btn btn-success btn-sm mx-2' (click)='hideSuccessAlert()'>Zamknij</button>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf='errorAlert'>
+    <span> Wystąpił błąd. </span>
+    <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
+</div>
 <div *ngIf='editProfile '>
     <form #form="ngForm" class='main-form' [formGroup]="this.profileForm" (ngSubmit)='onSubmitChangeProfile(form)'>
         <div class='form-group mx-auto row d-flex flex-column flex-lg-row'>

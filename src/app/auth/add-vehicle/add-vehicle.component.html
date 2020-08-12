@@ -1,9 +1,9 @@
-<div class="alert alert-success" role="alert" *ngIf='this.vehicleWasSent'>
+<div class="alert alert-success" role="alert" *ngIf='vehicleWasSent'>
     <span>Poprawnie dodano obiekt.</span>
     <button class='btn btn-success btn-sm mx-2' (click)='hideVehicleWasSentAlert()'>Zamknij</button>
 </div>
-<div class="alert alert-dangeg" role="alert" *ngIf='this.errorMessage'>
-    <span> {{ errorMessage }} </span>
+<div class="alert alert-danger" role="alert" *ngIf='errorMessage'>
+    <span> Wystąpił błąd. </span>
     <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
 </div>
 <div class="row d-flex flex-column flex-lg-row my-1">

@@ -28,15 +28,24 @@ export class VehicleDbService {
       .snapshotChanges();
   }
 
+  deleteMainPhotoInStorage(path) {
+    const storageRef = this.storage.ref(path);
+    return storageRef;
+  }
+
+  deleteSecondaryPhotos(collectionId) {
+    return this.db.collection(`a${collectionId}`).get().toPromise()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const path = doc.data().path;
+          const storageRef = this.storage.ref(path);
+          storageRef.delete();
+        });
+      });
+  }
 
   deleteMainDocument(documentId) {
-    this.db.collection('mainData').doc(documentId).delete()
-      .then(() => {
-        console.log('Document successfully deleted!');
-      })
-      .catch(error => {
-        console.error('Error removing document: ', error);
-      });
+    return this.db.collection('mainData').doc(documentId).delete();
   }
 
   deletePhotosURLs(collectionId) {
@@ -50,22 +59,6 @@ export class VehicleDbService {
             .catch(error => {
               console.error('Error removing document: ', error);
             });
-        });
-      });
-  }
-
-  deleteMainPhotoInStorage(path) {
-    const storageRef = this.storage.ref(path);
-    return storageRef;
-  }
-
-  deleteSecondaryPhotos(collectionId) {
-    this.db.collection(`a${collectionId}`).get().toPromise()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const path = doc.data().path;
-          const storageRef = this.storage.ref(path);
-          storageRef.delete();
         });
       });
   }

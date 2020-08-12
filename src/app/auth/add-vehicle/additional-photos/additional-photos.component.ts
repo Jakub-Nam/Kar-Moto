@@ -15,29 +15,30 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class AdditionalPhotosComponent implements OnInit {
   @Input()
   set inputTimestamp(inputTimestamp: string) {
-    this._inputTimestamp =  `a${inputTimestamp}`;
+    this._inputTimestamp = `a${inputTimestamp}`;
   }
   get inputTimestamp(): string { return this._inputTimestamp; }
   _inputTimestamp = '';
   isHovering: boolean;
   files: File[] = [];
   snapshot: Observable<any>;
+  errorAlert;
 
-  constructor(public automotiveDbService: VehicleDbService,
-              public formService: VehicleFormService,
-              private storage: AngularFireStorage,
-              private db: AngularFirestore) { }
+  constructor(
+    public automotiveDbService: VehicleDbService,
+    public formService: VehicleFormService,
+    private storage: AngularFireStorage,
+    private db: AngularFirestore
+  ) { }
 
   ngOnInit(): void {
   }
 
   onRemovePhotoes(event) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
   onSelectPhotoes(event) {
     this.files.push(...event.addedFiles);
-    console.log(this.files);
   }
   pushPhotos() {
     for (const file of this.files) {
@@ -52,12 +53,10 @@ export class AdditionalPhotosComponent implements OnInit {
 
     const ref = this.storage.ref(path);
 
-    const task: AngularFireUploadTask  = this.storage.upload(path, file);
+    const task: AngularFireUploadTask = this.storage.upload(path, file);
 
     const snapshot: Observable<any> = task.snapshotChanges();
     snapshot.pipe(
-      tap(console.log),
-
       finalize(async () => {
         const downloadURL = await ref.getDownloadURL().toPromise();
 
@@ -70,7 +69,8 @@ export class AdditionalPhotosComponent implements OnInit {
       })
     ).subscribe();
   }
-  clearDropZone(){
+  clearDropZone() {
     this.files = [];
   }
+
 }

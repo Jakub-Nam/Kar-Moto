@@ -1,14 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleDbService } from '../shared/vehicle-db.service';
-
-// interface UserProfile {
-//   userName: string;
-//   email: string;
-//   phoneNumber: any;
-//   street: string;
-//   postCode: any;
-//   city: string;
-// }
+import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-footer',
@@ -26,12 +18,13 @@ export class FooterComponent implements OnInit {
     this.vehicleDbService.fetchProfileData()
       .subscribe(
         next => {
+          if (!next) {
+            window.alert('Problem with fetch profile data');
+          }
           this.profileData = next;
-
+        },
+        error => {
+          window.alert('There is a error with fetch profile data!');
         });
-    // error => {
-
-    //   console.log(error)
-    // });
   }
 }

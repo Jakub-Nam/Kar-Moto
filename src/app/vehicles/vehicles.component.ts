@@ -91,8 +91,15 @@ export class VehiclesComponent implements OnInit {
     const collectionId = vehicle.payload.doc.data().timestamp;
     this.vehicleDbService.deleteSecondaryPhotos(collectionId);
 
+
     const documentId = vehicle.payload.doc.id;
-    this.vehicleDbService.deleteMainDocument(documentId);
+    this.vehicleDbService.deleteMainDocument(documentId)
+      .then(() => {
+        console.log('Document successfully deleted!');
+      })
+      .catch(error => {
+        console.error('Error removing document: ', error);
+      });
 
     this.vehicleDbService.deletePhotosURLs(collectionId);
   }

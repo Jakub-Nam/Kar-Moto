@@ -1,11 +1,19 @@
 <section *ngIf='registrationView'>
     <app-register-prohibited></app-register-prohibited>
 </section>
+<div class="alert alert-success" role="alert" *ngIf='successAlert'>
+    <span>Poprawnie zalogowano.</span>
+    <button class='btn btn-success btn-sm mx-2' (click)='hideSuccessAlert()'>Zamknij</button>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf='errorAlert'>
+    <span> Wystąpił błąd. </span>
+    <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
+</div>
 <div *ngIf='!registrationView'>
     <form class='col-10 col-lg-8 mx-auto' #authForm="ngForm" (ngSubmit)='onSubmit(authForm)' *ngIf='!adminInterface'>
         <h3 class='col-8 text-start px-0 py-2'>Logowanie</h3>
         <label for="inputEmail">Adres e-mail</label>
-        <div class="input-group">
+        <div class="input-group mb-1">
             <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
                 placeholder="Wprowadz e-mail" ngModel name='email' #email='ngModel' required email>
             <div class="input-group-append">

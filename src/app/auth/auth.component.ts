@@ -23,6 +23,8 @@ export class AuthComponent implements OnInit {
   hidePassword = true;
   passwordStrengthmeter;
   adminInterface = false;
+  successAlert;
+  errorAlert;
 
 
   constructor(private authService: AuthService, private router: Router) { }  // private router: Router
@@ -41,9 +43,11 @@ export class AuthComponent implements OnInit {
         else {
           return;
         }
-      }, err => console.log(err));
-
+      },
+      err => this.errorAlert = true
+    );
   }
+
   showPassword() {
     this.hidePassword = !this.hidePassword;
   }
@@ -59,14 +63,16 @@ export class AuthComponent implements OnInit {
       .then(async userCredential => {
         let token: string;
         let date: Date;
-        console.log('userCREEE', userCredential);
         await userCredential.user.getIdTokenResult().then(
           response => token = response.token);
 
         await userCredential.user.getIdTokenResult().then(
           response => date = response.expirationTime);
 
-        if (userCredential.user.email !== 'kubanam1995@gmail.com') { this.router.navigate(['/']); }
+        if (userCredential.user.email !== 'kubanam1995@gmail.com') {
+          this.router.navigate(['/']);
+        }
+
         const user = new User(
           userCredential.user.email,
           password,
@@ -74,11 +80,14 @@ export class AuthComponent implements OnInit {
           token,
           date
         );
+
         this.authService.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
+        this.successAlert = true;
       })
+
       .catch(error => {
-        console.log(error);
+        this.errorAlert = true;
       });
 
     form.reset();
@@ -88,5 +97,13 @@ export class AuthComponent implements OnInit {
   }
   showRegistrationView() {
     this.registrationView = true;
+  }
+
+  hideSuccessAlert() {
+    this.successAlert = false;
+  }
+
+  hideErrorAlert() {
+    this.errorAlert = null;
   }
 }

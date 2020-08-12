@@ -9,6 +9,8 @@ import { catchError } from 'rxjs/operators';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
+  successAlert = false;
+  errorAlert = false;
   profileForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
@@ -35,15 +37,22 @@ export class EditProfileComponent implements OnInit {
       })
 
       .then(() => {
-        console.log('Document successfully written!');
+        this.successAlert = true;
         form.reset();
       })
-      .catch( error => {
-        console.error('Error writing document: ', error);
+      .catch(error => {
+        this.errorAlert = true;
       });
     form.reset();
   }
   showEditProfileMenu() {
     this.editProfile = !this.editProfile;
+  }
+  hideSuccessAlert() {
+    this.successAlert = false;
+  }
+
+  hideErrorAlert() {
+    this.errorAlert = null;
   }
 }
