@@ -21,12 +21,21 @@ img:hover {
     cursor: pointer;
     background-color: #f5e7e7;
 }
-.delete-alert {
+
+.wrapper-delete-alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
-    padding : 2em;
-    top: 40%;
-    left: 25%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+
+.delete-alert {
     background: #dfe4e6;
     opacity: 0.8;
-    
+    padding: 2em;
 }

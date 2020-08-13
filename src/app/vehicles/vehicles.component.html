@@ -10,7 +10,7 @@
 </div>
 
 <section>
-  <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle($event)'></app-one-vehicle>
+  <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle()'></app-one-vehicle>
 </section>
 
 <div *ngIf='!showVehicle'>
@@ -53,16 +53,19 @@
           </div>
         </div>
       </div>
-      <div class="delete-alert row d-flex flex-column" role="alert" *ngIf='deleteAlert'>
-        <div class="col">
-          <p>Czy na pewno chcesz usunąć ten produkt?</p>
-        </div>
-        <div class="col text-center">
-          <button class='btn btn-dark btn-sm mx-2' (click)='deleteVehicle(vehicle)'>Usuń</button>
-          <button class='btn btn-dark btn-sm mx-2' (click)='toggleDeleteAlert()'>Zachowaj</button>
-        </div>
-      </div>
     </figure>
-    
   </section>
+  <div class='wrapper-delete-alert row' *ngIf='deleteAlert'>
+    <div class=" col-6 col-md-5 col-lg-4 delete-alert row d-flex flex-column py-2 px-1" role="alert" >
+      <div class="col text-center">
+        <p>Czy na pewno chcesz usunąć ten produkt?</p>
+      </div>
+      <div class="col text-center ">
+        <button class='btn btn-dark btn-sm mx-2' (click)='toggleDeleteAlert(vehicle)'>Zachowaj</button>
+        <button class='btn btn-dark btn-sm mx-2' (click)='deleteVehicle()'>Usuń</button>
+      </div>
+    </div>
+  </div>
+  
+  
 </div>
