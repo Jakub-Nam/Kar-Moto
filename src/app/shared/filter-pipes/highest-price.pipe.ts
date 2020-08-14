@@ -6,13 +6,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class HighestPricePipe implements PipeTransform {
 
   transform(vehicles: any, inputFilterValue: any): any {
-
-    if (inputFilterValue === undefined || inputFilterValue === '' ) {
+    if (!inputFilterValue) {
       return vehicles;
     }
+
     return vehicles.filter((vehicle) => {
       return vehicle.payload.doc.data().price <= inputFilterValue;
     });
-
   }
 }

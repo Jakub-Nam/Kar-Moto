@@ -9,10 +9,10 @@ export class LowestMileagePipe implements PipeTransform {
     if (inputFilterValue === undefined) {
       return vehicles;
     }
+
     return vehicles.filter((vehicle) => {
       return vehicle.payload.doc.data().carMileage >= inputFilterValue;
     });
-
   }
 
 }

@@ -64,10 +64,12 @@ export class AuthComponent implements OnInit {
         let token: string;
         let date: Date;
         await userCredential.user.getIdTokenResult().then(
-          response => token = response.token);
+          response => token = response.token
+        );
 
         await userCredential.user.getIdTokenResult().then(
-          response => date = response.expirationTime);
+          response => date = response.expirationTime
+        );
 
         if (userCredential.user.email !== 'kubanam1995@gmail.com') {
           this.router.navigate(['/']);

@@ -1,34 +1,32 @@
 <header class='bg-primary row'>
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark col-10 fixed-top mx-auto px-0">
-                <h1 class="navbar-brand my-1 mx-2">
-                    <a [routerLink]="['/']">
-                        Kar-Moto
-                    </a>
-                </h1>
-                <button class="navbar-toggler navbar-toggler-right ml-auto  " type="button"
-                    (click)="isNavbarCollapsed = !isNavbarCollapsed" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark col-10 fixed-top mx-auto px-0">
+        <h1 class="navbar-brand my-1 mx-2">
+            <a [routerLink]="['/']">
+                Kar-Moto
+            </a>
+        </h1>
+        <button class="navbar-toggler navbar-toggler-right ml-auto  " type="button"
+            (click)="isNavbarCollapsed = !isNavbarCollapsed" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse" id="navbarSupportedContent">
-
-                    <ul class="navbar-nav ml-auto  mt-2 mt-lg-0" (click)="isNavbarCollapsed = !isNavbarCollapsed">
-                        <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
-                            <a class="nav-link" [routerLink]="['/login']">Panel Użytkownika<span
-                                    class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item active ml-auto " *ngIf='hideLoginButton'>
-                            <a class="nav-link mr-auto" [routerLink]="['/login']">Zaloguj/Zarejestruj</a>
-                        </li>
-                        <li class="nav-item mx-1" *ngIf='!hideLoginButton'>
-                            <a class="nav-link disabled" id="disabledAnchor">Zalogowano<span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
-                            <a class="nav-link" href='#' (click)='logout()'>Wyloguj</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto  mt-2 mt-lg-0" (click)="isNavbarCollapsed = !isNavbarCollapsed">
+                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
+                    <a class="nav-link" [routerLink]="['/login']">Panel Użytkownika<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active ml-auto " *ngIf='hideLoginButton'>
+                    <a class="nav-link mr-auto" [routerLink]="['/login']">Zaloguj/Zarejestruj</a>
+                </li>
+                <li class="nav-item mx-1" *ngIf='!hideLoginButton'>
+                    <a class="nav-link disabled" id="disabledAnchor">Zalogowano<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
+                    <a class="nav-link" href='#' (click)='logout()'>Wyloguj</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>

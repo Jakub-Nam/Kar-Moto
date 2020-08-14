@@ -15,14 +15,14 @@ export class AuthService {
         // tslint:disable-next-line: align
         private db: AngularFirestore) { }
 
-    signUp(email, password) {
-        return this.afAuth.createUserWithEmailAndPassword(email, password)
-            .then((result) => {
-                window.alert('You have been successfully registered!');
-            }).catch((error) => {
-                window.alert(error.message);
-            });
-    }
+    // signUp(email, password) {
+    //     return this.afAuth.createUserWithEmailAndPassword(email, password)
+    //         .then((result) => {
+    //             window.alert('You have been successfully registered!');
+    //         }).catch((error) => {
+    //             window.alert(error.message);
+    //         });
+    // }
 
     login(email: string, password: string): Promise<any> {
         return this.afAuth.signInWithEmailAndPassword(email, password);
