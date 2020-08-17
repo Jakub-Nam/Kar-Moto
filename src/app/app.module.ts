@@ -39,7 +39,17 @@ import { EditProfileComponent } from './auth/edit-profile/edit-profile.component
 
 const appRoutes: Routes = [
   { path: '', component: VehiclesComponent },
-  { path: 'login', component: AuthComponent }
+  {
+    path: 'login',
+    component: AuthComponent,
+    children: [
+      {
+        path: 'admin-interface',
+        component: AddVehicleComponent
+      }
+    ]
+  },
+  // { path: '**', component: PageNotFoundComponent }
 ];
 
 const materialComponents = [

@@ -9,10 +9,9 @@ import { Router } from '@angular/router';
 export class AuthService {
     user = new BehaviorSubject<User>(null);
     adminInterface = false;
-    constructor(private router: Router,
-        // tslint:disable-next-line: align
+    constructor(
+        private router: Router,
         public afAuth: AngularFireAuth,
-        // tslint:disable-next-line: align
         private db: AngularFirestore) { }
 
     // signUp(email, password) {

@@ -14,11 +14,14 @@
 
         <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto  mt-2 mt-lg-0" (click)="isNavbarCollapsed = !isNavbarCollapsed">
-                <li class="nav-item active mx-1" *ngIf='!hideLoginButton'>
-                    <a class="nav-link" [routerLink]="['/login']">Panel Użytkownika<span class="sr-only"></span></a>
+                <li class="nav-item mx-1 active" *ngIf='!hideLoginButton' >
+                    <a class="nav-link" 
+                    [routerLink]="['/login']"
+
+                    >Panel Użytkownika<span class="sr-only"></span></a>
                 </li>
-                <li class="nav-item active ml-auto " *ngIf='hideLoginButton'>
-                    <a class="nav-link mr-auto" [routerLink]="['/login']">Zaloguj/Zarejestruj</a>
+                <li class="nav-item ml-auto active" *ngIf='hideLoginButton'>
+                    <a class="nav-link mr-auto" [routerLink]="['/login']">Zaloguj</a>
                 </li>
                 <li class="nav-item mx-1" *ngIf='!hideLoginButton'>
                     <a class="nav-link disabled" id="disabledAnchor">Zalogowano<span class="sr-only"></span></a>
