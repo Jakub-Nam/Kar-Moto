@@ -12,7 +12,9 @@ export class HeaderComponent implements OnInit {
   showAdminInterface = false;
   marked = false;
   isNavbarCollapsed = true;
-  constructor(public authService: AuthService) { }
+  constructor(
+    public authService: AuthService
+    ) { }
 
   ngOnInit(): void {
     this.authService.user.subscribe(

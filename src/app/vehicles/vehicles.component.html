@@ -5,8 +5,13 @@
 <section>
   <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle && !zeroVehiclesComponent'></app-filter-menu>
 </section>
-<div class="alert alert-danger" role="alert" *ngIf='this.errorMsg'>
-  Problem z serverem Firebase!
+<div class="alert alert-danger" role="alert" *ngIf='errorMsg'>
+  <span> {{ errorMsg }} </span>
+  <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
+</div>
+<div class="alert alert-success" role="alert" *ngIf='successMsg'>
+  <span> {{ successMsg }}</span>
+  <button class='btn btn-success btn-sm mx-2' (click)='hideSuccessAlert()'>Zamknij</button>
 </div>
 
 <section>

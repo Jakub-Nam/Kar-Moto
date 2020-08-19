@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleDbService } from '../shared/vehicle-db.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
+import { Filter } from './filter';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-vehicles',
@@ -10,27 +12,30 @@ import { AuthService } from '../auth/auth.service';
 })
 export class VehiclesComponent implements OnInit {
   zeroVehiclesComponent = false;
-  beginSlice = 0;
-  endSlice = 2;
   vehicles: any = [];
   showVehicle = false;
-  config: any;
   vehicle: [];
   faTrash = faTrash;
   showForAdmin = false;
-  filters = {
+  filters: Filter = {
     brand: undefined,
     priceLow: undefined,
     highestPrice: undefined,
     lowestMileage: undefined,
     highestMileage: undefined
   };
-  errorMsg: any;
-  paginationClickedCount = 0;
+
   deleteAlert = false;
   vehicleToDelete;
   toggleDeleteAlertEvent: Event;
 
+  deletedMainPhotoInStorage = false;
+  deletedPhotosURLs = false;
+  deletedMainDocument = false;
+  deletedSecondaryPhotos = false;
+
+  errorMsg: string;
+  successMsg: string;
   constructor(
     public vehicleDbService: VehicleDbService,
     private authService: AuthService,
@@ -49,6 +54,9 @@ export class VehiclesComponent implements OnInit {
         else {
           this.showForAdmin = true;
         }
+      },
+      error => {
+        this.errorMsg = `Nie udało się załadować danych.`;
       });
   }
 
@@ -71,8 +79,7 @@ export class VehiclesComponent implements OnInit {
         this.zeroVehiclesComponent = false;
       },
         error => {
-          this.errorMsg = error,
-            console.log(error);
+          this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
         });
   }
 
@@ -93,22 +100,66 @@ export class VehiclesComponent implements OnInit {
     this.vehicleToDelete = vehicle;
   }
 
-  deleteVehicle() {
+  async deleteVehicle() {
     const vehicle = this.vehicleToDelete;
     const storagePath = vehicle.payload.doc.data().path;
-    this.vehicleDbService.deleteMainPhotoInStorage(storagePath)
-      .delete()
-      .subscribe();
+
+    await this.vehicleDbService.deleteMainPhotoInStorage(storagePath)
+      .then(res => {
+        this.deletedMainPhotoInStorage = true;
+      })
+      .catch(err => {
+        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+      });
+
 
     const collectionId = vehicle.payload.doc.data().timestamp;
-    this.vehicleDbService.deleteSecondaryPhotos(collectionId);
+    await this.vehicleDbService.deleteSecondaryPhotos(collectionId)
+      .then(async querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const path = doc.data().path;
+          const storageRef = this.vehicleDbService.storage.ref(path);
+          storageRef.delete();
 
+          this.deletedSecondaryPhotos = true;
+        });
+      })
+      .catch(error => {
+        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+      });
+
+    await this.vehicleDbService.deletePhotosURLs(collectionId)
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          this.vehicleDbService.db.collection(`a${collectionId}`).doc(doc.id).delete()
+            .then(() => {
+              this.deletedPhotosURLs = true;
+            })
+            .catch(error => {
+              this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+            });
+        });
+      })
+      .catch(error => {
+        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+      });
 
     const documentId = vehicle.payload.doc.id;
-    this.vehicleDbService.deleteMainDocument(documentId);
-
-
-    this.vehicleDbService.deletePhotosURLs(collectionId);
+    await this.vehicleDbService.deleteMainDocument(documentId)
+      .then(() => {
+        this.deletedMainDocument = true;
+        if (
+          this.deletedMainPhotoInStorage === true &&
+          this.deletedSecondaryPhotos === true &&
+          this.deletedMainDocument === true &&
+          this.deletedPhotosURLs === true
+        ) {
+          this.successMsg = `Poprawnie usunięto obiekt.`;
+        }
+      })
+      .catch(error => {
+        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+      });
     this.toggleDeleteAlert(vehicle, this.toggleDeleteAlertEvent);
   }
 
@@ -119,5 +170,13 @@ export class VehiclesComponent implements OnInit {
 
   hideOneVehicle() {
     this.showVehicle = false;
+  }
+
+  hideSuccessAlert() {
+    this.successMsg = null;
+  }
+
+  hideErrorAlert() {
+    this.errorMsg = null;
   }
 }

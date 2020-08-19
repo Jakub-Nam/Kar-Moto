@@ -27,7 +27,10 @@ export class AuthComponent implements OnInit {
   errorAlert;
 
 
-  constructor(private authService: AuthService, private router: Router) { }  // private router: Router
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.authService.user.subscribe(
