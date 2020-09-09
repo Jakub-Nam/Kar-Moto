@@ -1,6 +1,6 @@
 
-<div class="row d-flex flex-column flex-lg-row my-3">
-  <div class='col-9 mx-auto'>
+<div class="row d-flex flex-column justify-content-center flex-lg-row my-3">
+  <div class='col-11 col-md-8 col-lg-4 mx-auto mx-lg-0'>
     <ngb-carousel>
       <ng-template ngbSlide>
         <img src="{{ vehicle.payload.doc.data().downloadURL }}" class="d-block w-100">
@@ -10,7 +10,7 @@
       </ng-template>
     </ngb-carousel>
   </div>
-  <div class="col-lg-3">
+  <div class="col-11 col-md-8 col-lg-3 mx-auto mx-lg-0">
     <h2 class="display-4 my-0">{{ vehicle.payload.doc.data().name | titlecase }}</h2>
     <b>Cena: {{ vehicle.payload.doc.data().price }}zł</b>
     <p class='mb-0 py-1'>Przebieg: {{ vehicle.payload.doc.data().carMileage }}km</p>
@@ -18,7 +18,7 @@
   </div>
 </div>
 <div class="row mb-3">
-  <div class="col">
+  <div class="col-11 col-md-8 col-lg-4 mx-auto text-center text-md-left ">
     <button (click)='returnBtn($event)' class='btn btn-dark'>powrót</button>
   </div>
 </div>

@@ -17,7 +17,7 @@
     <form #form="ngForm" class='main-form' [formGroup]="this.profileForm" (ngSubmit)='onSubmitChangeProfile(form)'>
         <div class='form-group mx-auto row d-flex flex-column flex-lg-row'>
 
-            <div class="col-4 col-lg-4 col-md-5 col-sm-6 mx-auto">
+            <div class="col col-md-5 col-lg-4  col-sm-6 mx-auto">
                 <div class='py-1'>
                     <label for='name'>Imię i Nazwisko:</label>
                     <input type="text" class="form-control" formControlName='name' id='name' name='name'
@@ -35,7 +35,7 @@
                 </div>
 
             </div>
-            <div class='col-4 col-lg-4 col-md-5 col-sm-6 mx-auto'>
+            <div class='col col-md-5 col-lg-4 col-sm-6 mx-auto'>
                 <div class="py-1">
                     <label for='street'>Ulica:</label>
                     <input type="text" class="form-control" id='street' name='street' formControlName='street'
