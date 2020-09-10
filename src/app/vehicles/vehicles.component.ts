@@ -131,7 +131,7 @@ export class VehiclesComponent implements OnInit {
     await this.vehicleDbService.deletePhotosURLs(collectionId)
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          this.vehicleDbService.db.collection(`a${collectionId}`).doc(doc.id).delete()
+          this.vehicleDbService.db.collection(`${collectionId}`).doc(doc.id).delete()
             .then(() => {
               this.deletedPhotosURLs = true;
             })

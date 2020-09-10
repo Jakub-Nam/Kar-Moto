@@ -33,7 +33,7 @@ export class VehicleDbService {
   }
 
   deleteSecondaryPhotos(collectionId) {
-    return this.db.collection(`a${collectionId}`).get().toPromise();
+    return this.db.collection(`${collectionId}`).get().toPromise();
   }
 
   deleteMainDocument(documentId) {
@@ -41,6 +41,6 @@ export class VehicleDbService {
   }
 
   deletePhotosURLs(collectionId) {
-    return this.db.collection(`a${collectionId}`).get().toPromise();
+    return this.db.collection(`${collectionId}`).get().toPromise();
   }
 }

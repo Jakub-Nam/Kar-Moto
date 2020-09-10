@@ -71,13 +71,14 @@ export class AddVehicleComponent implements OnInit {
   async compressFile(image) {
     const orientation = -1;
     this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
+    console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
     this.imageCompress.compressFile(image, orientation, 50, 50)
       .then(
         async result => {
           this.imgResultAfterCompress = result;
           this.localCompressedURl = result;
           this.sizeOFCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024);
-
+          console.warn('Size in bytes after compression:',  this.sizeOFCompressedImage);
           const imageBlob = this.dataURItoBlob(this.imgResultAfterCompress.split(',')[1]);
           this.compressedFile = imageBlob;
         });

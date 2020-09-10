@@ -27,7 +27,7 @@ export class OneVehicleComponent implements OnInit {
   }
   fetchAdditionalVehiclePhotos() {
     const timestamp = this.vehicle.payload.doc.data().timestamp;
-    this.vehicleDbService.fetchAdditionalVehiclePhotos(`a${timestamp}`).subscribe(
+    this.vehicleDbService.fetchAdditionalVehiclePhotos(`${timestamp}`).subscribe(
       next => {
         this.vehicleURLs = next;
       });
