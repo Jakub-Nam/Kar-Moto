@@ -36,6 +36,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ZeroVehiclesComponent } from './vehicles/zero-vehicles/zero-vehicles.component';
 import { RegisterProhibitedComponent } from './auth/register-prohibited/register-prohibited.component';
 import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 const appRoutes: Routes = [
   { path: '', component: VehiclesComponent },
@@ -98,7 +99,7 @@ const materialComponents = [
     NgbModule,
     NgbCollapseModule
   ],
-  providers: [],
+  providers: [NgxImageCompressService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

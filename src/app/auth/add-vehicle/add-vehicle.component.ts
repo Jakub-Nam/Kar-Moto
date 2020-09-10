@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, throwError } from 'rxjs';
 import { finalize, catchError } from 'rxjs/operators';
 import { AdditionalPhotosComponent } from './additional-photos/additional-photos.component';
+// import { NgxImageCompressService } from 'ngx-image-compress';
 
 
 @Component({
@@ -19,7 +20,10 @@ export class AddVehicleComponent implements OnInit {
   error;
   oneFile = false;
   isHovering: boolean;
-  file: File[] = [];
+
+  file: File[];
+  // compressedFile: any;
+
   task: AngularFireUploadTask;
   percentage: Observable<number>;
   snapshot: Observable<any>;
@@ -29,75 +33,137 @@ export class AddVehicleComponent implements OnInit {
   brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
   errorMessage: any;
 
+  // localUrl: any;
+  // localCompressedURl: any;
+  // sizeOfOriginalImage: number;
+  // sizeOFCompressedImage: number;
+  // imgResultBeforeCompress: string;
+  // imgResultAfterCompress: string;
+
   constructor(
     public vehicleDbService: VehicleDbService,
     public formService: VehicleFormService,
     private storage: AngularFireStorage,
     private db: AngularFirestore,
-    ) { }
+    // private imageCompress: NgxImageCompressService
+  ) { }
 
-    ngOnInit(): void {
-       this.form = this.formService.automotiveForm;
-     }
+  ngOnInit(): void {
+    this.form = this.formService.automotiveForm;
+  }
 
-     onSelectPhoto(event) {
-       this.file.push(...event.addedFiles);
-     }
+  onSelectPhoto(event) {
+    this.file.push(...event.addedFiles);
+  }
 
-     async onSubmitPushVehicle(myForm) {
-       await this.startUpload(this.file[0], myForm);
-       this.file = [];
-       this.additionalPhotos.clearDropZone();
 
-     }
+  // selectFile() {
+  //   let fileName: any;
+  //   // this.file = file[0];
+  //   fileName = this.file[0].name;
+  //   if (this.file && this.file[0]) {
+  //     const reader = new FileReader();
+  //     reader.onload = (ev: any) => {
+  //       this.localUrl = ev.target.result;
+  //       this.compressFile(this.localUrl, fileName);
+  //     };
+  //     reader.readAsDataURL(this.file[0]);
+  //   }
+  // }
 
-     onRemove(event) {
-       this.file.splice(this.file.indexOf(event), 1);
-     }
+  // async compressFile(image, fileName) {
+  //   const orientation = -1;
+  //   this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
+  //   console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
+  //   this.imageCompress.compressFile(image, orientation, 50, 50)
+  //     .then(
+  //       async result => {
+  //         this.imgResultAfterCompress = result;
+  //         this.localCompressedURl = result;
+  //         this.sizeOFCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024);
+  //         console.warn('Size in bytes after compression:', this.sizeOFCompressedImage);
+  //         // create file from byte
+  //         const imageName = fileName;
+  //         // call method that creates a blob from dataUri
+  //         const imageBlob = this.dataURItoBlob(this.imgResultAfterCompress.split(',')[1]);
+  //         // mageFile created below is the new compressed file which can be send to API in form data
+  //         const imageFile = new File([result], imageName, { type: 'image/jpeg' });
+  //         console.log('imaage', imageBlob);
+  //         this.compressedFile.push(imageBlob);
+  //       });
+  // }
+  // dataURItoBlob(dataURI) {
+  //   const byteString = window.atob(dataURI);
+  //   const arrayBuffer = new ArrayBuffer(byteString.length);
+  //   const int8Array = new Uint8Array(arrayBuffer);
+  //   for (let i = 0; i < byteString.length; i++) {
+  //     int8Array[i] = byteString.charCodeAt(i);
+  //   }
+  //   const blob = new Blob([int8Array], { type: 'image/jpeg' });
+  //   return blob;
+  // }
 
-     startUpload(file, myForm) {
 
-       const timestamp = Date.now();
-       this.timestamp = timestamp;
 
-       const path = `test/${timestamp}_${file.name}`;
 
-       const ref = this.storage.ref(path);
 
-       this.task = this.storage.upload(path, file);
 
-       this.snapshot = this.task.snapshotChanges().pipe(
 
-         finalize(async () => {
 
-           this.downloadURL = await ref.getDownloadURL().toPromise();
+  async onSubmitPushVehicle(myForm) {
+    await this.startUpload(this.file[0], myForm);
+    this.file = [];
+    this.additionalPhotos.clearDropZone();
 
-           await this.db.collection('mainData').add(
-             {
-               name: this.form.value.name,
-               brand: this.form.value.brand,
-               price: this.form.value.price,
-               carMileage: this.form.value.carMileage,
-               downloadURL: this.downloadURL,
-               timestamp,
-               path
-             });
-           myForm.reset();
-           this.vehicleWasSent = true;
-         }),
-         catchError(err => {
-           this.errorMessage = err;
-           return throwError(this.errorMessage);
-         }),
-       );
-       this.additionalPhotos.pushPhotos();
-     }
+  }
 
-     hideVehicleWasSentAlert() {
-       this.vehicleWasSent = false;
-     }
+  onRemove(event) {
+    this.file.splice(this.file.indexOf(event), 1);
+  }
 
-     hideErrorAlert() {
-       this.error = null;
-     }
+  startUpload(file, myForm) {
+
+    const timestamp = Date.now();
+    this.timestamp = timestamp;
+
+    const path = `test/${timestamp}_${file.name}`;
+
+    const ref = this.storage.ref(path);
+
+    this.task = this.storage.upload(path, file);
+
+    this.snapshot = this.task.snapshotChanges().pipe(
+
+      finalize(async () => {
+
+        this.downloadURL = await ref.getDownloadURL().toPromise();
+
+        await this.db.collection('mainData').add(
+          {
+            name: this.form.value.name,
+            brand: this.form.value.brand,
+            price: this.form.value.price,
+            carMileage: this.form.value.carMileage,
+            downloadURL: this.downloadURL,
+            timestamp,
+            path
+          });
+        myForm.reset();
+        this.vehicleWasSent = true;
+      }),
+      catchError(err => {
+        this.errorMessage = err;
+        return throwError(this.errorMessage);
+      }),
+    );
+    this.additionalPhotos.pushPhotos();
+  }
+
+  hideVehicleWasSentAlert() {
+    this.vehicleWasSent = false;
+  }
+
+  hideErrorAlert() {
+    this.error = null;
+  }
 }
