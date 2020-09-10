@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, throwError } from 'rxjs';
 import { finalize, catchError } from 'rxjs/operators';
 import { AdditionalPhotosComponent } from './additional-photos/additional-photos.component';
-// import { NgxImageCompressService } from 'ngx-image-compress';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 
 @Component({
@@ -22,10 +22,9 @@ export class AddVehicleComponent implements OnInit {
   isHovering: boolean;
 
   file: File[];
-  // compressedFile: any;
+  compressedFile: any;
 
   task: AngularFireUploadTask;
-  percentage: Observable<number>;
   snapshot: Observable<any>;
   downloadURL: string;
   form;
@@ -33,19 +32,19 @@ export class AddVehicleComponent implements OnInit {
   brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
   errorMessage: any;
 
-  // localUrl: any;
-  // localCompressedURl: any;
-  // sizeOfOriginalImage: number;
-  // sizeOFCompressedImage: number;
-  // imgResultBeforeCompress: string;
-  // imgResultAfterCompress: string;
+  localUrl: any;
+  localCompressedURl: any;
+  sizeOfOriginalImage: number;
+  sizeOFCompressedImage: number;
+  imgResultBeforeCompress: string;
+  imgResultAfterCompress: string;
 
   constructor(
     public vehicleDbService: VehicleDbService,
     public formService: VehicleFormService,
     private storage: AngularFireStorage,
     private db: AngularFirestore,
-    // private imageCompress: NgxImageCompressService
+    private imageCompress: NgxImageCompressService
   ) { }
 
   ngOnInit(): void {
@@ -53,65 +52,51 @@ export class AddVehicleComponent implements OnInit {
   }
 
   onSelectPhoto(event) {
-    this.file.push(...event.addedFiles);
+    this.file = event.addedFiles;
+    this.selectFile();
   }
 
 
-  // selectFile() {
-  //   let fileName: any;
-  //   // this.file = file[0];
-  //   fileName = this.file[0].name;
-  //   if (this.file && this.file[0]) {
-  //     const reader = new FileReader();
-  //     reader.onload = (ev: any) => {
-  //       this.localUrl = ev.target.result;
-  //       this.compressFile(this.localUrl, fileName);
-  //     };
-  //     reader.readAsDataURL(this.file[0]);
-  //   }
-  // }
+  selectFile() {
+    if (this.file && this.file[0]) {
+      const reader = new FileReader();
+      reader.onload = (ev: any) => {
+        this.localUrl = ev.target.result;
+        this.compressFile(this.localUrl);
+      };
+      reader.readAsDataURL(this.file[0]);
+    }
+  }
 
-  // async compressFile(image, fileName) {
-  //   const orientation = -1;
-  //   this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
-  //   console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
-  //   this.imageCompress.compressFile(image, orientation, 50, 50)
-  //     .then(
-  //       async result => {
-  //         this.imgResultAfterCompress = result;
-  //         this.localCompressedURl = result;
-  //         this.sizeOFCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024);
-  //         console.warn('Size in bytes after compression:', this.sizeOFCompressedImage);
-  //         // create file from byte
-  //         const imageName = fileName;
-  //         // call method that creates a blob from dataUri
-  //         const imageBlob = this.dataURItoBlob(this.imgResultAfterCompress.split(',')[1]);
-  //         // mageFile created below is the new compressed file which can be send to API in form data
-  //         const imageFile = new File([result], imageName, { type: 'image/jpeg' });
-  //         console.log('imaage', imageBlob);
-  //         this.compressedFile.push(imageBlob);
-  //       });
-  // }
-  // dataURItoBlob(dataURI) {
-  //   const byteString = window.atob(dataURI);
-  //   const arrayBuffer = new ArrayBuffer(byteString.length);
-  //   const int8Array = new Uint8Array(arrayBuffer);
-  //   for (let i = 0; i < byteString.length; i++) {
-  //     int8Array[i] = byteString.charCodeAt(i);
-  //   }
-  //   const blob = new Blob([int8Array], { type: 'image/jpeg' });
-  //   return blob;
-  // }
+  async compressFile(image) {
+    const orientation = -1;
+    this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
+    this.imageCompress.compressFile(image, orientation, 50, 50)
+      .then(
+        async result => {
+          this.imgResultAfterCompress = result;
+          this.localCompressedURl = result;
+          this.sizeOFCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024);
 
-
-
-
-
+          const imageBlob = this.dataURItoBlob(this.imgResultAfterCompress.split(',')[1]);
+          this.compressedFile = imageBlob;
+        });
+  }
+  dataURItoBlob(dataURI) {
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/jpeg' });
+    return blob;
+  }
 
 
 
   async onSubmitPushVehicle(myForm) {
-    await this.startUpload(this.file[0], myForm);
+    await this.startUpload(this.compressedFile, myForm);
     this.file = [];
     this.additionalPhotos.clearDropZone();
 
