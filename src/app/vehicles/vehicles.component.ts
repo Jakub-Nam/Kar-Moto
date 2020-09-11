@@ -3,7 +3,8 @@ import { VehicleDbService } from '../shared/vehicle-db.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
 import { Filter } from './filter';
-import { async } from '@angular/core/testing';
+
+
 
 @Component({
   selector: 'app-vehicles',
@@ -36,9 +37,10 @@ export class VehiclesComponent implements OnInit {
 
   errorMsg: string;
   successMsg: string;
+
   constructor(
     public vehicleDbService: VehicleDbService,
-    private authService: AuthService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {

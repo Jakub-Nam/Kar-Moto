@@ -36,10 +36,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ZeroVehiclesComponent } from './vehicles/zero-vehicles/zero-vehicles.component';
 import { RegisterProhibitedComponent } from './auth/register-prohibited/register-prohibited.component';
 import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
-import {NgxImageCompressService} from 'ngx-image-compress';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
-  { path: '', component: VehiclesComponent },
+  { path: 'vehicles', component: VehiclesComponent },
   {
     path: 'login',
     component: AuthComponent,
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
       }
     ]
   },
-  // { path: '**', component: PageNotFoundComponent }
+  { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 const materialComponents = [
@@ -78,7 +80,8 @@ const materialComponents = [
     OneVehicleComponent,
     ZeroVehiclesComponent,
     RegisterProhibitedComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
