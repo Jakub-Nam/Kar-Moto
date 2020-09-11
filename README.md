@@ -1,5 +1,5 @@
 
-# KarMoto
+# Kar-Moto
 Kar-Moto, a web application that allows the owner to freely manage the content on the website. 
 Thanks to this, the user can add and remove products sold by him.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
