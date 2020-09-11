@@ -19,7 +19,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { environment } from './environments/environment';
+import { environment } from './environment/environment';
 import { DropzoneDirective } from './dropzone.directive';
 import { FilterMenuComponent } from './vehicles/filter-menu/filter-menu.component';
 import { FilterBrandPipe } from './shared/filter-pipes/filter-brand.pipe';
