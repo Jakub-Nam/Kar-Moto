@@ -7,6 +7,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 <img src='https://img.shields.io/static/v1.svg?label=&message=Angular&color=D6002F'> <img src='https://img.shields.io/static/v1.svg?label=&message=Typescript&color=0076C6'> <img src='https://img.shields.io/static/v1.svg?label=&message=Bootstrap&color=533B78'> <img src='https://img.shields.io/static/v1.svg?label=&message=npm&color=C23435'> <img src='https://img.shields.io/static/v1.svg?label=&message=Firebase&color=F7A00E'>
 
+https://forkarol-2f16a.web.app/vehicles
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
