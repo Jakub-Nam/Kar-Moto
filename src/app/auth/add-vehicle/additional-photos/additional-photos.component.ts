@@ -59,7 +59,6 @@ export class AdditionalPhotosComponent implements OnInit {
   compressAndPushPhotos() {
     for (const file of this.files) {
       this.selectFileToCompress(file);
-      console.log('ffoe;', file);
     }
   }
   selectFileToCompress(file) {

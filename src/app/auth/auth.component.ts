@@ -78,14 +78,6 @@ export class AuthComponent implements OnInit {
           this.router.navigate(['/']);
         }
 
-        // userCredential.getIdToken().then(idToken => {
-        //   // Session login endpoint is queried and the session cookie is set.
-        //   // CSRF protection should be taken into account.
-        //   // ...
-        //   const csrfToken = getCookie('csrfToken');
-        //   return postIdTokenToSessionLogin('/sessionLogin', idToken, csrfToken);
-        // });
-
         const user = new User(
           userCredential.user.email,
           password,
