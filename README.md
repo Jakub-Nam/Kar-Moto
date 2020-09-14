@@ -1,6 +1,13 @@
-# KarMoto
+
+# Kar-Moto
+Kar-Moto, a web application that allows the owner to freely manage the content on the website. 
+Thanks to this, the user can add and remove products sold by him.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
+
+<img src='https://img.shields.io/static/v1.svg?label=&message=Angular&color=D6002F'> <img src='https://img.shields.io/static/v1.svg?label=&message=Typescript&color=0076C6'> <img src='https://img.shields.io/static/v1.svg?label=&message=Bootstrap&color=533B78'> <img src='https://img.shields.io/static/v1.svg?label=&message=npm&color=C23435'> <img src='https://img.shields.io/static/v1.svg?label=&message=Firebase&color=F7A00E'>
+
+https://forkarol-2f16a.web.app/vehicles
 
 ## Development server
 
