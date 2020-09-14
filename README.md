@@ -9,6 +9,20 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 https://forkarol-2f16a.web.app/vehicles
 
+Mobile view
+
+<img src="src/assets/images/github-img/first-view.jpg" width='20%'> <img src="src/assets/images/github-img/menu.jpg" width='20%'>
+
+<img src="src/assets/images/github-img/vehicles.jpg" width='20%'>
+
+<img src="src/assets/images/github-img/one-vehile-0.jpg" width='20%'>  <img src="src/assets/images/github-img/one-vehicle-1.jpg" width='20%'>  <img src="src/assets/images/github-img/one-vehicle-2.jpg" width='20%'>
+
+<img src="src/assets/images/github-img/auth.jpg" width='20%'>
+
+<img src="src/assets/images/github-img/add-vehicle-photos.jpg" width='20%'>  <img src="src/assets/images/github-img/add-vehicle-data.jpg" width='20%'>
+
+<img src="src/assets/images/github-img/footer.jpg" width='20%'>
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
