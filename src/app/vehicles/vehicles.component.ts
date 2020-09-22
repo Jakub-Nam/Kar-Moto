@@ -4,15 +4,13 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
 import { Filter } from './filter';
 
-
-
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
   styleUrls: ['./vehicles.component.css']
 })
 export class VehiclesComponent implements OnInit {
-  zeroVehiclesComponent = false;
+  zeroVehicle = false;
   vehicles: any = [];
   showVehicle = false;
   vehicle: [];
@@ -64,7 +62,7 @@ export class VehiclesComponent implements OnInit {
 
   noneVehicles() {
     if (this.vehicles.length === 0) {
-      this.zeroVehiclesComponent = true;
+      this.zeroVehicle = true;
     }
   }
 
@@ -74,11 +72,11 @@ export class VehiclesComponent implements OnInit {
       (response => {
         if (!response.length) {
           this.vehicles = [];
-          this.zeroVehiclesComponent = true;
+          this.zeroVehicle = true;
           return false;
         }
         this.vehicles = response;
-        this.zeroVehiclesComponent = false;
+        this.zeroVehicle = false;
       },
         error => {
           this.errorMsg = `Wystąpił błąd dotyczący serwera.`;

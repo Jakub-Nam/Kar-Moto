@@ -1,7 +1,7 @@
 export interface Filter {
-        brand: undefined;
-        priceLow: undefined;
-        highestPrice: undefined;
-        lowestMileage: undefined;
-        highestMileage: undefined;
+        brand: string;
+        priceLow: number;
+        highestPrice: number;
+        lowestMileage: number;
+        highestMileage: number;
 }

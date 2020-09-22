@@ -1,4 +1,5 @@
 import { Component, OnInit, DoCheck, EventEmitter, Output } from '@angular/core';
+import { Filter } from '../filter';
 
 @Component({
   selector: 'app-filter-menu',
@@ -10,7 +11,7 @@ export class FilterMenuComponent implements OnInit, DoCheck {
   @Output() filtered = new EventEmitter<object>();
 
   brandModel: string;
-  lowestPrice: string;
+  lowestPrice: number;
   highestPrice: number;
   lowestMileage: number;
   highestMileage: number;
@@ -21,7 +22,7 @@ export class FilterMenuComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    const formValues = {
+    const formValues: Filter = {
       brand: this.brandModel,
       priceLow: this.lowestPrice,
       highestPrice: this.highestPrice,
