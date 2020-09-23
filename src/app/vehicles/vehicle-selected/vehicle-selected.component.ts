@@ -3,11 +3,11 @@ import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-one-vehicle',
-  templateUrl: './one-vehicle.component.html',
-  styleUrls: ['./one-vehicle.component.css']
+  selector: 'app-vehicle-selected',
+  templateUrl: './vehicle-selected.component.html',
+  styleUrls: ['./vehicle-selected.component.css']
 })
-export class OneVehicleComponent implements OnInit {
+export class VehicleSelectedComponent implements OnInit {
   @Input() vehicle;
   @Output() return = new EventEmitter();
   vehicleURLs;

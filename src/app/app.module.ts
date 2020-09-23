@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { VehiclesComponent } from './vehicles/vehicles.component';
-import { AddVehicleComponent } from './auth/add-vehicle/add-vehicle.component';
+import { VehicleAddComponent } from './vehicles/vehicle-add/vehicle-add.component';
 import { AuthComponent } from './auth/auth.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -21,15 +21,15 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from './environment/environment';
 import { DropzoneDirective } from './dropzone.directive';
-import { FilterMenuComponent } from './vehicles/filter-menu/filter-menu.component';
+import { FilterMenuComponent } from './vehicles/vehicle-filter/vehicle-filter.component';
 import { FilterBrandPipe } from './shared/filter-pipes/filter-brand.pipe';
 import { FilterPriceLowPipe } from './shared/filter-pipes/filter-price-low.pipe';
 import { HighestPricePipe } from './shared/filter-pipes/highest-price.pipe';
 import { LowestMileagePipe } from './shared/filter-pipes/lowest-mileage.pipe';
 import { HighestMileagePipe } from './shared/filter-pipes/highest-mileage.pipe';
-import { AdditionalPhotosComponent } from './auth/add-vehicle/additional-photos/additional-photos.component';
+import { AdditionalPhotosComponent } from './vehicles/vehicle-add/additional-photos/additional-photos.component';
 import { FooterComponent } from './footer/footer.component';
-import { OneVehicleComponent } from './vehicles/one-vehicle/one-vehicle.component';
+import { VehicleSelectedComponent } from './vehicles/vehicle-selected/vehicle-selected.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -38,14 +38,21 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
-  { path: 'vehicles', component: VehiclesComponent },
+  {
+    path: 'vehicles', component: VehiclesComponent,
+    children: [
+      {
+        path: 'vehicle-add',
+        component: VehicleAddComponent
+      }],
+  },
   {
     path: 'login',
     component: AuthComponent,
     children: [
       {
-        path: 'admin-interface',
-        component: AddVehicleComponent
+        path: 'edit-profile',
+        component: EditProfileComponent
       }
     ]
   },
@@ -65,7 +72,7 @@ const materialComponents = [
     HeaderComponent,
     VehiclesComponent,
     AuthComponent,
-    AddVehicleComponent,
+    VehicleAddComponent,
     DropzoneDirective,
     FilterMenuComponent,
     FilterBrandPipe,
@@ -75,7 +82,7 @@ const materialComponents = [
     HighestMileagePipe,
     AdditionalPhotosComponent,
     FooterComponent,
-    OneVehicleComponent,
+    VehicleSelectedComponent,
     EditProfileComponent,
     PageNotFoundComponent
   ],

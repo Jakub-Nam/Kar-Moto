@@ -1,25 +1,36 @@
-import { Component, OnInit, ViewChild, Output } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
-import { VehicleFormService } from 'src/app/shared/vehicle-form.service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, throwError } from 'rxjs';
 import { finalize, catchError } from 'rxjs/operators';
 import { AdditionalPhotosComponent } from './additional-photos/additional-photos.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
-
+import { FormControl, FormGroup } from '@angular/forms';
+import { Photo } from './photo';
 
 @Component({
-  selector: 'app-add-vehicle',
-  templateUrl: './add-vehicle.component.html',
-  styleUrls: ['./add-vehicle.component.css']
+  selector: 'app-vehicle-add',
+  templateUrl: './vehicle-add.component.html',
+  styleUrls: ['./vehicle-add.component.css']
 })
-export class AddVehicleComponent implements OnInit {
+
+
+
+export class VehicleAddComponent implements OnInit {
   @ViewChild('AdditionalPhotosComponent') additionalPhotos: AdditionalPhotosComponent;
   vehicleWasSent = false;
   error = false;
   oneFile = false;
   isHovering = false;
+
+  vehicleForm = new FormGroup({
+    name: new FormControl(''),
+    brand: new FormControl(''),
+    price: new FormControl(''),
+    carMileage: new FormControl(''),
+    productionYear: new FormControl('')
+  });
 
   file: File[] = [];
   compressedFile: any;
@@ -27,7 +38,7 @@ export class AddVehicleComponent implements OnInit {
   task: AngularFireUploadTask;
   snapshot: Observable<any>;
   downloadURL: string;
-  form;
+
   timestamp: number;
   brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
   errorMessage: any;
@@ -41,17 +52,15 @@ export class AddVehicleComponent implements OnInit {
 
   constructor(
     public vehicleDbService: VehicleDbService,
-    public formService: VehicleFormService,
     private storage: AngularFireStorage,
     private db: AngularFirestore,
     private imageCompress: NgxImageCompressService
   ) { }
 
   ngOnInit(): void {
-    this.form = this.formService.automotiveForm;
   }
 
-  onSelectPhoto(event) {
+  onSelectPhoto(event: Photo) {
     this.file = event.addedFiles;
     this.selectFile();
   }
@@ -68,7 +77,7 @@ export class AddVehicleComponent implements OnInit {
     }
   }
 
-  async compressFile(image) {
+  async compressFile(image: string) {
     const orientation = -1;
     this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
     this.imageCompress.compressFile(image, orientation, 50, 50)
@@ -81,7 +90,7 @@ export class AddVehicleComponent implements OnInit {
           this.compressedFile = imageBlob;
         });
   }
-  dataURItoBlob(dataURI) {
+  dataURItoBlob(dataURI: string) {
     const byteString = window.atob(dataURI);
     const arrayBuffer = new ArrayBuffer(byteString.length);
     const int8Array = new Uint8Array(arrayBuffer);
@@ -94,18 +103,18 @@ export class AddVehicleComponent implements OnInit {
 
 
 
-  async onSubmitPushVehicle(myForm) {
+  async onSubmitPushVehicle(myForm: any) {
     await this.startUpload(this.compressedFile, myForm);
     this.file = [];
     this.additionalPhotos.clearDropZone();
 
   }
 
-  onRemove(event) {
+  onRemove(event: File) {
     this.file.splice(this.file.indexOf(event), 1);
   }
 
-  startUpload(file, myForm) {
+  startUpload(file: File, myForm: any) {
 
     const timestamp = Date.now();
     this.timestamp = timestamp;
@@ -124,10 +133,10 @@ export class AddVehicleComponent implements OnInit {
 
         await this.db.collection('mainData').add(
           {
-            name: this.form.value.name,
-            brand: this.form.value.brand,
-            price: this.form.value.price,
-            carMileage: this.form.value.carMileage,
+            name: this.vehicleForm.value.name,
+            brand: this.vehicleForm.value.brand,
+            price: this.vehicleForm.value.price,
+            carMileage: this.vehicleForm.value.carMileage,
             downloadURL: this.downloadURL,
             timestamp,
             path

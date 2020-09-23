@@ -2,9 +2,9 @@ import { Component, OnInit, DoCheck, EventEmitter, Output } from '@angular/core'
 import { Filter } from './filter';
 
 @Component({
-  selector: 'app-filter-menu',
-  templateUrl: './filter-menu.component.html',
-  styleUrls: ['./filter-menu.component.css']
+  selector: 'app-vehicle-filter',
+  templateUrl: './vehicle-filter.component.html',
+  styleUrls: ['./vehicle-filter.component.css']
 })
 
 export class FilterMenuComponent implements OnInit, DoCheck {

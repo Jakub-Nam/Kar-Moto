@@ -5,7 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   providedIn: 'root'
 })
 export class VehicleFormService {
-  automotiveForm = new FormGroup({
+  vehicleForm = new FormGroup({
     name: new FormControl(''),
     brand: new FormControl(''),
     price: new FormControl(''),

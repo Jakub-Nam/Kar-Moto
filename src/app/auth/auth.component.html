@@ -7,7 +7,7 @@
     <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
 </div>
 <div *ngIf='!registrationView'>
-    <form class='col-10 col-lg-8 mx-auto' #authForm="ngForm" (ngSubmit)='onSubmit(authForm)' *ngIf='!adminInterface'>
+    <form class='col-10 col-lg-8 mx-auto' #authForm="ngForm" (ngSubmit)='onSubmit(authForm)'>
         <h3 class='col-8 text-start px-0 py-2'>Logowanie</h3>
         <label for="inputEmail">Adres e-mail</label>
         <div class="input-group mb-1">
@@ -53,11 +53,3 @@
         </div>
     </form>
 </div>
-
-<section *ngIf='adminInterface'>
-    <app-add-vehicle></app-add-vehicle>
-</section>
-<hr>
-<section *ngIf='adminInterface'>
-    <app-edit-profile></app-edit-profile>
-</section>

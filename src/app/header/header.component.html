@@ -15,10 +15,10 @@
         <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto  mt-2 mt-lg-0" (click)="isNavbarCollapsed = !isNavbarCollapsed">
                 <li class="nav-item mx-1 active" *ngIf='!hideLoginButton'>
-                    <a class="nav-link text-center" [routerLink]="['/login']">Edytuj profil<span class="sr-only"></span></a>
+                    <a class="nav-link text-center" [routerLink]="['/login/edit-profile']">Edytuj profil<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item mx-1 active" *ngIf='!hideLoginButton'>
-                    <a class="nav-link text-center" [routerLink]="['/login']">Dodaj sprzęt<span class="sr-only"></span></a>
+                    <a class="nav-link text-center" [routerLink]="['/vehicles/vehicle-add']">Dodaj sprzęt<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active" *ngIf='hideLoginButton'>
                     <a class="nav-link text-center" [routerLink]="['/login']">Zaloguj</a>

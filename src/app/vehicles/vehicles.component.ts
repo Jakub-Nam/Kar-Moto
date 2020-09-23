@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleDbService } from '../shared/vehicle-db.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
-import { Filter } from './filter-menu/filter';
+import { Filter } from './vehicle-filter/filter';
 
 @Component({
   selector: 'app-vehicles',
@@ -16,6 +16,7 @@ export class VehiclesComponent implements OnInit {
   showVehicle = false;
   faTrash = faTrash;
   showForAdmin = false;
+  // musisz zrobic  cos z filtrem
   filters: Filter = {
     brand: undefined,
     priceLow: undefined,
@@ -83,7 +84,7 @@ export class VehiclesComponent implements OnInit {
         });
   }
 
-  filtr($event: Event) {
+  filter($event) {
     this.filters.brand = $event.brand;
     this.filters.priceLow = $event.priceLow;
     this.filters.highestPrice = $event.highestPrice;

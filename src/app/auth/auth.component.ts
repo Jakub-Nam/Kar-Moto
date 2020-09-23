@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit {
   faEyeSlash = faEyeSlash;
   faEnvelope = faEnvelope;
   hidePassword = true;
-  passwordStrengthmeter;
+  passwordStrengthmeter: any;
   adminInterface = false;
   successAlert = '';
   errorAlert = '';

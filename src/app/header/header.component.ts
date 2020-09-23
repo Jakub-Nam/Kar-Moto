@@ -14,13 +14,17 @@ export class HeaderComponent implements OnInit {
   isNavbarCollapsed = true;
   constructor(
     public authService: AuthService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.authService.user.subscribe(
       user => {
-        if (user === null) { return; }
-        else { this.changeButtonsVisability(); }
+        if (user === null) {
+          return;
+        }
+        else {
+          this.changeButtonsVisability();
+        }
 
         if (user.email !== 'kubanam1995@gmail.com' && user.email !== null) { this.marked = true; }
         else { this.showAdminInterface = true; }

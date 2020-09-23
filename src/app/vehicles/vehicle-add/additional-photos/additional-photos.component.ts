@@ -1,17 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { VehicleFormService } from 'src/app/shared/vehicle-form.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { Photo } from './../photo';
 
 @Component({
   selector: 'app-additional-photos',
   templateUrl: './additional-photos.component.html',
   styleUrls: ['./additional-photos.component.css']
 })
+
+
+
 export class AdditionalPhotosComponent implements OnInit {
   @Input()
   set inputTimestamp(inputTimestamp: string) {
@@ -24,11 +28,9 @@ export class AdditionalPhotosComponent implements OnInit {
   isHovering: boolean;
   files: File[] = [];
   snapshot: Observable<any>;
-  errorAlert;
-  file;
+  errorAlert = false;
 
-  imageBlob;
-  compressedFiles;
+  imageBlob: Blob;
   localUrl: any;
   localCompressedURl: any;
   sizeOfOriginalImage: number;
@@ -46,22 +48,24 @@ export class AdditionalPhotosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onRemovePhotoes(event) {
-    this.files.splice(this.files.indexOf(event), 1);
-  }
-  onSelectPhotos(event) {
+  onSelectPhotos(event: Photo) {
     this.files.push(...event.addedFiles);
   }
+
+  onRemovePhotos(event: File) {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
   async pushPhotos() {
     await this.compressAndPushPhotos();
   }
 
   compressAndPushPhotos() {
     for (const file of this.files) {
-      this.selectFileToCompress(file);
+      this.selectedFileToCompress(file);
     }
   }
-  selectFileToCompress(file) {
+  selectedFileToCompress(file: File) {
     if (file) {
       const reader = new FileReader();
       reader.onload = (ev: any) => {
@@ -72,7 +76,7 @@ export class AdditionalPhotosComponent implements OnInit {
     }
   }
 
-  compressFile(image) {
+  compressFile(image: string) {
     const orientation = -1;
     this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
     this.imageCompress.compressFile(image, orientation, 50, 50)
@@ -86,7 +90,7 @@ export class AdditionalPhotosComponent implements OnInit {
 
         });
   }
-  dataURItoBlob(dataURI) {
+  dataURItoBlob(dataURI: string) {
     const byteString = window.atob(dataURI);
     const arrayBuffer = new ArrayBuffer(byteString.length);
     const int8Array = new Uint8Array(arrayBuffer);
@@ -97,11 +101,11 @@ export class AdditionalPhotosComponent implements OnInit {
     this.startUpload(blob);
   }
 
-  startUpload(file) {
+  startUpload(file: Blob) {
 
     const photoTimestamp = Date.now();
 
-    const path = `test/${photoTimestamp}_${file.name}`;
+    const path = `test/${photoTimestamp}`;
 
     const ref = this.storage.ref(path);
 

@@ -1,5 +1,5 @@
 <section class='col-12'>
-  <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle && !zeroVehicles'></app-filter-menu>
+  <app-vehicle-filter (filtered)="filter($event)" *ngIf='!showVehicle && !zeroVehicles'></app-vehicle-filter>
 </section>
 <div class="alert alert-danger" role="alert" *ngIf='errorMsg'>
   <span> {{ errorMsg }} </span>
@@ -11,7 +11,7 @@
 </div>
 
 <section>
-  <app-one-vehicle [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle()'></app-one-vehicle>
+  <app-vehicle-selected [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle()'></app-vehicle-selected>
 </section>
 
 <div *ngIf='!showVehicle'>
