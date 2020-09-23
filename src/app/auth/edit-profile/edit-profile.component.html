@@ -1,9 +1,9 @@
-<div class="row py-3 mx-0">
-    <div class="col-4 col-lg-4 col-md-5 col-sm-4 mx-left mx-0 px-0">
-        <button mat-raised-button color="primary" (click)='showEditProfileMenu()' class='btn-block mx-0'>Edytuj
-            profil</button>
+<div class="row">
+    <div class="col">
+        <h2 class='text-center'>
+            Edytuj profil
+        </h2>
     </div>
-
 </div>
 <div class="alert alert-success" role="alert" *ngIf='successAlert'>
     <span>Profil został poprawnie edytowany</span>
@@ -13,7 +13,7 @@
     <span> Wystąpił błąd. </span>
     <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
 </div>
-<div *ngIf='editProfile '>
+<div>
     <form #form="ngForm" class='main-form' [formGroup]="this.profileForm" (ngSubmit)='onSubmitChangeProfile(form)'>
         <div class='form-group mx-auto row d-flex flex-column flex-lg-row'>
 
@@ -53,8 +53,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 col-lg-4 col-md-5 col-sm-6 mx-auto my-3">
-            <button type="submit" mat-raised-button color="primary" class='btn-block'>Wprowadź zmiany</button>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-5 mx-auto my-3">
+            <button type="submit" mat-raised-button color="primary" class='btn-md btn-block'>Wprowadź zmiany</button>
         </div>
     </form>
 </div>

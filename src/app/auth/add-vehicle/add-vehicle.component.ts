@@ -17,11 +17,11 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 export class AddVehicleComponent implements OnInit {
   @ViewChild('AdditionalPhotosComponent') additionalPhotos: AdditionalPhotosComponent;
   vehicleWasSent = false;
-  error;
+  error = false;
   oneFile = false;
-  isHovering: boolean;
+  isHovering = false;
 
-  file: File[];
+  file: File[] = [];
   compressedFile: any;
 
   task: AngularFireUploadTask;
@@ -148,6 +148,6 @@ export class AddVehicleComponent implements OnInit {
   }
 
   hideErrorAlert() {
-    this.error = null;
+    this.error = false;
   }
 }

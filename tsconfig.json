@@ -14,7 +14,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "noFallthroughCasesInSwitch": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

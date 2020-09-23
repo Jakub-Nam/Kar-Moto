@@ -1,9 +1,5 @@
-<section *ngIf='zeroVehiclesComponent'>
-  <app-zero-vehicles></app-zero-vehicles>
-</section>
-
 <section class='col-12'>
-  <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle && !zeroVehiclesComponent'></app-filter-menu>
+  <app-filter-menu (filtered)="filtr($event)" *ngIf='!showVehicle && !zeroVehicles'></app-filter-menu>
 </section>
 <div class="alert alert-danger" role="alert" *ngIf='errorMsg'>
   <span> {{ errorMsg }} </span>
@@ -72,7 +68,7 @@
     </div>
   </div>
 </div>
-<div class="row" *ngIf='ZeroVehicle'>
+<div class="row" *ngIf='zeroVehicles'>
   <div class="col px-0 d-flex justify-content-center my-2">
     <img src="assets\images\motor.png" alt="Zdjęcie pojazdu" class=' img-fluid'>
   </div>

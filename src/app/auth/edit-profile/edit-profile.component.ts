@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,6 +10,7 @@ import { catchError } from 'rxjs/operators';
 export class EditProfileComponent implements OnInit {
   successAlert = false;
   errorAlert = false;
+
   profileForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
@@ -19,13 +19,15 @@ export class EditProfileComponent implements OnInit {
     postCode: new FormControl(''),
     city: new FormControl('')
   });
-  editProfile = false;
-  constructor(private db: AngularFirestore) { }
+
+  constructor(
+    private db: AngularFirestore
+    ) { }
 
   ngOnInit(): void {
   }
 
-  onSubmitChangeProfile(form) {
+  onSubmitChangeProfile(form: any) {
     this.db.collection('mainData').doc('profileData').set(
       {
         userName: form.value.name,
@@ -36,7 +38,7 @@ export class EditProfileComponent implements OnInit {
         city: form.value.city,
       })
 
-      .then(() => {
+      .then( event => {
         this.successAlert = true;
         form.reset();
       })
@@ -45,14 +47,11 @@ export class EditProfileComponent implements OnInit {
       });
     form.reset();
   }
-  showEditProfileMenu() {
-    this.editProfile = !this.editProfile;
-  }
   hideSuccessAlert() {
     this.successAlert = false;
   }
 
   hideErrorAlert() {
-    this.errorAlert = null;
+    this.errorAlert = false;
   }
 }

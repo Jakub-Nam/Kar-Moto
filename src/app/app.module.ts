@@ -33,7 +33,6 @@ import { OneVehicleComponent } from './vehicles/one-vehicle/one-vehicle.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { RegisterProhibitedComponent } from './auth/register-prohibited/register-prohibited.component';
 import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -77,7 +76,6 @@ const materialComponents = [
     AdditionalPhotosComponent,
     FooterComponent,
     OneVehicleComponent,
-    RegisterProhibitedComponent,
     EditProfileComponent,
     PageNotFoundComponent
   ],

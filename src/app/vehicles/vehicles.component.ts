@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleDbService } from '../shared/vehicle-db.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
-import { Filter } from './filter';
+import { Filter } from './filter-menu/filter';
 
 @Component({
   selector: 'app-vehicles',
@@ -10,10 +10,10 @@ import { Filter } from './filter';
   styleUrls: ['./vehicles.component.css']
 })
 export class VehiclesComponent implements OnInit {
-  zeroVehicle = false;
+  zeroVehicles = false;
   vehicles: any = [];
+  vehicle: object = {};
   showVehicle = false;
-  vehicle: [];
   faTrash = faTrash;
   showForAdmin = false;
   filters: Filter = {
@@ -33,8 +33,8 @@ export class VehiclesComponent implements OnInit {
   deletedMainDocument = false;
   deletedSecondaryPhotos = false;
 
-  errorMsg: string;
-  successMsg: string;
+  errorMsg = '';
+  successMsg = '';
 
   constructor(
     public vehicleDbService: VehicleDbService,
@@ -62,7 +62,7 @@ export class VehiclesComponent implements OnInit {
 
   noneVehicles() {
     if (this.vehicles.length === 0) {
-      this.zeroVehicle = true;
+      this.zeroVehicles = true;
     }
   }
 
@@ -72,18 +72,18 @@ export class VehiclesComponent implements OnInit {
       (response => {
         if (!response.length) {
           this.vehicles = [];
-          this.zeroVehicle = true;
+          this.zeroVehicles = true;
           return false;
         }
         this.vehicles = response;
-        this.zeroVehicle = false;
+        this.zeroVehicles = false;
       },
         error => {
           this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
         });
   }
 
-  filtr($event) {
+  filtr($event: Event) {
     this.filters.brand = $event.brand;
     this.filters.priceLow = $event.priceLow;
     this.filters.highestPrice = $event.highestPrice;
@@ -91,7 +91,7 @@ export class VehiclesComponent implements OnInit {
     this.filters.highestMileage = $event.highestMileage;
   }
 
-  toggleDeleteAlert(vehicle, event) {
+  toggleDeleteAlert(vehicle: object, event: Event) {
     if (!this.deleteAlert) {
       event.stopPropagation();
     }
@@ -173,10 +173,10 @@ export class VehiclesComponent implements OnInit {
   }
 
   hideSuccessAlert() {
-    this.successMsg = null;
+    this.successMsg = '';
   }
 
   hideErrorAlert() {
-    this.errorMsg = null;
+    this.errorMsg = '';
   }
 }

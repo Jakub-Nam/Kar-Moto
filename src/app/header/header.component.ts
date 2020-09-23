@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
   hideLoginButton = true;
-  public toggleNavbar = true;
+  toggleNavbar = true;
   showAdminInterface = false;
   marked = false;
   isNavbarCollapsed = true;

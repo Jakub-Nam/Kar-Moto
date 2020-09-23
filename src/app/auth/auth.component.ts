@@ -16,15 +16,15 @@ import { User } from './user.model';
 export class AuthComponent implements OnInit {
   registrationView = false;
   hideSpinner = true;
-  error: string = null;
+  error = '';
   faEye = faEye;
   faEyeSlash = faEyeSlash;
   faEnvelope = faEnvelope;
   hidePassword = true;
   passwordStrengthmeter;
   adminInterface = false;
-  successAlert;
-  errorAlert;
+  successAlert = '';
+  errorAlert = '';
 
 
   constructor(
@@ -47,7 +47,7 @@ export class AuthComponent implements OnInit {
           return;
         }
       },
-      err => this.errorAlert = true
+      err => this.errorAlert = err
     );
   }
 
@@ -64,19 +64,15 @@ export class AuthComponent implements OnInit {
 
     this.authService.login(email, password)
       .then(async userCredential => {
-        let token: string;
-        let date: Date;
+        let token = '';
+        let date: Date =
         await userCredential.user.getIdTokenResult().then(
-          response => token = response.token
+          (response: { token: string; }) => token =  response.token
         );
 
         await userCredential.user.getIdTokenResult().then(
-          response => date = response.expirationTime
+          (response: { expirationTime: Date; }) => date = response.expirationTime
         );
-
-        if (userCredential.user.email !== 'kubanam1995@gmail.com') {
-          this.router.navigate(['/']);
-        }
 
         const user = new User(
           userCredential.user.email,
@@ -88,12 +84,12 @@ export class AuthComponent implements OnInit {
 
         this.authService.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
-        this.successAlert = true;
+        this.successAlert = 'success';
       })
 
 
       .catch(error => {
-        this.errorAlert = true;
+        this.errorAlert = error;
       });
 
     form.reset();
@@ -106,10 +102,10 @@ export class AuthComponent implements OnInit {
   }
 
   hideSuccessAlert() {
-    this.successAlert = false;
+    this.successAlert = '';
   }
 
   hideErrorAlert() {
-    this.errorAlert = null;
+    this.errorAlert = '';
   }
 }
