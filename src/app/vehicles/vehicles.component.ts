@@ -3,6 +3,7 @@ import { VehicleDbService } from '../shared/vehicle-db.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
 import { Filter } from './vehicle-filter/filter';
+import { Vehicle } from './vehicle';
 
 @Component({
   selector: 'app-vehicles',
@@ -11,22 +12,21 @@ import { Filter } from './vehicle-filter/filter';
 })
 export class VehiclesComponent implements OnInit {
   zeroVehicles = false;
-  vehicles: any = [];
-  vehicle: object = {};
+  vehicles: Array<Vehicle> = []; // Array<Vehicle>
+  vehicle: Vehicle;
   showVehicle = false;
   faTrash = faTrash;
   showForAdmin = false;
-  // musisz zrobic  cos z filtrem
   filters: Filter = {
-    brand: undefined,
-    priceLow: undefined,
-    highestPrice: undefined,
-    lowestMileage: undefined,
-    highestMileage: undefined
+    brand: '',
+    priceLow: 0,
+    highestPrice: 0,
+    lowestMileage: 0,
+    highestMileage: 0
   };
 
   deleteAlert = false;
-  vehicleToDelete;
+  vehicleToDelete: Vehicle;
   toggleDeleteAlertEvent: Event;
 
   deletedMainPhotoInStorage = false;
@@ -50,7 +50,7 @@ export class VehiclesComponent implements OnInit {
           return;
         }
         if (user.email !== 'kubanam1995@gmail.com') {
-          return null;
+          return;
         }
         else {
           this.showForAdmin = true;
@@ -74,9 +74,13 @@ export class VehiclesComponent implements OnInit {
         if (!response.length) {
           this.vehicles = [];
           this.zeroVehicles = true;
-          return false;
+          return;
         }
-        this.vehicles = response;
+        response.forEach(vehicleData => {
+          const simpleVehicle: any = vehicleData.payload.doc.data();
+          const vehicle: Vehicle = simpleVehicle;
+          this.vehicles.push(vehicle);
+        });
         this.zeroVehicles = false;
       },
         error => {
@@ -84,7 +88,7 @@ export class VehiclesComponent implements OnInit {
         });
   }
 
-  filter($event) {
+  filter($event: Filter) {
     this.filters.brand = $event.brand;
     this.filters.priceLow = $event.priceLow;
     this.filters.highestPrice = $event.highestPrice;
@@ -92,7 +96,7 @@ export class VehiclesComponent implements OnInit {
     this.filters.highestMileage = $event.highestMileage;
   }
 
-  toggleDeleteAlert(vehicle: object, event: Event) {
+  toggleDeleteAlert(vehicle: Vehicle, event: Event) {
     if (!this.deleteAlert) {
       event.stopPropagation();
     }
@@ -103,7 +107,7 @@ export class VehiclesComponent implements OnInit {
 
   async deleteVehicle() {
     const vehicle = this.vehicleToDelete;
-    const storagePath = vehicle.payload.doc.data().path;
+    const storagePath = vehicle.path;
 
     await this.vehicleDbService.deleteMainPhotoInStorage(storagePath)
       .then(res => {
@@ -114,7 +118,7 @@ export class VehiclesComponent implements OnInit {
       });
 
 
-    const collectionId = vehicle.payload.doc.data().timestamp;
+    const collectionId = vehicle.timestamp;
     await this.vehicleDbService.deleteSecondaryPhotos(collectionId)
       .then(async querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -164,7 +168,7 @@ export class VehiclesComponent implements OnInit {
     this.toggleDeleteAlert(vehicle, this.toggleDeleteAlertEvent);
   }
 
-  showOneVehicle(vehicle) {
+  showOneVehicle(vehicle: Vehicle) {
     this.vehicle = vehicle;
     this.showVehicle = true;
   }

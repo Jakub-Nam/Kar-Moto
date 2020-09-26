@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Vehicle } from '../vehicle';
 
 @Component({
   selector: 'app-vehicle-selected',
@@ -8,9 +9,10 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./vehicle-selected.component.css']
 })
 export class VehicleSelectedComponent implements OnInit {
-  @Input() vehicle;
+  @Input() vehicle: Vehicle;
   @Output() return = new EventEmitter();
-  vehicleURLs;
+  // vehicleURL: Array<object>;
+  vehicleURL: any;
 
   constructor(
     private vehicleDbService: VehicleDbService,
@@ -26,10 +28,11 @@ export class VehicleSelectedComponent implements OnInit {
 
   }
   fetchAdditionalVehiclePhotos() {
-    const timestamp = this.vehicle.payload.doc.data().timestamp;
+    const timestamp = this.vehicle.timestamp;
     this.vehicleDbService.fetchAdditionalVehiclePhotos(`${timestamp}`).subscribe(
       next => {
-        this.vehicleURLs = next;
+        console.log(timestamp, 'TIMESTApm')
+        this.vehicleURL = next;
       });
   }
 

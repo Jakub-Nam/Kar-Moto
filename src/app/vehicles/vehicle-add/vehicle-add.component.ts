@@ -131,7 +131,7 @@ export class VehicleAddComponent implements OnInit {
 
         this.downloadURL = await ref.getDownloadURL().toPromise();
 
-        await this.db.collection('mainData').add(
+        await this.db.collection('mainData').doc(`a${timestamp}`).set(
           {
             name: this.vehicleForm.value.name,
             brand: this.vehicleForm.value.brand,

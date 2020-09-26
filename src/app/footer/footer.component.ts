@@ -21,7 +21,7 @@ export class FooterComponent implements OnInit {
           if (!next) {
             window.alert('Problem with fetch profile data');
           }
-          this.profileData = next;
+          this.profileDataz = next;
         },
         error => {
           window.alert('There is a error with fetch profile data!');
