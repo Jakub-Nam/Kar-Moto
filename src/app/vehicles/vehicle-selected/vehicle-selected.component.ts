@@ -11,8 +11,7 @@ import { Vehicle } from '../vehicle';
 export class VehicleSelectedComponent implements OnInit {
   @Input() vehicle: Vehicle;
   @Output() return = new EventEmitter();
-  // vehicleURL: Array<object>;
-  vehicleURL: any;
+  vehicleURLs: Array<object>;
 
   constructor(
     private vehicleDbService: VehicleDbService,
@@ -28,16 +27,10 @@ export class VehicleSelectedComponent implements OnInit {
 
   }
   fetchAdditionalVehiclePhotos() {
-    const timestamp = this.vehicle.timestamp;
-    this.vehicleDbService.fetchAdditionalVehiclePhotos(`${timestamp}`).subscribe(
+    const timestamp: number = this.vehicle.timestamp;
+    this.vehicleDbService.fetchAdditionalVehiclePhotos(`a${timestamp}`).subscribe(
       next => {
-        console.log(timestamp, 'TIMESTApm')
-        this.vehicleURL = next;
+        this.vehicleURLs = next;
       });
   }
-
-  returnBtn(e) {
-    this.return.emit(e);
-  }
-
 }

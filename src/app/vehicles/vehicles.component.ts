@@ -4,6 +4,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
 import { Filter } from './vehicle-filter/filter';
 import { Vehicle } from './vehicle';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vehicles',
@@ -12,7 +13,7 @@ import { Vehicle } from './vehicle';
 })
 export class VehiclesComponent implements OnInit {
   zeroVehicles = false;
-  vehicles: Array<Vehicle> = []; // Array<Vehicle>
+  vehicles: Array<Vehicle> = [];
   vehicle: Vehicle;
   showVehicle = false;
   faTrash = faTrash;
@@ -39,7 +40,8 @@ export class VehiclesComponent implements OnInit {
 
   constructor(
     public vehicleDbService: VehicleDbService,
-    private authService: AuthService
+    private authService: AuthService,
+    public route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -149,7 +151,7 @@ export class VehiclesComponent implements OnInit {
         this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
       });
 
-    const documentId = vehicle.payload.doc.id;
+    const documentId = `a${vehicle.timestamp}`;
     await this.vehicleDbService.deleteMainDocument(documentId)
       .then(() => {
         this.deletedMainDocument = true;

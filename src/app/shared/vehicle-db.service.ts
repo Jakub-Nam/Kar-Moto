@@ -23,24 +23,24 @@ export class VehicleDbService {
       .snapshotChanges();
   }
 
-  fetchAdditionalVehiclePhotos(timestamp) {
-    return this.db.collection(timestamp)
+  fetchAdditionalVehiclePhotos(path: string) {
+    return this.db.collection(path)
       .snapshotChanges();
   }
 
-  deleteMainPhotoInStorage(path) {
+  deleteMainPhotoInStorage(path: string) {
     return this.storage.ref(path).delete().toPromise();
   }
 
-  deleteSecondaryPhotos(collectionId) {
+  deleteSecondaryPhotos(collectionId: number) {
     return this.db.collection(`${collectionId}`).get().toPromise();
   }
 
-  deleteMainDocument(documentId) {
+  deleteMainDocument(documentId: string) {
     return this.db.collection('mainData').doc(documentId).delete();
   }
 
-  deletePhotosURLs(collectionId) {
+  deletePhotosURLs(collectionId: number) {
     return this.db.collection(`${collectionId}`).get().toPromise();
   }
 }

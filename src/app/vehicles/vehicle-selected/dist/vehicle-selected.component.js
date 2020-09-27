@@ -23,13 +23,9 @@ var VehicleSelectedComponent = /** @class */ (function () {
     VehicleSelectedComponent.prototype.fetchAdditionalVehiclePhotos = function () {
         var _this = this;
         var timestamp = this.vehicle.timestamp;
-        this.vehicleDbService.fetchAdditionalVehiclePhotos("" + timestamp).subscribe(function (next) {
-            console.log(timestamp, 'TIMESTApm');
-            _this.vehicleURL = next;
+        this.vehicleDbService.fetchAdditionalVehiclePhotos("a" + timestamp).subscribe(function (next) {
+            _this.vehicleURLs = next;
         });
-    };
-    VehicleSelectedComponent.prototype.returnBtn = function (e) {
-        this["return"].emit(e);
     };
     __decorate([
         core_1.Input()

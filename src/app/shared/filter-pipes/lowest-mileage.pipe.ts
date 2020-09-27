@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Vehicle } from 'src/app/vehicles/vehicle';
 
 @Pipe({
   name: 'lowestMileage'
@@ -10,8 +11,8 @@ export class LowestMileagePipe implements PipeTransform {
       return vehicles;
     }
 
-    return vehicles.filter((vehicle) => {
-      return vehicle.payload.doc.data().carMileage >= inputFilterValue;
+    return vehicles.filter((vehicle: Vehicle) => {
+      return vehicle.carMileage >= inputFilterValue;
     });
   }
 

@@ -46,11 +46,12 @@ exports.VehiclesComponent = void 0;
 var core_1 = require("@angular/core");
 var free_solid_svg_icons_1 = require("@fortawesome/free-solid-svg-icons");
 var VehiclesComponent = /** @class */ (function () {
-    function VehiclesComponent(vehicleDbService, authService) {
+    function VehiclesComponent(vehicleDbService, authService, route) {
         this.vehicleDbService = vehicleDbService;
         this.authService = authService;
+        this.route = route;
         this.zeroVehicles = false;
-        this.vehicles = []; // Array<Vehicle>
+        this.vehicles = [];
         this.showVehicle = false;
         this.faTrash = free_solid_svg_icons_1.faTrash;
         this.showForAdmin = false;
@@ -175,7 +176,7 @@ var VehiclesComponent = /** @class */ (function () {
                             })];
                     case 3:
                         _a.sent();
-                        documentId = vehicle.payload.doc.id;
+                        documentId = "a" + vehicle.timestamp;
                         return [4 /*yield*/, this.vehicleDbService.deleteMainDocument(documentId)
                                 .then(function () {
                                 _this.deletedMainDocument = true;

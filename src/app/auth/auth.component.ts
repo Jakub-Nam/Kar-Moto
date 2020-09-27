@@ -51,7 +51,7 @@ export class AuthComponent implements OnInit {
     );
   }
 
-  showPassword() {
+  togglePassword() {
     this.hidePassword = !this.hidePassword;
   }
 

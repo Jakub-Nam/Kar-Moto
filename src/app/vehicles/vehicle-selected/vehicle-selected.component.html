@@ -5,7 +5,7 @@
       <ng-template ngbSlide>
         <img src="{{ vehicle.downloadURL }}" class="d-block w-100">
       </ng-template>
-      <ng-template ngbSlide *ngFor='let vehicleURL of vehiclesURL'>
+      <ng-template ngbSlide *ngFor='let vehicleURL of vehicleURLs'>
         <img src="{{ vehicleURL.payload.doc.data().downloadURL }}" class="d-block w-100">
       </ng-template>
     </ngb-carousel>
@@ -19,6 +19,6 @@
 </div>
 <div class="row mb-3">
   <div class="col-11 col-md-8 col-lg-4 mx-auto text-center text-md-left ">
-    <button (click)='returnBtn($event)' class='btn btn-dark'>powrót</button>
+    <a [routerLink]="['/vehicles']" class='btn btn-dark'>powrót</a>
   </div>
 </div>

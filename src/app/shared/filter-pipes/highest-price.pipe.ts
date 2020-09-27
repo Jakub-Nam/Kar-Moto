@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Vehicle } from 'src/app/vehicles/vehicle';
 
 @Pipe({
   name: 'highestPrice'
@@ -10,8 +11,8 @@ export class HighestPricePipe implements PipeTransform {
       return vehicles;
     }
 
-    return vehicles.filter((vehicle) => {
-      return vehicle.payload.doc.data().price <= inputFilterValue;
+    return vehicles.filter((vehicle: Vehicle) => {
+      return vehicle.price <= inputFilterValue;
     });
   }
 }

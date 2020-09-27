@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Vehicle } from 'src/app/vehicles/vehicle';
 
 @Pipe({
   name: 'filterPriceLow'
@@ -9,8 +10,8 @@ export class FilterPriceLowPipe implements PipeTransform {
     if (inputFilterValue === undefined) {
       return vehicles;
     }
-    return vehicles.filter((vehicle) => {
-      return vehicle.payload.doc.data().price >= inputFilterValue;
+    return vehicles.filter((vehicle: Vehicle) => {
+      return vehicle.price >= inputFilterValue;
     });
   }
 }

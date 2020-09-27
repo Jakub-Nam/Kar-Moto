@@ -18,7 +18,7 @@
                     <a class="nav-link text-center" [routerLink]="['/login/edit-profile']">Edytuj profil<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item mx-1 active" *ngIf='!hideLoginButton'>
-                    <a class="nav-link text-center" [routerLink]="['/vehicles/vehicle-add']">Dodaj sprzęt<span class="sr-only"></span></a>
+                    <a class="nav-link text-center" [routerLink]="['vehicles/vehicle-add']">Dodaj sprzęt<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active" *ngIf='hideLoginButton'>
                     <a class="nav-link text-center" [routerLink]="['/login']">Zaloguj</a>

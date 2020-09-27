@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     user = new BehaviorSubject<User>(null);
-    adminInterface = false;
     constructor(
         private router: Router,
         public afAuth: AngularFireAuth,
@@ -47,8 +46,5 @@ export class AuthService {
         this.user.next(null);
         this.afAuth.signOut();
         localStorage.clear();
-    }
-    showAdminInterface() {
-        this.adminInterface = true;
     }
 }
