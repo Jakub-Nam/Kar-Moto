@@ -42,7 +42,7 @@ export class VehicleDbService {
   }
 
   deleteMainDocument(documentId: string) {
-    return this.db.collection('mainData').doc(documentId).delete();
+    return this.db.collection('vehicles').doc(documentId).delete();
   }
 
   deletePhotosURLs(collectionId: number) {

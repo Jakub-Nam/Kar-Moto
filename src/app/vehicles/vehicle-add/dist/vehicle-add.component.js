@@ -176,7 +176,7 @@ var VehicleAddComponent = /** @class */ (function () {
         this.vehicleWasSent = false;
     };
     VehicleAddComponent.prototype.hideErrorAlert = function () {
-        this.error = false;
+        this.errorMessage = false;
     };
     __decorate([
         core_1.ViewChild('AdditionalPhotosComponent')

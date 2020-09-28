@@ -36,7 +36,7 @@ var VehicleDbService = /** @class */ (function () {
         return this.db.collection("" + collectionId).get().toPromise();
     };
     VehicleDbService.prototype.deleteMainDocument = function (documentId) {
-        return this.db.collection('mainData').doc(documentId)["delete"]();
+        return this.db.collection('vehicles').doc(documentId)["delete"]();
     };
     VehicleDbService.prototype.deletePhotosURLs = function (collectionId) {
         return this.db.collection("" + collectionId).get().toPromise();

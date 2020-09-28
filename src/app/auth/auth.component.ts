@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
+import { Router, Routes } from '@angular/router';
 import { User } from './user.model';
 
 
@@ -28,7 +28,8 @@ export class AuthComponent implements OnInit {
 
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -82,6 +83,8 @@ export class AuthComponent implements OnInit {
         );
 
         this.authService.user.next(user);
+        console.log(this.authService.user.next(user), '1');
+        console.log(this.authService.user.next(null), '2');
         localStorage.setItem('userData', JSON.stringify(user));
         this.successAlert = 'success';
       })
@@ -92,6 +95,7 @@ export class AuthComponent implements OnInit {
       });
 
     form.reset();
+    this.router.navigate(['/']);
   }
   onSwitchMode(form: NgForm) {
     this.registrationView = true;

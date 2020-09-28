@@ -157,6 +157,6 @@ export class VehicleAddComponent implements OnInit {
   }
 
   hideErrorAlert() {
-    this.error = false;
+    this.errorMessage = false;
   }
 }

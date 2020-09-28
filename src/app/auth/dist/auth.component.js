@@ -49,8 +49,9 @@ var free_solid_svg_icons_2 = require("@fortawesome/free-solid-svg-icons");
 var free_solid_svg_icons_3 = require("@fortawesome/free-solid-svg-icons");
 var user_model_1 = require("./user.model");
 var AuthComponent = /** @class */ (function () {
-    function AuthComponent(authService) {
+    function AuthComponent(authService, router) {
         this.authService = authService;
+        this.router = router;
         this.registrationView = false;
         this.hideSpinner = true;
         this.error = '';
@@ -103,6 +104,8 @@ var AuthComponent = /** @class */ (function () {
                         _a.sent();
                         user = new user_model_1.User(userCredential.user.email, password, userCredential.user.uid, token, date);
                         this.authService.user.next(user);
+                        console.log(this.authService.user.next(user), '1');
+                        console.log(this.authService.user.next(null), '2');
                         localStorage.setItem('userData', JSON.stringify(user));
                         this.successAlert = 'success';
                         return [2 /*return*/];
@@ -112,6 +115,7 @@ var AuthComponent = /** @class */ (function () {
             _this.errorAlert = error;
         });
         form.reset();
+        this.router.navigate(['/']);
     };
     AuthComponent.prototype.onSwitchMode = function (form) {
         this.registrationView = true;

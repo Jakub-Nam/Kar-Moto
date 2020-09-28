@@ -118,6 +118,7 @@ var VehiclesComponent = /** @class */ (function () {
         this.filters.highestMileage = $event.highestMileage;
     };
     VehiclesComponent.prototype.toggleDeleteAlert = function (vehicle, event) {
+        event.preventDefault();
         if (!this.deleteAlert) {
             event.stopPropagation();
         }

@@ -99,6 +99,7 @@ export class VehiclesComponent implements OnInit {
   }
 
   toggleDeleteAlert(vehicle: Vehicle, event: Event) {
+    event.preventDefault();
     if (!this.deleteAlert) {
       event.stopPropagation();
     }
