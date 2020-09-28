@@ -27,8 +27,8 @@ var EditProfileComponent = /** @class */ (function () {
     };
     EditProfileComponent.prototype.onSubmitChangeProfile = function (form) {
         var _this = this;
-        this.db.collection('profiles').doc('mainData').set({
-            userName: form.value.name,
+        this.db.collection('profiles').doc('mainProfile').set({
+            name: form.value.name,
             phoneNumber: form.value.phoneNumber,
             email: form.value.email,
             street: form.value.street,

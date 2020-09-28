@@ -3,8 +3,9 @@ import { VehicleDbService } from '../shared/vehicle-db.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../auth/auth.service';
 import { Filter } from './vehicle-filter/filter';
-import { Vehicle } from './vehicle';
+import { Vehicle } from '../shared/interfaces/vehicle';
 import { ActivatedRoute } from '@angular/router';
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-vehicles',
@@ -48,7 +49,7 @@ export class VehiclesComponent implements OnInit {
     this.fetchAllVehicles();
     this.authService.user.subscribe(
       user => {
-        if (user === null) {
+        if (user === {} as User) {
           return;
         }
         if (user.email !== 'kubanam1995@gmail.com') {
@@ -79,8 +80,7 @@ export class VehiclesComponent implements OnInit {
           return;
         }
         response.forEach(vehicleData => {
-          const simpleVehicle: any = vehicleData.payload.doc.data();
-          const vehicle: Vehicle = simpleVehicle;
+          const vehicle: Vehicle = vehicleData.payload.doc.data() as Vehicle;
           this.vehicles.push(vehicle);
         });
         this.zeroVehicles = false;

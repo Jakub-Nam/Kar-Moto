@@ -74,7 +74,7 @@ var VehiclesComponent = /** @class */ (function () {
         var _this = this;
         this.fetchAllVehicles();
         this.authService.user.subscribe(function (user) {
-            if (user === null) {
+            if (user === {}) {
                 return;
             }
             if (user.email !== 'kubanam1995@gmail.com') {
@@ -102,8 +102,7 @@ var VehiclesComponent = /** @class */ (function () {
                 return;
             }
             response.forEach(function (vehicleData) {
-                var simpleVehicle = vehicleData.payload.doc.data();
-                var vehicle = simpleVehicle;
+                var vehicle = vehicleData.payload.doc.data();
                 _this.vehicles.push(vehicle);
             });
             _this.zeroVehicles = false;

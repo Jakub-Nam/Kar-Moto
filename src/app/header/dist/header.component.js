@@ -20,7 +20,7 @@ var HeaderComponent = /** @class */ (function () {
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.authService.user.subscribe(function (user) {
-            if (user === null) {
+            if (user === {}) {
                 return;
             }
             else {

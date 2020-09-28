@@ -42,7 +42,7 @@ var vehicle_selected_component_1 = require("./vehicles/vehicle-selected/vehicle-
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var ng_bootstrap_2 = require("@ng-bootstrap/ng-bootstrap");
 var auth_1 = require("@angular/fire/auth");
-var edit_profile_component_1 = require("./auth/edit-profile/edit-profile.component");
+var edit_profile_component_1 = require("./edit-profile/edit-profile.component");
 var ngx_image_compress_1 = require("ngx-image-compress");
 var page_not_found_component_1 = require("./page-not-found/page-not-found.component");
 var appRoutes = [
@@ -62,13 +62,11 @@ var appRoutes = [
     },
     {
         path: 'login',
-        component: auth_component_1.AuthComponent,
-        children: [
-            {
-                path: 'edit-profile',
-                component: edit_profile_component_1.EditProfileComponent
-            }
-        ]
+        component: auth_component_1.AuthComponent
+    },
+    {
+        path: 'edit-profile',
+        component: edit_profile_component_1.EditProfileComponent
     },
     { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
     { path: '**', component: page_not_found_component_1.PageNotFoundComponent }

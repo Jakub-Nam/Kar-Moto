@@ -6,7 +6,7 @@ import { User } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    user = new BehaviorSubject<User>(null);
+    user = new BehaviorSubject<User>({} as User);
     constructor(
         public afAuth: AngularFireAuth
         ) { }
@@ -41,7 +41,7 @@ export class AuthService {
     }
 
     logout() {
-        this.user.next(null);
+        this.user.next({} as User);
         this.afAuth.signOut();
         localStorage.clear();
     }

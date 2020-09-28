@@ -9,10 +9,6 @@
   <section class='col-12'>
     <app-vehicle-filter (filtered)="filter($event)" *ngIf='!showVehicle && !zeroVehicles'></app-vehicle-filter>
   </section>
-  
-  <section>
-    <app-vehicle-selected [vehicle]='vehicle' *ngIf='showVehicle' (return)='hideOneVehicle()'></app-vehicle-selected>
-  </section>
 
   <div *ngIf='!showVehicle'>
     <section class="card mb-3" *ngFor='let vehicle of vehicles | filterBrand: this.filters.brand | 
@@ -23,13 +19,13 @@
       <a [routerLink]="['vehicle-selected', vehicle.timestamp]">
         <figure>
           <div class="row no-gutters">
-            <div class="col-12 col-md-4 col-lg-3">
+            <div class="col-12 col-md-4 col-lg-4">
               <img src="{{ vehicle.downloadURL }}" class="card-img px-2 py-2" alt="Zdjęcie pojazdu">
             </div>
             <div class="col-md-6 d-flex ">
               <div class="card-body py-0 px-2">
                 <figcaption>
-                  <h2 class="card-title mb-1">{{ vehicle.name | titlecase }}</h2>
+                  <h2 class="card-title mb-1 my-2">{{ vehicle.name | titlecase }}</h2>
                   <p class="card-text mb-1">Przebieg: {{ vehicle.carMileage }}km</p>
                   <p class="card-text mb-0 pt-lg-2">
                     <small class="text-muted ">{{ vehicle.brand }}</small>

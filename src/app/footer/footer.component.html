@@ -8,14 +8,14 @@
                     aria-hidden="false" tabindex="0"></iframe>
             </div>
         </div>
-        <div class="col-lg-4 py-3 ">
+        <div class="col-lg-4 py-3">
             <p class='text-center'> Jesteś zainteresowany?
                 <br>
                 Zadzwoń lub wyślij wiadomość!
             </p>
-            <p class='mb-0'>Kontakt:</p>
-            <address *ngIf='this.profileData'>
-                {{ profileData.userName }}<br>
+            <p class='mb-0 text-center'>Kontakt:</p>
+            <address *ngIf='profileData' class='text-center'>
+                {{ profileData.name }}<br>
                 <a href="{{ profileData.phoneNumber }}">{{ profileData.phoneNumber }}</a><br>
                 {{ profileData.email }}<br>
                 {{ profileData.street }},<br>

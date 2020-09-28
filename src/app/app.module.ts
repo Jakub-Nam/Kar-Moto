@@ -33,7 +33,7 @@ import { VehicleSelectedComponent } from './vehicles/vehicle-selected/vehicle-se
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -54,12 +54,10 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: AuthComponent,
-    children: [
-      {
-        path: 'edit-profile',
-        component: EditProfileComponent
-      }
-    ]
+  },
+  {
+    path: 'edit-profile',
+    component: EditProfileComponent
   },
   { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

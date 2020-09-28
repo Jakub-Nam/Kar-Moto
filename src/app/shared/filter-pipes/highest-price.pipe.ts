@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Vehicle } from 'src/app/vehicles/vehicle';
+import { Vehicle } from 'src/app/shared/interfaces/vehicle';
 
 @Pipe({
   name: 'highestPrice'

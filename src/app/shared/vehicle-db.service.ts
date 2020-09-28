@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Vehicle } from '../vehicles/vehicle';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Vehicle } from './interfaces/vehicle';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,8 @@ import { Vehicle } from '../vehicles/vehicle';
 export class VehicleDbService {
 
   constructor(
-    private storage: AngularFireStorage,
-    private db: AngularFirestore
+    public storage: AngularFireStorage,
+    public db: AngularFirestore
   ) { }
 
   fetchProfileData() {
@@ -26,9 +27,7 @@ export class VehicleDbService {
   fetchMainPhoto(path: string) {
     return this.db.collection('vehicles').doc(`a${path}`).valueChanges();
   }
-  // fetchMainPhoto(path: string) {
-  //   return this.db.collection('vehicles').doc(`a${path}`).valueChanges();
-  // }
+
   fetchAdditionalVehiclePhotos(path: string) {
     return this.db.collection(path)
       .snapshotChanges();

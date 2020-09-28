@@ -13,7 +13,7 @@ var user_model_1 = require("./user.model");
 var AuthService = /** @class */ (function () {
     function AuthService(afAuth) {
         this.afAuth = afAuth;
-        this.user = new rxjs_1.BehaviorSubject(null);
+        this.user = new rxjs_1.BehaviorSubject({});
     }
     AuthService.prototype.login = function (email, password) {
         return this.afAuth.signInWithEmailAndPassword(email, password);
@@ -30,7 +30,7 @@ var AuthService = /** @class */ (function () {
         this.login(userData.email, userData.password);
     };
     AuthService.prototype.logout = function () {
-        this.user.next(null);
+        this.user.next({});
         this.afAuth.signOut();
         localStorage.clear();
     };

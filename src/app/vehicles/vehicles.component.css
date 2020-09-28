@@ -39,3 +39,7 @@ img:hover {
     opacity: 0.8;
     padding: 2em;
 }
+a {
+    text-decoration: none;
+    color: black;
+}

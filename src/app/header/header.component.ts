@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user.subscribe(
       user => {
-        if (user === null) {
+        if (user === {} as User) {
           return;
         }
         else {
@@ -29,7 +30,7 @@ export class HeaderComponent implements OnInit {
         if (user.email !== 'kubanam1995@gmail.com' && user.email !== null) {
            this.marked = true;
           }
-        else { 
+        else {
           this.showAdminInterface = true;
         }
       });

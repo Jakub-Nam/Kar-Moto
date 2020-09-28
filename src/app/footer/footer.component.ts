@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleDbService } from '../shared/vehicle-db.service';
-import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
-import { Profile } from '../auth/edit-profile/profile';
-import { Subscription } from 'rxjs';
+import { Profile } from '../shared/interfaces/profile';
 
 @Component({
   selector: 'app-footer',
@@ -10,21 +8,20 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  profileData: any;
+  profileData: Profile;
   constructor(private vehicleDbService: VehicleDbService) { }
 
   ngOnInit(): void {
     this.fetchProfileData();
   }
-  fetchProfileData(): Subscription {
+  fetchProfileData() {
     return this.vehicleDbService.fetchProfileData()
       .subscribe(
         next => {
           if (!next) {
             window.alert('Problem with fetch profile data');
           }
-
-          this.profileData = next;
+          this.profileData = next as Profile;
         },
         error => {
           window.alert('There is a error with fetch profile data!');

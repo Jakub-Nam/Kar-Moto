@@ -25,9 +25,6 @@ var VehicleDbService = /** @class */ (function () {
     VehicleDbService.prototype.fetchMainPhoto = function (path) {
         return this.db.collection('vehicles').doc("a" + path).valueChanges();
     };
-    // fetchMainPhoto(path: string) {
-    //   return this.db.collection('vehicles').doc(`a${path}`).valueChanges();
-    // }
     VehicleDbService.prototype.fetchAdditionalVehiclePhotos = function (path) {
         return this.db.collection(path)
             .snapshotChanges();
