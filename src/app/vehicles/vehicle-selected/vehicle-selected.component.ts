@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Vehicle } from '../vehicle';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-vehicle-selected',
@@ -9,12 +11,15 @@ import { Vehicle } from '../vehicle';
   styleUrls: ['./vehicle-selected.component.css']
 })
 export class VehicleSelectedComponent implements OnInit {
-  @Input() vehicle: Vehicle;
-  @Output() return = new EventEmitter();
+  vehicle: Vehicle;
+  // @Output() return = new EventEmitter();
   vehicleURLs: Array<object>;
+  timestamp: number;
 
   constructor(
     private vehicleDbService: VehicleDbService,
+    private route: ActivatedRoute,
+    private router: Router,
     config: NgbCarouselConfig) {
     config.interval = 100000;
     config.wrap = true;
@@ -23,12 +28,21 @@ export class VehicleSelectedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchAdditionalVehiclePhotos();
-
+    const timestamp: string | null = this.route.snapshot.paramMap.get('timestamp');
+    const path: string = timestamp || '';
+    this.fetchMainPhoto(path);
+    this.fetchAdditionalVehiclePhotos(path);
   }
-  fetchAdditionalVehiclePhotos() {
-    const timestamp: number = this.vehicle.timestamp;
-    this.vehicleDbService.fetchAdditionalVehiclePhotos(`a${timestamp}`).subscribe(
+
+  fetchMainPhoto (path: string) {
+    this.vehicleDbService.fetchMainPhoto(path).subscribe(
+      next => {
+        this.vehicle = next;
+      });
+  }
+
+  fetchAdditionalVehiclePhotos(path: string) {
+    this.vehicleDbService.fetchAdditionalVehiclePhotos(path).subscribe(
       next => {
         this.vehicleURLs = next;
       });

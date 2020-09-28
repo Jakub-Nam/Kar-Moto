@@ -11,10 +11,8 @@ var core_1 = require("@angular/core");
 var rxjs_1 = require("rxjs");
 var user_model_1 = require("./user.model");
 var AuthService = /** @class */ (function () {
-    function AuthService(router, afAuth, db) {
-        this.router = router;
+    function AuthService(afAuth) {
         this.afAuth = afAuth;
-        this.db = db;
         this.user = new rxjs_1.BehaviorSubject(null);
     }
     AuthService.prototype.login = function (email, password) {

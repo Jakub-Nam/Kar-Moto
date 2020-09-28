@@ -26,8 +26,12 @@ export class HeaderComponent implements OnInit {
           this.changeButtonsVisability();
         }
 
-        if (user.email !== 'kubanam1995@gmail.com' && user.email !== null) { this.marked = true; }
-        else { this.showAdminInterface = true; }
+        if (user.email !== 'kubanam1995@gmail.com' && user.email !== null) {
+           this.marked = true;
+          }
+        else { 
+          this.showAdminInterface = true;
+        }
       });
 
     this.authService.autoLogin();

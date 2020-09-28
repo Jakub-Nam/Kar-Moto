@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Profile } from './profile';
 
 @Component({
   selector: 'app-edit-profile',
@@ -28,7 +29,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   onSubmitChangeProfile(form: any) {
-    this.db.collection('mainData').doc('profileData').set(
+    this.db.collection('profiles').doc('mainData').set(
       {
         userName: form.value.name,
         phoneNumber: form.value.phoneNumber,

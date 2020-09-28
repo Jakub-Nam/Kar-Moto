@@ -105,7 +105,7 @@ export class AdditionalPhotosComponent implements OnInit {
 
     const photoTimestamp = Date.now();
 
-    const path = `test/${photoTimestamp}`;
+    const path = `vehicles/${photoTimestamp}`;
 
     const ref = this.storage.ref(path);
 

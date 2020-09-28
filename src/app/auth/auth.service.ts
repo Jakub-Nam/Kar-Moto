@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     user = new BehaviorSubject<User>(null);
     constructor(
-        private router: Router,
-        public afAuth: AngularFireAuth,
-        private db: AngularFirestore) { }
+        public afAuth: AngularFireAuth
+        ) { }
 
     login(email: string, password: string): Promise<any> {
         return this.afAuth.signInWithEmailAndPassword(email, password);

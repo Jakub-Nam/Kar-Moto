@@ -119,7 +119,7 @@ export class VehicleAddComponent implements OnInit {
     const timestamp = Date.now();
     this.timestamp = timestamp;
 
-    const path = `test/${timestamp}_${file.name}`;
+    const path = `vehicles/${timestamp}`;
 
     const ref = this.storage.ref(path);
 
@@ -131,7 +131,7 @@ export class VehicleAddComponent implements OnInit {
 
         this.downloadURL = await ref.getDownloadURL().toPromise();
 
-        await this.db.collection('mainData').doc(`a${timestamp}`).set(
+        await this.db.collection('vehicles').doc(`a${timestamp}`).set(
           {
             name: this.vehicleForm.value.name,
             brand: this.vehicleForm.value.brand,

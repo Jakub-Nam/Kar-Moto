@@ -138,7 +138,7 @@ var VehicleAddComponent = /** @class */ (function () {
         var _this = this;
         var timestamp = Date.now();
         this.timestamp = timestamp;
-        var path = "test/" + timestamp + "_" + file.name;
+        var path = "vehicles/" + timestamp;
         var ref = this.storage.ref(path);
         this.task = this.storage.upload(path, file);
         this.snapshot = this.task.snapshotChanges().pipe(operators_1.finalize(function () { return __awaiter(_this, void 0, void 0, function () {
@@ -150,7 +150,7 @@ var VehicleAddComponent = /** @class */ (function () {
                         return [4 /*yield*/, ref.getDownloadURL().toPromise()];
                     case 1:
                         _a.downloadURL = _b.sent();
-                        return [4 /*yield*/, this.db.collection('mainData').doc("a" + timestamp).set({
+                        return [4 /*yield*/, this.db.collection('vehicles').doc("a" + timestamp).set({
                                 name: this.vehicleForm.value.name,
                                 brand: this.vehicleForm.value.brand,
                                 price: this.vehicleForm.value.price,

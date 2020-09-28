@@ -9,30 +9,33 @@ exports.__esModule = true;
 exports.VehicleSelectedComponent = void 0;
 var core_1 = require("@angular/core");
 var VehicleSelectedComponent = /** @class */ (function () {
-    function VehicleSelectedComponent(vehicleDbService, config) {
+    function VehicleSelectedComponent(vehicleDbService, route, router, config) {
         this.vehicleDbService = vehicleDbService;
-        this["return"] = new core_1.EventEmitter();
+        this.route = route;
+        this.router = router;
         config.interval = 100000;
         config.wrap = true;
         config.keyboard = false;
         config.pauseOnHover = false;
     }
     VehicleSelectedComponent.prototype.ngOnInit = function () {
-        this.fetchAdditionalVehiclePhotos();
+        var timestamp = this.route.snapshot.paramMap.get('timestamp');
+        var path = timestamp || '';
+        this.fetchMainPhoto(path);
+        this.fetchAdditionalVehiclePhotos(path);
     };
-    VehicleSelectedComponent.prototype.fetchAdditionalVehiclePhotos = function () {
+    VehicleSelectedComponent.prototype.fetchMainPhoto = function (path) {
         var _this = this;
-        var timestamp = this.vehicle.timestamp;
-        this.vehicleDbService.fetchAdditionalVehiclePhotos("a" + timestamp).subscribe(function (next) {
+        this.vehicleDbService.fetchMainPhoto(path).subscribe(function (next) {
+            _this.vehicle = next;
+        });
+    };
+    VehicleSelectedComponent.prototype.fetchAdditionalVehiclePhotos = function (path) {
+        var _this = this;
+        this.vehicleDbService.fetchAdditionalVehiclePhotos(path).subscribe(function (next) {
             _this.vehicleURLs = next;
         });
     };
-    __decorate([
-        core_1.Input()
-    ], VehicleSelectedComponent.prototype, "vehicle");
-    __decorate([
-        core_1.Output()
-    ], VehicleSelectedComponent.prototype, "return");
     VehicleSelectedComponent = __decorate([
         core_1.Component({
             selector: 'app-vehicle-selected',

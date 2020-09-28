@@ -49,9 +49,8 @@ var free_solid_svg_icons_2 = require("@fortawesome/free-solid-svg-icons");
 var free_solid_svg_icons_3 = require("@fortawesome/free-solid-svg-icons");
 var user_model_1 = require("./user.model");
 var AuthComponent = /** @class */ (function () {
-    function AuthComponent(authService, router) {
+    function AuthComponent(authService) {
         this.authService = authService;
-        this.router = router;
         this.registrationView = false;
         this.hideSpinner = true;
         this.error = '';
