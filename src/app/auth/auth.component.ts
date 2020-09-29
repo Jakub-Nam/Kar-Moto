@@ -33,22 +33,7 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.user.subscribe(
-      user => {
-        if (user) {
-          if (user.email !== 'kubanam1995@gmail.com') {
-            return;
-          }
-          else {
-            this.adminInterface = true;
-          }
-        }
-        else {
-          return;
-        }
-      },
-      err => this.errorAlert = err
-    );
+
   }
 
   togglePassword() {
@@ -83,8 +68,6 @@ export class AuthComponent implements OnInit {
         );
 
         this.authService.user.next(user);
-        console.log(this.authService.user.next(user), '1');
-        console.log(this.authService.user.next(null), '2');
         localStorage.setItem('userData', JSON.stringify(user));
         this.successAlert = 'success';
       })

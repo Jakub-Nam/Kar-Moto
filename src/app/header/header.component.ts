@@ -8,7 +8,7 @@ import { User } from '../auth/user.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  hideLoginButton = true;
+  isBtnVisability = true;
   toggleNavbar = true;
   showAdminInterface = false;
   marked = false;
@@ -20,18 +20,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user.subscribe(
       user => {
-        if (user === {} as User) {
+        if (user === this.authService.emptyUser) {
+          this.changeButtonsVisability(true);
+        }
+        else {
+          this.changeButtonsVisability(false);
           return;
-        }
-        else {
-          this.changeButtonsVisability();
-        }
-
-        if (user.email !== 'kubanam1995@gmail.com' && user.email !== null) {
-           this.marked = true;
-          }
-        else {
-          this.showAdminInterface = true;
         }
       });
 
@@ -39,11 +33,11 @@ export class HeaderComponent implements OnInit {
   }
   logout() {
     this.authService.logout();
-    this.changeButtonsVisability();
+    this.changeButtonsVisability(true);
     this.showAdminInterface = false;
     this.marked = false;
   }
-  changeButtonsVisability() {
-    this.hideLoginButton = !this.hideLoginButton;
+  changeButtonsVisability(isVisible: boolean) {
+    this.isBtnVisability = isVisible;
   }
 }

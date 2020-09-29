@@ -64,20 +64,6 @@ var AuthComponent = /** @class */ (function () {
         this.errorAlert = '';
     }
     AuthComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.authService.user.subscribe(function (user) {
-            if (user) {
-                if (user.email !== 'kubanam1995@gmail.com') {
-                    return;
-                }
-                else {
-                    _this.adminInterface = true;
-                }
-            }
-            else {
-                return;
-            }
-        }, function (err) { return _this.errorAlert = err; });
     };
     AuthComponent.prototype.togglePassword = function () {
         this.hidePassword = !this.hidePassword;
@@ -104,8 +90,6 @@ var AuthComponent = /** @class */ (function () {
                         _a.sent();
                         user = new user_model_1.User(userCredential.user.email, password, userCredential.user.uid, token, date);
                         this.authService.user.next(user);
-                        console.log(this.authService.user.next(user), '1');
-                        console.log(this.authService.user.next(null), '2');
                         localStorage.setItem('userData', JSON.stringify(user));
                         this.successAlert = 'success';
                         return [2 /*return*/];

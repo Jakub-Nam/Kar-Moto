@@ -11,7 +11,7 @@ var core_1 = require("@angular/core");
 var HeaderComponent = /** @class */ (function () {
     function HeaderComponent(authService) {
         this.authService = authService;
-        this.hideLoginButton = true;
+        this.isBtnVisability = true;
         this.toggleNavbar = true;
         this.showAdminInterface = false;
         this.marked = false;
@@ -20,29 +20,24 @@ var HeaderComponent = /** @class */ (function () {
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.authService.user.subscribe(function (user) {
-            if (user === {}) {
+            if (user === _this.authService.emptyUser) {
+                _this.changeButtonsVisability(true);
+            }
+            else {
+                _this.changeButtonsVisability(false);
                 return;
-            }
-            else {
-                _this.changeButtonsVisability();
-            }
-            if (user.email !== 'kubanam1995@gmail.com' && user.email !== null) {
-                _this.marked = true;
-            }
-            else {
-                _this.showAdminInterface = true;
             }
         });
         this.authService.autoLogin();
     };
     HeaderComponent.prototype.logout = function () {
         this.authService.logout();
-        this.changeButtonsVisability();
+        this.changeButtonsVisability(true);
         this.showAdminInterface = false;
         this.marked = false;
     };
-    HeaderComponent.prototype.changeButtonsVisability = function () {
-        this.hideLoginButton = !this.hideLoginButton;
+    HeaderComponent.prototype.changeButtonsVisability = function (isVisible) {
+        this.isBtnVisability = isVisible;
     };
     HeaderComponent = __decorate([
         core_1.Component({
