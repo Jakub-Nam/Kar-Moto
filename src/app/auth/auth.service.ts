@@ -3,8 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
 
-
 @Injectable({ providedIn: 'root' })
+
 export class AuthService {
 
     emptyUser: User = {
@@ -27,9 +27,13 @@ export class AuthService {
         public afAuth: AngularFireAuth
     ) { }
 
-    login(email: string, password: string): Promise<any> {
-        return this.afAuth.signInWithEmailAndPassword(email, password);
+    login(email: string, password: string): Promise<any | undefined>  {
 
+        if (email !== undefined) {
+            return this.afAuth.signInWithEmailAndPassword(email, password);
+        }
+
+        return this.login(email, password);
     }
 
     autoLogin() {

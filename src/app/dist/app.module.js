@@ -45,6 +45,7 @@ var auth_1 = require("@angular/fire/auth");
 var edit_profile_component_1 = require("./edit-profile/edit-profile.component");
 var ngx_image_compress_1 = require("ngx-image-compress");
 var page_not_found_component_1 = require("./page-not-found/page-not-found.component");
+var auth_guard_guard_1 = require("./auth/auth-guard.guard");
 var appRoutes = [
     {
         path: 'vehicles',
@@ -52,7 +53,8 @@ var appRoutes = [
         children: [
             {
                 path: 'vehicle-add',
-                component: vehicle_add_component_1.VehicleAddComponent
+                component: vehicle_add_component_1.VehicleAddComponent,
+                canActivate: [auth_guard_guard_1.AuthGuard]
             },
             {
                 path: 'vehicle-selected/:timestamp',
@@ -66,7 +68,8 @@ var appRoutes = [
     },
     {
         path: 'edit-profile',
-        component: edit_profile_component_1.EditProfileComponent
+        component: edit_profile_component_1.EditProfileComponent,
+        canActivate: [auth_guard_guard_1.AuthGuard]
     },
     { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
     { path: '**', component: page_not_found_component_1.PageNotFoundComponent }
@@ -119,7 +122,7 @@ var AppModule = /** @class */ (function () {
                 ng_bootstrap_1.NgbModule,
                 ng_bootstrap_2.NgbCollapseModule
             ],
-            providers: [ngx_image_compress_1.NgxImageCompressService],
+            providers: [ngx_image_compress_1.NgxImageCompressService, auth_guard_guard_1.AuthGuard],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

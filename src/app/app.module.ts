@@ -36,6 +36,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './auth/auth-guard.guard';
+
+
 
 const appRoutes: Routes = [
   {
@@ -45,6 +48,7 @@ const appRoutes: Routes = [
       {
         path: 'vehicle-add',
         component: VehicleAddComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'vehicle-selected/:timestamp',
@@ -57,7 +61,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'edit-profile',
-    component: EditProfileComponent
+    component: EditProfileComponent,
+    canActivate: [AuthGuard]
   },
   { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
@@ -68,6 +73,7 @@ const materialComponents = [
   MatButtonModule,
   MatInputModule
 ];
+
 
 @NgModule({
   declarations: [
@@ -108,7 +114,7 @@ const materialComponents = [
     NgbModule,
     NgbCollapseModule
   ],
-  providers: [NgxImageCompressService],
+  providers: [NgxImageCompressService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

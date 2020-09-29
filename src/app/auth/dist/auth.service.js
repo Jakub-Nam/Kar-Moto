@@ -29,7 +29,10 @@ var AuthService = /** @class */ (function () {
         this.user = new rxjs_1.BehaviorSubject(this.emptyUser);
     }
     AuthService.prototype.login = function (email, password) {
-        return this.afAuth.signInWithEmailAndPassword(email, password);
+        if (email !== undefined) {
+            return this.afAuth.signInWithEmailAndPassword(email, password);
+        }
+        return this.login(email, password);
     };
     AuthService.prototype.autoLogin = function () {
         var localStorageData = JSON.parse(localStorage.getItem('userData') || '{}');
