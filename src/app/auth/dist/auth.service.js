@@ -32,9 +32,9 @@ var AuthService = /** @class */ (function () {
         return this.afAuth.signInWithEmailAndPassword(email, password);
     };
     AuthService.prototype.autoLogin = function () {
-        var localStorageData = JSON.parse(localStorage.getItem('userData'));
+        var localStorageData = JSON.parse(localStorage.getItem('userData') || '{}');
         if (localStorageData) {
-            var userData = JSON.parse(localStorage.getItem('userData'));
+            var userData = JSON.parse(localStorage.getItem('userData') || '{}');
             if (!userData) {
                 return;
             }
