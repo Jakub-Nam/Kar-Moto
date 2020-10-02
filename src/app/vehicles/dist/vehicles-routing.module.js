@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var auth_guard_guard_1 = require("../auth/auth-guard.guard");
 var vehicle_add_component_1 = require("./vehicle-add/vehicle-add.component");
+var vehicle_list_component_1 = require("./vehicle-list/vehicle-list.component");
 var vehicle_selected_component_1 = require("./vehicle-selected/vehicle-selected.component");
 var vehicles_component_1 = require("./vehicles.component");
 var vehiclesRoutes = [
@@ -18,11 +19,10 @@ var vehiclesRoutes = [
         path: '',
         component: vehicles_component_1.VehiclesComponent,
         children: [
-            //     // {
-            //     //     path: 'vehicle-list',
-            //     //     component: VehicleAddComponent,
-            //     //     canActivate: [AuthGuard]
-            //     // },
+            {
+                path: 'vehicle-list',
+                component: vehicle_list_component_1.VehicleListComponent
+            },
             {
                 path: 'vehicle-add',
                 component: vehicle_add_component_1.VehicleAddComponent,

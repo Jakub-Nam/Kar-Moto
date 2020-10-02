@@ -24,6 +24,7 @@ import { environment } from './../../environment/environment';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { VehiclesRoutingModule } from './vehicles-routing.module';
+import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 
 
 const materialComponents = [
@@ -44,7 +45,8 @@ const materialComponents = [
         FilterPriceLowPipe,
         HighestPricePipe,
         LowestMileagePipe,
-        HighestMileagePipe
+        HighestMileagePipe,
+        VehicleListComponent
     ],
     imports: [
         CommonModule,
