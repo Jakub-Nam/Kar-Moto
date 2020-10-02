@@ -13,178 +13,178 @@ import { User } from '../auth/user.model';
   styleUrls: ['./vehicles.component.css']
 })
 export class VehiclesComponent implements OnInit {
-  zeroVehicles = false;
-  vehicles: Array<Vehicle> = [];
-  vehicle: Vehicle;
-  showVehicle = false;
-  faTrash = faTrash;
-  showForAdmin = false;
-  filters: Filter = {
-    brand: '',
-    priceLow: 0,
-    highestPrice: 0,
-    lowestMileage: 0,
-    highestMileage: 0
-  };
+  // zeroVehicles = false;
+  // vehicles: Array<Vehicle> = [];
+  // vehicle: Vehicle;
+  // showVehicle = false;
+  // faTrash = faTrash;
+  // showForAdmin = false;
+  // filters: Filter = {
+  //   brand: '',
+  //   priceLow: 0,
+  //   highestPrice: 0,
+  //   lowestMileage: 0,
+  //   highestMileage: 0
+  // };
 
-  deleteAlert = false;
-  vehicleToDelete: Vehicle;
-  toggleDeleteAlertEvent: Event;
+  // deleteAlert = false;
+  // vehicleToDelete: Vehicle;
+  // toggleDeleteAlertEvent: Event;
 
-  deletedMainPhotoInStorage = false;
-  deletedPhotosURLs = false;
-  deletedMainDocument = false;
-  deletedSecondaryPhotos = false;
+  // deletedMainPhotoInStorage = false;
+  // deletedPhotosURLs = false;
+  // deletedMainDocument = false;
+  // deletedSecondaryPhotos = false;
 
-  errorMsg = '';
-  successMsg = '';
+  // errorMsg = '';
+  // successMsg = '';
 
   constructor(
-    public vehicleDbService: VehicleDbService,
-    private authService: AuthService,
-    public route: ActivatedRoute
+    // public vehicleDbService: VehicleDbService,
+    // private authService: AuthService,
+    // public route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.fetchAllVehicles();
-    this.authService.user.subscribe(
-      user => {
-        if (user === {} as User) {
-          return;
-        }
-        if (user.email !== 'kubanam1995@gmail.com') {
-          return;
-        }
-        else {
-          this.showForAdmin = true;
-        }
-      },
-      error => {
-        this.errorMsg = `Nie udało się załadować danych.`;
-      });
+    // this.fetchAllVehicles();
+    // this.authService.user.subscribe(
+    //   user => {
+    //     if (user === {} as User) {
+    //       return;
+    //     }
+    //     if (user.email !== 'kubanam1995@gmail.com') {
+    //       return;
+    //     }
+    //     else {
+    //       this.showForAdmin = true;
+    //     }
+    //   },
+    //   error => {
+    //     this.errorMsg = `Nie udało się załadować danych.`;
+    //   });
   }
 
-  noneVehicles() {
-    if (this.vehicles.length === 0) {
-      this.zeroVehicles = true;
-    }
-  }
+  // noneVehicles() {
+  //   if (this.vehicles.length === 0) {
+  //     this.zeroVehicles = true;
+  //   }
+  // }
 
-  fetchAllVehicles() {
-    this.vehicleDbService.fetchAllVehicles()
-      .subscribe
-      (response => {
-        if (!response.length) {
-          this.vehicles = [];
-          this.zeroVehicles = true;
-          return;
-        }
-        response.forEach(vehicleData => {
-          const vehicle: Vehicle = vehicleData.payload.doc.data() as Vehicle;
-          this.vehicles.push(vehicle);
-        });
-        this.zeroVehicles = false;
-      },
-        error => {
-          this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
-        });
-  }
+  // fetchAllVehicles() {
+  //   this.vehicleDbService.fetchAllVehicles()
+  //     .subscribe
+  //     (response => {
+  //       if (!response.length) {
+  //         this.vehicles = [];
+  //         this.zeroVehicles = true;
+  //         return;
+  //       }
+  //       response.forEach(vehicleData => {
+  //         const vehicle: Vehicle = vehicleData.payload.doc.data() as Vehicle;
+  //         this.vehicles.push(vehicle);
+  //       });
+  //       this.zeroVehicles = false;
+  //     },
+  //       error => {
+  //         this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+  //       });
+  // }
 
-  filter($event: Filter) {
-    this.filters.brand = $event.brand;
-    this.filters.priceLow = $event.priceLow;
-    this.filters.highestPrice = $event.highestPrice;
-    this.filters.lowestMileage = $event.lowestMileage;
-    this.filters.highestMileage = $event.highestMileage;
-  }
+  // filter($event: Filter) {
+  //   this.filters.brand = $event.brand;
+  //   this.filters.priceLow = $event.priceLow;
+  //   this.filters.highestPrice = $event.highestPrice;
+  //   this.filters.lowestMileage = $event.lowestMileage;
+  //   this.filters.highestMileage = $event.highestMileage;
+  // }
 
-  toggleDeleteAlert(vehicle: Vehicle, event: Event) {
-    event.preventDefault();
-    if (!this.deleteAlert) {
-      event.stopPropagation();
-    }
-    this.toggleDeleteAlertEvent = event;
-    this.deleteAlert = !this.deleteAlert;
-    this.vehicleToDelete = vehicle;
-  }
+  // toggleDeleteAlert(vehicle: Vehicle, event: Event) {
+  //   event.preventDefault();
+  //   if (!this.deleteAlert) {
+  //     event.stopPropagation();
+  //   }
+  //   this.toggleDeleteAlertEvent = event;
+  //   this.deleteAlert = !this.deleteAlert;
+  //   this.vehicleToDelete = vehicle;
+  // }
 
-  async deleteVehicle() {
-    const vehicle = this.vehicleToDelete;
-    const storagePath = vehicle.path;
+  // async deleteVehicle() {
+  //   const vehicle = this.vehicleToDelete;
+  //   const storagePath = vehicle.path;
 
-    await this.vehicleDbService.deleteMainPhotoInStorage(storagePath)
-      .then(res => {
-        this.deletedMainPhotoInStorage = true;
-      })
-      .catch(err => {
-        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
-      });
+  //   await this.vehicleDbService.deleteMainPhotoInStorage(storagePath)
+  //     .then(res => {
+  //       this.deletedMainPhotoInStorage = true;
+  //     })
+  //     .catch(err => {
+  //       this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+  //     });
 
 
-    const collectionId = vehicle.timestamp;
-    await this.vehicleDbService.deleteSecondaryPhotos(collectionId)
-      .then(async querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const path = doc.data().path;
-          const storageRef = this.vehicleDbService.storage.ref(path);
-          storageRef.delete();
+  //   const collectionId = vehicle.timestamp;
+  //   await this.vehicleDbService.deleteSecondaryPhotos(collectionId)
+  //     .then(async querySnapshot => {
+  //       querySnapshot.forEach(doc => {
+  //         const path = doc.data().path;
+  //         const storageRef = this.vehicleDbService.storage.ref(path);
+  //         storageRef.delete();
 
-          this.deletedSecondaryPhotos = true;
-        });
-      })
-      .catch(error => {
-        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
-      });
+  //         this.deletedSecondaryPhotos = true;
+  //       });
+  //     })
+  //     .catch(error => {
+  //       this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+  //     });
 
-    await this.vehicleDbService.deletePhotosURLs(collectionId)
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          this.vehicleDbService.db.collection(`${collectionId}`).doc(doc.id).delete()
-            .then(() => {
-              this.deletedPhotosURLs = true;
-            })
-            .catch(error => {
-              this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
-            });
-        });
-      })
-      .catch(error => {
-        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
-      });
+  //   await this.vehicleDbService.deletePhotosURLs(collectionId)
+  //     .then(querySnapshot => {
+  //       querySnapshot.forEach(doc => {
+  //         this.vehicleDbService.db.collection(`${collectionId}`).doc(doc.id).delete()
+  //           .then(() => {
+  //             this.deletedPhotosURLs = true;
+  //           })
+  //           .catch(error => {
+  //             this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+  //           });
+  //       });
+  //     })
+  //     .catch(error => {
+  //       this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+  //     });
 
-    const documentId = `a${vehicle.timestamp}`;
-    await this.vehicleDbService.deleteMainDocument(documentId)
-      .then(() => {
-        this.deletedMainDocument = true;
-        if (
-          this.deletedMainPhotoInStorage === true &&
-          this.deletedSecondaryPhotos === true &&
-          this.deletedMainDocument === true &&
-          this.deletedPhotosURLs === true
-        ) {
-          this.successMsg = `Poprawnie usunięto obiekt.`;
-        }
-      })
-      .catch(error => {
-        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
-      });
-    this.toggleDeleteAlert(vehicle, this.toggleDeleteAlertEvent);
-  }
+  //   const documentId = `a${vehicle.timestamp}`;
+  //   await this.vehicleDbService.deleteMainDocument(documentId)
+  //     .then(() => {
+  //       this.deletedMainDocument = true;
+  //       if (
+  //         this.deletedMainPhotoInStorage === true &&
+  //         this.deletedSecondaryPhotos === true &&
+  //         this.deletedMainDocument === true &&
+  //         this.deletedPhotosURLs === true
+  //       ) {
+  //         this.successMsg = `Poprawnie usunięto obiekt.`;
+  //       }
+  //     })
+  //     .catch(error => {
+  //       this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+  //     });
+  //   this.toggleDeleteAlert(vehicle, this.toggleDeleteAlertEvent);
+  // }
 
-  showOneVehicle(vehicle: Vehicle) {
-    this.vehicle = vehicle;
-    this.showVehicle = true;
-  }
+  // showOneVehicle(vehicle: Vehicle) {
+  //   this.vehicle = vehicle;
+  //   this.showVehicle = true;
+  // }
 
-  hideOneVehicle() {
-    this.showVehicle = false;
-  }
+  // hideOneVehicle() {
+  //   this.showVehicle = false;
+  // }
 
-  hideSuccessAlert() {
-    this.successMsg = '';
-  }
+  // hideSuccessAlert() {
+  //   this.successMsg = '';
+  // }
 
-  hideErrorAlert() {
-    this.errorMsg = '';
-  }
+  // hideErrorAlert() {
+  //   this.errorMsg = '';
+  // }
 }
