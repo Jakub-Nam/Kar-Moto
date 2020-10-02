@@ -11,6 +11,14 @@ var core_1 = require("@angular/core");
 var FooterComponent = /** @class */ (function () {
     function FooterComponent(vehicleDbService) {
         this.vehicleDbService = vehicleDbService;
+        this.profileData = {
+            name: '',
+            email: '',
+            phoneNumber: 0,
+            street: '',
+            postCode: '',
+            city: ''
+        };
     }
     FooterComponent.prototype.ngOnInit = function () {
         this.fetchProfileData();

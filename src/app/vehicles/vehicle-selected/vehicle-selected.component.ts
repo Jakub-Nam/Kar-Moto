@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Vehicle } from '../../shared/interfaces/vehicle';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-vehicle-selected',
@@ -18,7 +18,6 @@ export class VehicleSelectedComponent implements OnInit {
   constructor(
     private vehicleDbService: VehicleDbService,
     private route: ActivatedRoute,
-    private router: Router,
     config: NgbCarouselConfig ) {
     config.interval = 100000;
     config.wrap = true;

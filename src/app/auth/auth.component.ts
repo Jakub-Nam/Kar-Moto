@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { Router, Routes } from '@angular/router';
+import { Router } from '@angular/router';
 import { User } from './user.model';
 
 
@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
   passwordStrengthmeter: any;
   adminInterface = false;
   successAlert = '';
-  errorAlert = '';
+  errorAlert = false;
 
 
   constructor(
@@ -70,15 +70,15 @@ export class AuthComponent implements OnInit {
         this.authService.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
         this.successAlert = 'success';
+        this.router.navigate(['/']);
       })
 
 
       .catch(error => {
-        this.errorAlert = error;
+        this.errorAlert = true;
       });
 
     form.reset();
-    this.router.navigate(['/']);
   }
   onSwitchMode(form: NgForm) {
     this.registrationView = true;
@@ -88,10 +88,10 @@ export class AuthComponent implements OnInit {
   }
 
   hideSuccessAlert() {
-    this.successAlert = '';
+    // this.successAlert = '';
   }
 
   hideErrorAlert() {
-    this.errorAlert = '';
+    // this.errorAlert = false;
   }
 }

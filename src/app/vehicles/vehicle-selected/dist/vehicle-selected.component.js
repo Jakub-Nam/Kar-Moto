@@ -9,10 +9,9 @@ exports.__esModule = true;
 exports.VehicleSelectedComponent = void 0;
 var core_1 = require("@angular/core");
 var VehicleSelectedComponent = /** @class */ (function () {
-    function VehicleSelectedComponent(vehicleDbService, route, router, config) {
+    function VehicleSelectedComponent(vehicleDbService, route, config) {
         this.vehicleDbService = vehicleDbService;
         this.route = route;
-        this.router = router;
         config.interval = 100000;
         config.wrap = true;
         config.keyboard = false;

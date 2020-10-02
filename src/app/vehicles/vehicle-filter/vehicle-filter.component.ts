@@ -7,7 +7,7 @@ import { Filter } from './filter';
   styleUrls: ['./vehicle-filter.component.css']
 })
 
-export class FilterMenuComponent implements OnInit, DoCheck {
+export class VehicleFilterComponent implements OnInit, DoCheck {
   @Output() filtered = new EventEmitter<object>();
 
   brandModel: string;

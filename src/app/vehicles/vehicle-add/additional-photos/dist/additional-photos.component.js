@@ -46,15 +46,20 @@ exports.AdditionalPhotosComponent = void 0;
 var core_1 = require("@angular/core");
 var operators_1 = require("rxjs/operators");
 var AdditionalPhotosComponent = /** @class */ (function () {
-    function AdditionalPhotosComponent(automotiveDbService, formService, storage, db, imageCompress) {
+    function AdditionalPhotosComponent(automotiveDbService, storage, db, imageCompress) {
         this.automotiveDbService = automotiveDbService;
-        this.formService = formService;
         this.storage = storage;
         this.db = db;
         this.imageCompress = imageCompress;
         this._inputTimestamp = '';
+        this.isHovering = false;
         this.files = [];
         this.errorAlert = false;
+        this.localCompressedURl = '';
+        this.sizeOfOriginalImage = 0;
+        this.sizeOFCompressedImage = 0;
+        this.imgResultBeforeCompress = '';
+        this.imgResultAfterCompress = '';
     }
     Object.defineProperty(AdditionalPhotosComponent.prototype, "inputTimestamp", {
         get: function () {

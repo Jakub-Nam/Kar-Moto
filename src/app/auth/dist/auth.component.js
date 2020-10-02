@@ -61,7 +61,7 @@ var AuthComponent = /** @class */ (function () {
         this.hidePassword = true;
         this.adminInterface = false;
         this.successAlert = '';
-        this.errorAlert = '';
+        this.errorAlert = false;
     }
     AuthComponent.prototype.ngOnInit = function () {
     };
@@ -92,14 +92,14 @@ var AuthComponent = /** @class */ (function () {
                         this.authService.user.next(user);
                         localStorage.setItem('userData', JSON.stringify(user));
                         this.successAlert = 'success';
+                        this.router.navigate(['/']);
                         return [2 /*return*/];
                 }
             });
         }); })["catch"](function (error) {
-            _this.errorAlert = error;
+            _this.errorAlert = true;
         });
         form.reset();
-        this.router.navigate(['/']);
     };
     AuthComponent.prototype.onSwitchMode = function (form) {
         this.registrationView = true;
@@ -108,10 +108,10 @@ var AuthComponent = /** @class */ (function () {
         this.registrationView = true;
     };
     AuthComponent.prototype.hideSuccessAlert = function () {
-        this.successAlert = '';
+        // this.successAlert = '';
     };
     AuthComponent.prototype.hideErrorAlert = function () {
-        this.errorAlert = '';
+        // this.errorAlert = false;
     };
     AuthComponent = __decorate([
         core_1.Component({

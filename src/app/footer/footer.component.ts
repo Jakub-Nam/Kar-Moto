@@ -8,7 +8,17 @@ import { Profile } from '../shared/interfaces/profile';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  profileData: Profile;
+
+  profileData: Profile =  {
+    name: '',
+    email: '',
+    phoneNumber: 0,
+    street: '',
+    postCode: '',
+    city: ''
+}
+;
+
   constructor(private vehicleDbService: VehicleDbService) { }
 
   ngOnInit(): void {

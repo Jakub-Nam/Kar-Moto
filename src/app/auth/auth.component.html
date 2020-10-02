@@ -2,10 +2,11 @@
     <span>Poprawnie zalogowano.</span>
     <button class='btn btn-success btn-sm mx-2' (click)='hideSuccessAlert()'>Zamknij</button>
 </div>
-<div class="alert alert-danger" role="alert" *ngIf='errorAlert'>
+<!-- <div class="alert alert-danger" role="alert" *ngIf='errorAlert'>
     <span> Wystąpił błąd. </span>
     <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
-</div>
+</div> -->
+<!-- <app-alert *ngIf="errorAlert"></app-alert> -->
 <div *ngIf='!registrationView'>
     <form class='col-10 col-lg-8 mx-auto' #authForm="ngForm" (ngSubmit)='onSubmit(authForm)'>
         <h3 class='col-8 text-start px-0 py-2'>Logowanie</h3>

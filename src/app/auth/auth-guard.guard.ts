@@ -14,13 +14,15 @@ export class AuthGuard implements CanActivate {
       password: string;
       id: string;
       _token: string;
-      _tokenExpirationDate: string;
+      _tokenExpirationDate: Date;
     } = JSON.parse(localStorage.getItem('userData') || '{}');
 
-    if (!userData._token) {
-      return false;
-    } else {
+    const expirationTime: Date = new Date (userData._tokenExpirationDate);
+
+    if (expirationTime.getSeconds() < expirationTime.getSeconds() + 1800 ) {
       return true;
+    } else {
+      return false;
     }
   }
 }

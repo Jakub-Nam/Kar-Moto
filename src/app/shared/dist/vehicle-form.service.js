@@ -6,26 +6,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.AuthGuard = void 0;
+exports.VehicleFormService = void 0;
 var core_1 = require("@angular/core");
-var AuthGuard = /** @class */ (function () {
-    function AuthGuard() {
+var forms_1 = require("@angular/forms");
+var VehicleFormService = /** @class */ (function () {
+    function VehicleFormService() {
+        this.vehicleForm = new forms_1.FormGroup({
+            name: new forms_1.FormControl(''),
+            brand: new forms_1.FormControl(''),
+            price: new forms_1.FormControl(''),
+            carMileage: new forms_1.FormControl(''),
+            productionYear: new forms_1.FormControl('')
+        });
     }
-    AuthGuard.prototype.canActivate = function (next, state) {
-        var userData = JSON.parse(localStorage.getItem('userData') || '{}');
-        var expirationTime = new Date(userData._tokenExpirationDate);
-        if (expirationTime.getSeconds() < expirationTime.getSeconds() + 1800) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    };
-    AuthGuard = __decorate([
+    VehicleFormService = __decorate([
         core_1.Injectable({
             providedIn: 'root'
         })
-    ], AuthGuard);
-    return AuthGuard;
+    ], VehicleFormService);
+    return VehicleFormService;
 }());
-exports.AuthGuard = AuthGuard;
+exports.VehicleFormService = VehicleFormService;

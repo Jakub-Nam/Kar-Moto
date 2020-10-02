@@ -6,26 +6,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.AuthGuard = void 0;
+exports.AlertComponent = void 0;
 var core_1 = require("@angular/core");
-var AuthGuard = /** @class */ (function () {
-    function AuthGuard() {
+var AlertComponent = /** @class */ (function () {
+    function AlertComponent() {
+        //   @Input() message: string;
+        this.closee = new core_1.EventEmitter();
     }
-    AuthGuard.prototype.canActivate = function (next, state) {
-        var userData = JSON.parse(localStorage.getItem('userData') || '{}');
-        var expirationTime = new Date(userData._tokenExpirationDate);
-        if (expirationTime.getSeconds() < expirationTime.getSeconds() + 1800) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    AlertComponent.prototype.onClose = function () {
+        this.closee.emit();
     };
-    AuthGuard = __decorate([
-        core_1.Injectable({
-            providedIn: 'root'
+    __decorate([
+        core_1.Output()
+    ], AlertComponent.prototype, "closee");
+    AlertComponent = __decorate([
+        core_1.Component({
+            selector: 'app-alert',
+            templateUrl: './alert.component.html',
+            styleUrls: ['./alert.component.css']
         })
-    ], AuthGuard);
-    return AuthGuard;
+    ], AlertComponent);
+    return AlertComponent;
 }());
-exports.AuthGuard = AuthGuard;
+exports.AlertComponent = AlertComponent;

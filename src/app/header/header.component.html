@@ -24,7 +24,7 @@
                     <a class="nav-link text-center" [routerLink]="['vehicles/vehicle-add']">Dodaj sprzęt<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item active" *ngIf='isBtnVisability'>
-                    <a class="nav-link text-center" [routerLink]="['/login']">Zaloguj</a>
+                    <a class="nav-link text-center" [routerLink]="['/auth']">Zaloguj</a>
                 </li>
                 <li class="nav-item mx-1" routerLinkActive="visuallyhidden" *ngIf='!isBtnVisability'>
                     <a class="nav-link disabled text-center" id="disabledAnchor">Zalogowano<span class="sr-only"></span></a>

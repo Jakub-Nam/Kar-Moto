@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
-import { VehicleFormService } from 'src/app/shared/vehicle-form.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { Photo } from './../photo';
@@ -25,21 +24,20 @@ export class AdditionalPhotosComponent implements OnInit {
     return this._inputTimestamp;
   }
   _inputTimestamp = '';
-  isHovering: boolean;
+  isHovering = false;
   files: File[] = [];
   snapshot: Observable<any>;
   errorAlert = false;
 
   imageBlob: Blob;
   localUrl: any;
-  localCompressedURl: any;
-  sizeOfOriginalImage: number;
-  sizeOFCompressedImage: number;
-  imgResultBeforeCompress: string;
-  imgResultAfterCompress: string;
+  localCompressedURl = '';
+  sizeOfOriginalImage = 0;
+  sizeOFCompressedImage = 0;
+  imgResultBeforeCompress = '';
+  imgResultAfterCompress = '';
   constructor(
     public automotiveDbService: VehicleDbService,
-    public formService: VehicleFormService,
     private storage: AngularFireStorage,
     private db: AngularFirestore,
     private imageCompress: NgxImageCompressService

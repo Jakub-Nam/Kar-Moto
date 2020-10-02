@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Profile } from '../shared/interfaces/profile';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css']
+  selector: 'app-profile-data-edit',
+  templateUrl: './profile-data-edit.component.html',
+  styleUrls: ['./profile-data-edit.component.css']
 })
-export class EditProfileComponent implements OnInit {
+export class ProfileDataEditComponent implements OnInit {
   successAlert = false;
   errorAlert = false;
 
