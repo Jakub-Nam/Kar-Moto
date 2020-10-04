@@ -10,7 +10,6 @@ exports.AppRoutingModule = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var auth_guard_guard_1 = require("./auth/auth-guard.guard");
-var profile_data_edit_component_1 = require("./profile-data-edit/profile-data-edit.component");
 var page_not_found_component_1 = require("./page-not-found/page-not-found.component");
 var slider_1 = require("@angular/material/slider");
 var button_1 = require("@angular/material/button");
@@ -33,7 +32,7 @@ var appRoutes = [
     },
     {
         path: 'edit-profile',
-        component: profile_data_edit_component_1.ProfileDataEditComponent,
+        loadChildren: function () { return Promise.resolve().then(function () { return require('./profile/profile.module'); }).then(function (m) { return m.ProfileModule; }); },
         canActivate: [auth_guard_guard_1.AuthGuard]
     },
     { path: '**', component: page_not_found_component_1.PageNotFoundComponent }
@@ -45,7 +44,7 @@ var AppRoutingModule = /** @class */ (function () {
         core_1.NgModule({
             imports: [
                 materialComponents,
-                router_1.RouterModule.forRoot(appRoutes),
+                router_1.RouterModule.forRoot(appRoutes, { preloadingStrategy: router_1.PreloadAllModules }),
                 vehicles_module_1.VehiclesModule
             ],
             exports: [router_1.RouterModule],

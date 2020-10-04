@@ -7,12 +7,12 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { User } from './user.model';
 
-
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
+
 export class AuthComponent implements OnInit {
   registrationView = false;
   hideSpinner = true;
@@ -23,9 +23,7 @@ export class AuthComponent implements OnInit {
   hidePassword = true;
   passwordStrengthmeter: any;
   adminInterface = false;
-  successAlert = '';
-  errorAlert = false;
-
+  message = '';
 
   constructor(
     private authService: AuthService,
@@ -69,13 +67,13 @@ export class AuthComponent implements OnInit {
 
         this.authService.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
-        this.successAlert = 'success';
+        this.message = 'Poprawnie zalogowano';
         this.router.navigate(['/']);
       })
 
 
       .catch(error => {
-        this.errorAlert = true;
+        this.message = 'Niepoprawne dane';
       });
 
     form.reset();
@@ -86,12 +84,7 @@ export class AuthComponent implements OnInit {
   showRegistrationView() {
     this.registrationView = true;
   }
-
-  hideSuccessAlert() {
-    // this.successAlert = '';
-  }
-
-  hideErrorAlert() {
-    // this.errorAlert = false;
+  onHandleError() {
+    this.message = '';
   }
 }

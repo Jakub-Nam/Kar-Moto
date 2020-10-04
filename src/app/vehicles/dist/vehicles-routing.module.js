@@ -18,10 +18,6 @@ var vehiclesRoutes = [
         path: '',
         component: vehicles_component_1.VehiclesComponent,
         children: [
-            // {
-            //     path: 'vehicle-list',
-            //     component:  VehicleListComponent
-            // },
             {
                 path: 'vehicle-add',
                 component: vehicle_add_component_1.VehicleAddComponent,

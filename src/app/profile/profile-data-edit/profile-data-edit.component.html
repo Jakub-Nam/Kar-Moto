@@ -1,3 +1,6 @@
+<app-alert [message]='message' *ngIf="message" (closeMessage)='onHandleError()'></app-alert>
+
+
 <div class="row">
     <div class="col">
         <h2 class='text-center'>
@@ -5,14 +8,7 @@
         </h2>
     </div>
 </div>
-<div class="alert alert-success" role="alert" *ngIf='successAlert'>
-    <span>Profil został poprawnie edytowany</span>
-    <button class='btn btn-success btn-sm mx-2' (click)='hideSuccessAlert()'>Zamknij</button>
-</div>
-<div class="alert alert-danger" role="alert" *ngIf='errorAlert'>
-    <span> Wystąpił błąd. </span>
-    <button class='btn btn-success btn-sm mx-2' (click)='hideErrorAlert()'>Zamknij</button>
-</div>
+
 <div>
     <form #form="ngForm" class='main-form' [formGroup]="this.profileForm" (ngSubmit)='onSubmitChangeProfile(form)'>
         <div class='form-group mx-auto row d-flex flex-column flex-lg-row'>

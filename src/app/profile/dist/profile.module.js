@@ -6,29 +6,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.AuthModule = void 0;
+exports.ProfileModule = void 0;
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
-var router_1 = require("@angular/router");
-var angular_password_strength_meter_1 = require("angular-password-strength-meter");
-var auth_component_1 = require("./auth.component");
 var shared_module_1 = require("../shared/shared.module");
-var AuthModule = /** @class */ (function () {
-    function AuthModule() {
+var profile_data_edit_component_1 = require("./profile-data-edit/profile-data-edit.component");
+var router_1 = require("@angular/router");
+var ProfileModule = /** @class */ (function () {
+    function ProfileModule() {
     }
-    AuthModule = __decorate([
+    ProfileModule = __decorate([
         core_1.NgModule({
-            declarations: [auth_component_1.AuthComponent],
+            declarations: [profile_data_edit_component_1.ProfileDataEditComponent],
             imports: [
                 common_1.CommonModule,
                 forms_1.FormsModule,
-                router_1.RouterModule.forChild([{ path: '', component: auth_component_1.AuthComponent }]),
-                angular_password_strength_meter_1.PasswordStrengthMeterModule,
+                forms_1.ReactiveFormsModule,
+                router_1.RouterModule.forChild([{ path: '', component: profile_data_edit_component_1.ProfileDataEditComponent }]),
                 shared_module_1.SharedModule
             ]
         })
-    ], AuthModule);
-    return AuthModule;
+    ], ProfileModule);
+    return ProfileModule;
 }());
-exports.AuthModule = AuthModule;
+exports.ProfileModule = ProfileModule;

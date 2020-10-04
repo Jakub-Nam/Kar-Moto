@@ -10,11 +10,11 @@ import { VehiclesComponent } from './vehicles.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FilterBrandPipe } from './filter-pipes/filter-brand.pipe';
-import { FilterPriceLowPipe } from './filter-pipes/filter-price-low.pipe';
-import { HighestPricePipe } from './filter-pipes/highest-price.pipe';
-import { LowestMileagePipe } from './filter-pipes/lowest-mileage.pipe';
-import { HighestMileagePipe } from './filter-pipes/highest-mileage.pipe';
+import { FilterBrandPipe } from './vehicle-filter/filters/filter-brand.pipe';
+import { FilterPriceLowPipe } from './vehicle-filter/filters/filter-price-low.pipe';
+import { HighestPricePipe } from './vehicle-filter/filters/highest-price.pipe';
+import { LowestMileagePipe } from './vehicle-filter/filters/lowest-mileage.pipe';
+import { HighestMileagePipe } from './vehicle-filter/filters/highest-mileage.pipe';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MatSliderModule } from '@angular/material/slider';
@@ -25,7 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { VehiclesRoutingModule } from './vehicles-routing.module';
 import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 const materialComponents = [
     MatSliderModule,
@@ -58,7 +58,8 @@ const materialComponents = [
         materialComponents,
         NgbModule,
         FontAwesomeModule,
-        VehiclesRoutingModule
+        VehiclesRoutingModule,
+        SharedModule
     ],
     providers: [NgxImageCompressService],
     exports: [RouterModule]

@@ -9,52 +9,9 @@ exports.__esModule = true;
 exports.VehiclesComponent = void 0;
 var core_1 = require("@angular/core");
 var VehiclesComponent = /** @class */ (function () {
-    // zeroVehicles = false;
-    // vehicles: Array<Vehicle> = [];
-    // vehicle: Vehicle;
-    // showVehicle = false;
-    // faTrash = faTrash;
-    // showForAdmin = false;
-    // filters: Filter = {
-    //   brand: '',
-    //   priceLow: 0,
-    //   highestPrice: 0,
-    //   lowestMileage: 0,
-    //   highestMileage: 0
-    // };
-    // deleteAlert = false;
-    // vehicleToDelete: Vehicle;
-    // toggleDeleteAlertEvent: Event;
-    // deletedMainPhotoInStorage = false;
-    // deletedPhotosURLs = false;
-    // deletedMainDocument = false;
-    // deletedSecondaryPhotos = false;
-    // errorMsg = '';
-    // successMsg = '';
-    function VehiclesComponent(
-    // public vehicleDbService: VehicleDbService,
-    // private authService: AuthService,
-    // public route: ActivatedRoute
-    ) {
+    function VehiclesComponent() {
     }
-    VehiclesComponent.prototype.ngOnInit = function () {
-        // this.fetchAllVehicles();
-        // this.authService.user.subscribe(
-        //   user => {
-        //     if (user === {} as User) {
-        //       return;
-        //     }
-        //     if (user.email !== 'kubanam1995@gmail.com') {
-        //       return;
-        //     }
-        //     else {
-        //       this.showForAdmin = true;
-        //     }
-        //   },
-        //   error => {
-        //     this.errorMsg = `Nie udało się załadować danych.`;
-        //   });
-    };
+    VehiclesComponent.prototype.ngOnInit = function () { };
     VehiclesComponent = __decorate([
         core_1.Component({
             selector: 'app-vehicles',

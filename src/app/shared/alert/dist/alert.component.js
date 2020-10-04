@@ -10,15 +10,17 @@ exports.AlertComponent = void 0;
 var core_1 = require("@angular/core");
 var AlertComponent = /** @class */ (function () {
     function AlertComponent() {
-        //   @Input() message: string;
-        this.closee = new core_1.EventEmitter();
+        this.closeMessage = new core_1.EventEmitter();
     }
     AlertComponent.prototype.onClose = function () {
-        this.closee.emit();
+        this.closeMessage.emit();
     };
     __decorate([
+        core_1.Input()
+    ], AlertComponent.prototype, "message");
+    __decorate([
         core_1.Output()
-    ], AlertComponent.prototype, "closee");
+    ], AlertComponent.prototype, "closeMessage");
     AlertComponent = __decorate([
         core_1.Component({
             selector: 'app-alert',

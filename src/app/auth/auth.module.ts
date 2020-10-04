@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { AuthComponent } from './auth.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -14,7 +13,7 @@ import { AuthComponent } from './auth.component';
     FormsModule,
     RouterModule.forChild([{ path: '', component: AuthComponent }]),
     PasswordStrengthMeterModule,
-    FontAwesomeModule
+    SharedModule
   ]
 })
 export class AuthModule {}

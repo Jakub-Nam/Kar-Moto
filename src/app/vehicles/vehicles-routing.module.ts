@@ -12,10 +12,6 @@ const vehiclesRoutes: Routes = [
         path: '',
         component: VehiclesComponent,
         children: [
-            // {
-            //     path: 'vehicle-list',
-            //     component:  VehicleListComponent
-            // },
             {
                 path: 'vehicle-add',
                 component: VehicleAddComponent,

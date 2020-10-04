@@ -8,8 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./profile-data-edit.component.css']
 })
 export class ProfileDataEditComponent implements OnInit {
-  successAlert = false;
-  errorAlert = false;
+  message = '';
 
   profileForm = new FormGroup({
     name: new FormControl(''),
@@ -39,19 +38,15 @@ export class ProfileDataEditComponent implements OnInit {
       })
 
       .then( event => {
-        this.successAlert = true;
+        this.message = 'Poprawnie wprowadzono dane';
         form.reset();
       })
       .catch(error => {
-        this.errorAlert = true;
+        this.message = 'Wystąpił błąd';
       });
     form.reset();
   }
-  hideSuccessAlert() {
-    this.successAlert = false;
-  }
-
-  hideErrorAlert() {
-    this.errorAlert = false;
+  onHandleError() {
+    this.message = '';
   }
 }

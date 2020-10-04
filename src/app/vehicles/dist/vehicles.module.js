@@ -19,11 +19,11 @@ var vehicles_component_1 = require("./vehicles.component");
 var ngx_dropzone_1 = require("ngx-dropzone");
 var ngx_image_compress_1 = require("ngx-image-compress");
 var forms_1 = require("@angular/forms");
-var filter_brand_pipe_1 = require("./filter-pipes/filter-brand.pipe");
-var filter_price_low_pipe_1 = require("./filter-pipes/filter-price-low.pipe");
-var highest_price_pipe_1 = require("./filter-pipes/highest-price.pipe");
-var lowest_mileage_pipe_1 = require("./filter-pipes/lowest-mileage.pipe");
-var highest_mileage_pipe_1 = require("./filter-pipes/highest-mileage.pipe");
+var filter_brand_pipe_1 = require("./vehicle-filter/filters/filter-brand.pipe");
+var filter_price_low_pipe_1 = require("./vehicle-filter/filters/filter-price-low.pipe");
+var highest_price_pipe_1 = require("./vehicle-filter/filters/highest-price.pipe");
+var lowest_mileage_pipe_1 = require("./vehicle-filter/filters/lowest-mileage.pipe");
+var highest_mileage_pipe_1 = require("./vehicle-filter/filters/highest-mileage.pipe");
 var fire_1 = require("@angular/fire");
 var firestore_1 = require("@angular/fire/firestore");
 var slider_1 = require("@angular/material/slider");
@@ -33,6 +33,8 @@ var environment_1 = require("./../../environment/environment");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
 var angular_fontawesome_1 = require("@fortawesome/angular-fontawesome");
 var vehicles_routing_module_1 = require("./vehicles-routing.module");
+var vehicle_list_component_1 = require("./vehicle-list/vehicle-list.component");
+var shared_module_1 = require("../shared/shared.module");
 var materialComponents = [
     slider_1.MatSliderModule,
     button_1.MatButtonModule,
@@ -54,7 +56,8 @@ var VehiclesModule = /** @class */ (function () {
                 filter_price_low_pipe_1.FilterPriceLowPipe,
                 highest_price_pipe_1.HighestPricePipe,
                 lowest_mileage_pipe_1.LowestMileagePipe,
-                highest_mileage_pipe_1.HighestMileagePipe
+                highest_mileage_pipe_1.HighestMileagePipe,
+                vehicle_list_component_1.VehicleListComponent
             ],
             imports: [
                 common_1.CommonModule,
@@ -66,7 +69,8 @@ var VehiclesModule = /** @class */ (function () {
                 materialComponents,
                 ng_bootstrap_1.NgbModule,
                 angular_fontawesome_1.FontAwesomeModule,
-                vehicles_routing_module_1.VehiclesRoutingModule
+                vehicles_routing_module_1.VehiclesRoutingModule,
+                shared_module_1.SharedModule
             ],
             providers: [ngx_image_compress_1.NgxImageCompressService],
             exports: [router_1.RouterModule]

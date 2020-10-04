@@ -1,8 +1,7 @@
 
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AuthGuard } from './auth/auth-guard.guard';
-import { ProfileDataEditComponent } from './profile-data-edit/profile-data-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,7 +26,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'edit-profile',
-    component: ProfileDataEditComponent,
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
     canActivate: [AuthGuard]
   },
   { path: '**', component: PageNotFoundComponent }
@@ -38,7 +37,7 @@ const appRoutes: Routes = [
   imports: [
 
     materialComponents,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules}),
 
     VehiclesModule
   ],

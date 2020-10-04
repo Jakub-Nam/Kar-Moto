@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VehicleDbService } from '../../shared/vehicle-db.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../auth/auth.service';
-import { Filter } from './../vehicle-filter/filter';
+import { Filter } from '../vehicle-filter/filter.model';
 import { Vehicle } from './../../shared/interfaces/vehicle';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../auth/user.model';

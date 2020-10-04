@@ -1,5 +1,5 @@
 import { Component, OnInit, DoCheck, EventEmitter, Output } from '@angular/core';
-import { Filter } from './filter';
+import { Filter } from './filter.model';
 
 @Component({
   selector: 'app-vehicle-filter',

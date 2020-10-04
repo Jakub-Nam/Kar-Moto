@@ -12,8 +12,7 @@ var forms_1 = require("@angular/forms");
 var ProfileDataEditComponent = /** @class */ (function () {
     function ProfileDataEditComponent(db) {
         this.db = db;
-        this.successAlert = false;
-        this.errorAlert = false;
+        this.message = '';
         this.profileForm = new forms_1.FormGroup({
             name: new forms_1.FormControl(''),
             email: new forms_1.FormControl(''),
@@ -36,18 +35,15 @@ var ProfileDataEditComponent = /** @class */ (function () {
             city: form.value.city
         })
             .then(function (event) {
-            _this.successAlert = true;
+            _this.message = 'Poprawnie wprowadzono dane';
             form.reset();
         })["catch"](function (error) {
-            _this.errorAlert = true;
+            _this.message = 'Wystąpił błąd';
         });
         form.reset();
     };
-    ProfileDataEditComponent.prototype.hideSuccessAlert = function () {
-        this.successAlert = false;
-    };
-    ProfileDataEditComponent.prototype.hideErrorAlert = function () {
-        this.errorAlert = false;
+    ProfileDataEditComponent.prototype.onHandleError = function () {
+        this.message = '';
     };
     ProfileDataEditComponent = __decorate([
         core_1.Component({
