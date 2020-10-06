@@ -16,7 +16,7 @@ export class VehicleListComponent implements OnInit {
 
   zeroVehicles = false;
   vehicles: Array<Vehicle> = [];
-  vehicle: Vehicle;
+  vehicle!: Vehicle;
   showVehicle = false;
   faTrash = faTrash;
   showForAdmin = false;
@@ -29,8 +29,8 @@ export class VehicleListComponent implements OnInit {
   };
 
   deleteAlert = false;
-  vehicleToDelete: Vehicle;
-  toggleDeleteAlertEvent: Event;
+  vehicleToDelete!: Vehicle;
+  toggleDeleteAlertEvent!: Event;
 
   deletedMainPhotoInStorage = false;
   deletedPhotosURLs = false;

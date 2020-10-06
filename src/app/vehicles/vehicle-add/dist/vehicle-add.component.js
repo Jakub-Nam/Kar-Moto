@@ -65,7 +65,15 @@ var VehicleAddComponent = /** @class */ (function () {
             productionYear: new forms_1.FormControl('')
         });
         this.file = [];
+        this.downloadURL = '';
+        this.timestamp = 0;
         this.brandList = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
+        this.localUrl = '';
+        this.localCompressedURl = '';
+        this.sizeOfOriginalImage = 0;
+        this.sizeOFCompressedImage = 0;
+        this.imgResultBeforeCompress = '';
+        this.imgResultAfterCompress = '';
     }
     VehicleAddComponent.prototype.ngOnInit = function () {
     };

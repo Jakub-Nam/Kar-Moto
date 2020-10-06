@@ -28,9 +28,9 @@ export class AuthComponent implements OnDestroy {
   passwordStrengthmeter: any;
   adminInterface = false;
   message = '';
-  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
+  @ViewChild(PlaceholderDirective, { static: false }) alertHost!: PlaceholderDirective;
 
-  private closeSub: Subscription;
+  private closeSub!: Subscription;
 
 
   constructor(

@@ -18,7 +18,7 @@ import { Photo } from './photo';
 
 
 export class VehicleAddComponent implements OnInit {
-  @ViewChild('AdditionalPhotosComponent') additionalPhotos: AdditionalPhotosComponent;
+  @ViewChild('AdditionalPhotosComponent') additionalPhotos!: AdditionalPhotosComponent;
   vehicleWasSent = false;
   error = false;
   oneFile = false;
@@ -35,20 +35,20 @@ export class VehicleAddComponent implements OnInit {
   file: File[] = [];
   compressedFile: any;
 
-  task: AngularFireUploadTask;
-  snapshot: Observable<any>;
-  downloadURL: string;
+  task!: AngularFireUploadTask;
+  snapshot!: Observable<any>;
+  downloadURL = '';
 
-  timestamp: number;
+  timestamp = 0;
   brandList: string[] = ['BMW', 'Honda', 'Junak', 'KAWASAKI', 'KTM', 'KYMCO', 'Suzuki', 'Romet', 'Yamaha', 'Zipp'];
   errorMessage: any;
 
-  localUrl: any;
-  localCompressedURl: any;
-  sizeOfOriginalImage: number;
-  sizeOFCompressedImage: number;
-  imgResultBeforeCompress: string;
-  imgResultAfterCompress: string;
+  localUrl = '';
+  localCompressedURl = '';
+  sizeOfOriginalImage = 0;
+  sizeOFCompressedImage = 0;
+  imgResultBeforeCompress = '';
+  imgResultAfterCompress = '';
 
   constructor(
     public vehicleDbService: VehicleDbService,

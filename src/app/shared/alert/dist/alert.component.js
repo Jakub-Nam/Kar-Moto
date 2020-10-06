@@ -10,6 +10,7 @@ exports.AlertComponent = void 0;
 var core_1 = require("@angular/core");
 var AlertComponent = /** @class */ (function () {
     function AlertComponent() {
+        this.message = '';
         this.closeMessage = new core_1.EventEmitter();
     }
     AlertComponent.prototype.onClose = function () {

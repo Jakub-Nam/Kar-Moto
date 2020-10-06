@@ -13,8 +13,6 @@ import { Photo } from './../photo';
   styleUrls: ['./additional-photos.component.css']
 })
 
-
-
 export class AdditionalPhotosComponent implements OnInit {
   @Input()
   set inputTimestamp(inputTimestamp: string) {
@@ -26,17 +24,17 @@ export class AdditionalPhotosComponent implements OnInit {
   _inputTimestamp = '';
   isHovering = false;
   files: File[] = [];
-  snapshot: Observable<any>;
+  snapshot!: Observable<any>;
   errorAlert = false;
 
-  imageBlob: Blob;
+  imageBlob!: Blob;
   localUrl: any;
   localCompressedURl = '';
   sizeOfOriginalImage = 0;
   sizeOFCompressedImage = 0;
   imgResultBeforeCompress = '';
   imgResultAfterCompress = '';
-  
+
   constructor(
     public automotiveDbService: VehicleDbService,
     private storage: AngularFireStorage,

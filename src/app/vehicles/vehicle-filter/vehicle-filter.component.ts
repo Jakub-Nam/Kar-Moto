@@ -10,11 +10,11 @@ import { Filter } from './filter.model';
 export class VehicleFilterComponent implements OnInit, DoCheck {
   @Output() filtered = new EventEmitter<object>();
 
-  brandModel: string;
-  lowestPrice: number;
-  highestPrice: number;
-  lowestMileage: number;
-  highestMileage: number;
+  brandModel!: string;
+  lowestPrice!: number;
+  highestPrice!: number;
+  lowestMileage!: number;
+  highestMileage!: number;
 
   constructor() { }
 
