@@ -36,6 +36,9 @@ export class VehicleSelectedComponent implements OnInit {
     this.vehicleDbService.fetchMainPhoto(path).subscribe(
       next => {
         this.vehicle = next as Vehicle;
+      },
+      err => {
+        window.alert('Wystąpił błąd podczas wczytywania danych');
       });
   }
 
@@ -43,6 +46,9 @@ export class VehicleSelectedComponent implements OnInit {
     this.vehicleDbService.fetchAdditionalVehiclePhotos(path).subscribe(
       next => {
         this.vehicleURLs = next;
+      },
+      err => {
+        window.alert('Wystąpił błąd podczas wczytywania danych');
       });
   }
 }

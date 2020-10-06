@@ -25,7 +25,6 @@ var ProfileDataEditComponent = /** @class */ (function () {
     ProfileDataEditComponent.prototype.ngOnInit = function () {
     };
     ProfileDataEditComponent.prototype.onSubmitChangeProfile = function (form) {
-        var _this = this;
         this.db.collection('profiles').doc('mainProfile').set({
             name: form.value.name,
             phoneNumber: form.value.phoneNumber,
@@ -35,10 +34,10 @@ var ProfileDataEditComponent = /** @class */ (function () {
             city: form.value.city
         })
             .then(function (event) {
-            _this.message = 'Poprawnie wprowadzono dane';
+            window.alert('Poprawnie wprowadzono dane');
             form.reset();
-        })["catch"](function (error) {
-            _this.message = 'Wystąpił błąd';
+        })["catch"](function (err) {
+            window.alert('Wystąpił błąd podczas wczytywania danych');
         });
         form.reset();
     };

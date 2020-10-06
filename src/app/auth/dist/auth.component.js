@@ -48,10 +48,13 @@ var free_solid_svg_icons_1 = require("@fortawesome/free-solid-svg-icons");
 var free_solid_svg_icons_2 = require("@fortawesome/free-solid-svg-icons");
 var free_solid_svg_icons_3 = require("@fortawesome/free-solid-svg-icons");
 var user_model_1 = require("./user.model");
+var placeholder_directive_1 = require("../shared/placeholder/placeholder.directive");
+var alert_component_1 = require("../shared/alert/alert.component");
 var AuthComponent = /** @class */ (function () {
-    function AuthComponent(authService, router) {
+    function AuthComponent(authService, router, componentFactoryResolver) {
         this.authService = authService;
         this.router = router;
+        this.componentFactoryResolver = componentFactoryResolver;
         this.registrationView = false;
         this.hideSpinner = true;
         this.error = '';
@@ -62,8 +65,6 @@ var AuthComponent = /** @class */ (function () {
         this.adminInterface = false;
         this.message = '';
     }
-    AuthComponent.prototype.ngOnInit = function () {
-    };
     AuthComponent.prototype.togglePassword = function () {
         this.hidePassword = !this.hidePassword;
     };
@@ -90,13 +91,13 @@ var AuthComponent = /** @class */ (function () {
                         user = new user_model_1.User(userCredential.user.email, password, userCredential.user.uid, token, date);
                         this.authService.user.next(user);
                         localStorage.setItem('userData', JSON.stringify(user));
-                        this.message = 'Poprawnie zalogowano';
                         this.router.navigate(['/']);
                         return [2 /*return*/];
                 }
             });
         }); })["catch"](function (error) {
             _this.message = 'Niepoprawne dane';
+            _this.showErrorAlert(_this.message);
         });
         form.reset();
     };
@@ -109,6 +110,26 @@ var AuthComponent = /** @class */ (function () {
     AuthComponent.prototype.onHandleError = function () {
         this.message = '';
     };
+    AuthComponent.prototype.ngOnDestroy = function () {
+        if (this.closeSub) {
+            this.closeSub.unsubscribe();
+        }
+    };
+    AuthComponent.prototype.showErrorAlert = function (message) {
+        var _this = this;
+        var alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(alert_component_1.AlertComponent);
+        var hostViewContainerRef = this.alertHost.viewContainerRef;
+        hostViewContainerRef.clear();
+        var componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
+        componentRef.instance.message = message;
+        this.closeSub = componentRef.instance.closeMessage.subscribe(function () {
+            _this.closeSub.unsubscribe();
+            hostViewContainerRef.clear();
+        });
+    };
+    __decorate([
+        core_1.ViewChild(placeholder_directive_1.PlaceholderDirective, { static: false })
+    ], AuthComponent.prototype, "alertHost");
     AuthComponent = __decorate([
         core_1.Component({
             selector: 'app-auth',

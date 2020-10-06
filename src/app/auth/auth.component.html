@@ -1,5 +1,4 @@
-
-<app-alert [message]='message' *ngIf="message" (closeMessage)='onHandleError()'></app-alert>
+<ng-template appPlaceholder></ng-template>
 
 <div *ngIf='!registrationView'>
     <form class='col-10 col-lg-8 mx-auto' #authForm="ngForm" (ngSubmit)='onSubmit(authForm)'>

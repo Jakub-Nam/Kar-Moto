@@ -60,8 +60,8 @@ export class VehicleListComponent implements OnInit {
           this.showForAdmin = true;
         }
       },
-      error => {
-        this.errorMsg = `Nie udało się załadować danych.`;
+      err => {
+        window.alert('Wystąpił błąd podczas wczytywania danych');
       });
   }
 
@@ -86,9 +86,9 @@ export class VehicleListComponent implements OnInit {
         });
         this.zeroVehicles = false;
       },
-        error => {
-          this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
-        });
+      err => {
+        window.alert('Wystąpił błąd podczas wczytywania danych');
+      });
   }
 
   filter($event: Filter) {
@@ -118,7 +118,7 @@ export class VehicleListComponent implements OnInit {
         this.deletedMainPhotoInStorage = true;
       })
       .catch(err => {
-        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+        window.alert('Wystąpił błąd podczas wczytywania danych');
       });
 
 
@@ -133,8 +133,8 @@ export class VehicleListComponent implements OnInit {
           this.deletedSecondaryPhotos = true;
         });
       })
-      .catch(error => {
-        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+      .catch(err => {
+        window.alert('Wystąpił błąd podczas wczytywania danych');
       });
 
     await this.vehicleDbService.deletePhotosURLs(collectionId)
@@ -144,8 +144,8 @@ export class VehicleListComponent implements OnInit {
             .then(() => {
               this.deletedPhotosURLs = true;
             })
-            .catch(error => {
-              this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+            .catch( err => {
+              window.alert('Wystąpił błąd podczas wczytywania danych');
             });
         });
       })
@@ -166,8 +166,8 @@ export class VehicleListComponent implements OnInit {
           this.successMsg = `Poprawnie usunięto obiekt.`;
         }
       })
-      .catch(error => {
-        this.errorMsg = `Wystąpił błąd dotyczący serwera.`;
+      .catch( err => {
+        window.alert('Wystąpił błąd podczas wczytywania danych');
       });
     this.toggleDeleteAlert(vehicle, this.toggleDeleteAlertEvent);
   }

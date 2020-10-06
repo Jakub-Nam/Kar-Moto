@@ -27,12 +27,16 @@ var VehicleSelectedComponent = /** @class */ (function () {
         var _this = this;
         this.vehicleDbService.fetchMainPhoto(path).subscribe(function (next) {
             _this.vehicle = next;
+        }, function (err) {
+            window.alert('Wystąpił błąd podczas wczytywania danych');
         });
     };
     VehicleSelectedComponent.prototype.fetchAdditionalVehiclePhotos = function (path) {
         var _this = this;
         this.vehicleDbService.fetchAdditionalVehiclePhotos(path).subscribe(function (next) {
             _this.vehicleURLs = next;
+        }, function (err) {
+            window.alert('Wystąpił błąd podczas wczytywania danych');
         });
     };
     VehicleSelectedComponent = __decorate([

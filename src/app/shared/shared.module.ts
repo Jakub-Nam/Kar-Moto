@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AlertComponent } from './alert/alert.component';
+import { PlaceholderDirective } from './placeholder/placeholder.directive';
 
 const angularMaterial = [
     MatSliderModule,
@@ -18,6 +19,7 @@ const angularMaterial = [
 @NgModule({
     declarations: [
         AlertComponent,
+        PlaceholderDirective
 
     ],
     imports: [
@@ -29,8 +31,9 @@ const angularMaterial = [
         AlertComponent,
         CommonModule,
         FontAwesomeModule,
-        angularMaterial
-    ],
-    entryComponents: [AlertComponent]
+        angularMaterial,
+        PlaceholderDirective
+    ]
+    // entryComponents: [AlertComponent]
 })
 export class SharedModule { }

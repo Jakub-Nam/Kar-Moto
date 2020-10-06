@@ -83,8 +83,8 @@ var VehicleListComponent = /** @class */ (function () {
             else {
                 _this.showForAdmin = true;
             }
-        }, function (error) {
-            _this.errorMsg = "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 danych.";
+        }, function (err) {
+            window.alert('Wystąpił błąd podczas wczytywania danych');
         });
     };
     VehicleListComponent.prototype.noneVehicles = function () {
@@ -106,8 +106,8 @@ var VehicleListComponent = /** @class */ (function () {
                 _this.vehicles.push(vehicle);
             });
             _this.zeroVehicles = false;
-        }, function (error) {
-            _this.errorMsg = "Wyst\u0105pi\u0142 b\u0142\u0105d dotycz\u0105cy serwera.";
+        }, function (err) {
+            window.alert('Wystąpił błąd podczas wczytywania danych');
         });
     };
     VehicleListComponent.prototype.filter = function ($event) {
@@ -139,7 +139,7 @@ var VehicleListComponent = /** @class */ (function () {
                                 .then(function (res) {
                                 _this.deletedMainPhotoInStorage = true;
                             })["catch"](function (err) {
-                                _this.errorMsg = "Wyst\u0105pi\u0142 b\u0142\u0105d dotycz\u0105cy serwera.";
+                                window.alert('Wystąpił błąd podczas wczytywania danych');
                             })];
                     case 1:
                         _a.sent();
@@ -156,8 +156,8 @@ var VehicleListComponent = /** @class */ (function () {
                                     });
                                     return [2 /*return*/];
                                 });
-                            }); })["catch"](function (error) {
-                                _this.errorMsg = "Wyst\u0105pi\u0142 b\u0142\u0105d dotycz\u0105cy serwera.";
+                            }); })["catch"](function (err) {
+                                window.alert('Wystąpił błąd podczas wczytywania danych');
                             })];
                     case 2:
                         _a.sent();
@@ -167,8 +167,8 @@ var VehicleListComponent = /** @class */ (function () {
                                     _this.vehicleDbService.db.collection("" + collectionId).doc(doc.id)["delete"]()
                                         .then(function () {
                                         _this.deletedPhotosURLs = true;
-                                    })["catch"](function (error) {
-                                        _this.errorMsg = "Wyst\u0105pi\u0142 b\u0142\u0105d dotycz\u0105cy serwera.";
+                                    })["catch"](function (err) {
+                                        window.alert('Wystąpił błąd podczas wczytywania danych');
                                     });
                                 });
                             })["catch"](function (error) {
@@ -186,8 +186,8 @@ var VehicleListComponent = /** @class */ (function () {
                                     _this.deletedPhotosURLs === true) {
                                     _this.successMsg = "Poprawnie usuni\u0119to obiekt.";
                                 }
-                            })["catch"](function (error) {
-                                _this.errorMsg = "Wyst\u0105pi\u0142 b\u0142\u0105d dotycz\u0105cy serwera.";
+                            })["catch"](function (err) {
+                                window.alert('Wystąpił błąd podczas wczytywania danych');
                             })];
                     case 4:
                         _a.sent();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
@@ -6,6 +6,10 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { User } from './user.model';
+import { PlaceholderDirective } from '../shared/placeholder/placeholder.directive';
+import { AlertComponent } from '../shared/alert/alert.component';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +17,7 @@ import { User } from './user.model';
   styleUrls: ['./auth.component.css']
 })
 
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnDestroy {
   registrationView = false;
   hideSpinner = true;
   error = '';
@@ -24,15 +28,16 @@ export class AuthComponent implements OnInit {
   passwordStrengthmeter: any;
   adminInterface = false;
   message = '';
+  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
+
+  private closeSub: Subscription;
+
 
   constructor(
     private authService: AuthService,
     private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver
   ) { }
-
-  ngOnInit() {
-
-  }
 
   togglePassword() {
     this.hidePassword = !this.hidePassword;
@@ -49,9 +54,9 @@ export class AuthComponent implements OnInit {
       .then(async userCredential => {
         let token = '';
         let date: Date =
-        await userCredential.user.getIdTokenResult().then(
-          (response: { token: string; }) => token =  response.token
-        );
+          await userCredential.user.getIdTokenResult().then(
+            (response: { token: string; }) => token = response.token
+          );
 
         await userCredential.user.getIdTokenResult().then(
           (response: { expirationTime: Date; }) => date = response.expirationTime
@@ -67,13 +72,13 @@ export class AuthComponent implements OnInit {
 
         this.authService.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
-        this.message = 'Poprawnie zalogowano';
         this.router.navigate(['/']);
       })
 
 
       .catch(error => {
         this.message = 'Niepoprawne dane';
+        this.showErrorAlert(this.message);
       });
 
     form.reset();
@@ -86,5 +91,27 @@ export class AuthComponent implements OnInit {
   }
   onHandleError() {
     this.message = '';
+  }
+
+  ngOnDestroy() {
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
+  }
+
+  private showErrorAlert(message: string) {
+    const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(
+      AlertComponent
+    );
+    const hostViewContainerRef = this.alertHost.viewContainerRef;
+    hostViewContainerRef.clear();
+
+    const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
+
+    componentRef.instance.message = message;
+    this.closeSub = componentRef.instance.closeMessage.subscribe(() => {
+      this.closeSub.unsubscribe();
+      hostViewContainerRef.clear();
+    });
   }
 }

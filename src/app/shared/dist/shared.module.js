@@ -15,6 +15,7 @@ var input_1 = require("@angular/material/input");
 var select_1 = require("@angular/material/select");
 var angular_fontawesome_1 = require("@fortawesome/angular-fontawesome");
 var alert_component_1 = require("./alert/alert.component");
+var placeholder_directive_1 = require("./placeholder/placeholder.directive");
 var angularMaterial = [
     slider_1.MatSliderModule,
     input_1.MatInputModule,
@@ -28,6 +29,7 @@ var SharedModule = /** @class */ (function () {
         core_1.NgModule({
             declarations: [
                 alert_component_1.AlertComponent,
+                placeholder_directive_1.PlaceholderDirective
             ],
             imports: [
                 common_1.CommonModule,
@@ -38,9 +40,10 @@ var SharedModule = /** @class */ (function () {
                 alert_component_1.AlertComponent,
                 common_1.CommonModule,
                 angular_fontawesome_1.FontAwesomeModule,
-                angularMaterial
-            ],
-            entryComponents: [alert_component_1.AlertComponent]
+                angularMaterial,
+                placeholder_directive_1.PlaceholderDirective
+            ]
+            // entryComponents: [AlertComponent]
         })
     ], SharedModule);
     return SharedModule;

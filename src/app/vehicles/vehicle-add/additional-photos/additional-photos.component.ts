@@ -36,6 +36,7 @@ export class AdditionalPhotosComponent implements OnInit {
   sizeOFCompressedImage = 0;
   imgResultBeforeCompress = '';
   imgResultAfterCompress = '';
+  
   constructor(
     public automotiveDbService: VehicleDbService,
     private storage: AngularFireStorage,

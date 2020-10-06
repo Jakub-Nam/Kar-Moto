@@ -21,7 +21,7 @@ export class ProfileDataEditComponent implements OnInit {
 
   constructor(
     private db: AngularFirestore
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
@@ -37,12 +37,12 @@ export class ProfileDataEditComponent implements OnInit {
         city: form.value.city,
       })
 
-      .then( event => {
-        this.message = 'Poprawnie wprowadzono dane';
+      .then(event => {
+        window.alert('Poprawnie wprowadzono dane');
         form.reset();
       })
-      .catch(error => {
-        this.message = 'Wystąpił błąd';
+      .catch(err => {
+        window.alert('Wystąpił błąd podczas wczytywania danych');
       });
     form.reset();
   }
