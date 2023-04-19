@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "forkarol-2f16a"
-  }
+    "default": "forkarol-2f16a",
+    "firebase deploy": "forkarol-2f16a"
+  },
+  "targets": {},
+  "etags": {}
 }

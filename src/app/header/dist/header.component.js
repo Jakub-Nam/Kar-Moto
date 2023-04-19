@@ -18,26 +18,30 @@ var HeaderComponent = /** @class */ (function () {
         this.isNavbarCollapsed = true;
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.authService.user.subscribe(function (user) {
-            if (user === _this.authService.emptyUser) {
-                _this.changeButtonsVisability(true);
-            }
-            else {
-                _this.changeButtonsVisability(false);
-                return;
-            }
-        });
-        this.authService.autoLogin();
+        this.changeBtnVisability();
+        this.autoLogin();
     };
     HeaderComponent.prototype.logout = function () {
         this.authService.logout();
-        this.changeButtonsVisability(true);
         this.showAdminInterface = false;
         this.marked = false;
     };
-    HeaderComponent.prototype.changeButtonsVisability = function (isVisible) {
-        this.isBtnVisability = isVisible;
+    HeaderComponent.prototype.changeBtnVisability = function () {
+        var _this = this;
+        this.authService.user.subscribe(function (user) {
+            if (user === _this.authService.emptyUser) {
+                _this.isBtnVisability = true;
+            }
+            else {
+                _this.isBtnVisability = false;
+                return;
+            }
+        });
+    };
+    HeaderComponent.prototype.autoLogin = function () {
+        if (localStorage.length > 0) {
+            this.authService.autoLogin();
+        }
     };
     HeaderComponent = __decorate([
         core_1.Component({

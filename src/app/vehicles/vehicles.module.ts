@@ -38,7 +38,7 @@ const materialComponents = [
         VehiclesComponent,
         VehicleAddComponent,
         AdditionalPhotosComponent,
-        DropzoneDirective,
+        // DropzoneDirective,
         VehicleSelectedComponent,
         VehicleFilterComponent,
         FilterBrandPipe,

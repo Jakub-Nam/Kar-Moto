@@ -17,26 +17,29 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authService.user.subscribe(
-      user => {
-        if (user === this.authService.emptyUser) {
-          this.changeButtonsVisability(true);
-        }
-        else {
-          this.changeButtonsVisability(false);
-          return;
-        }
-      });
-
-    this.authService.autoLogin();
+    this.changeBtnVisability()
+    this.autoLogin()
   }
   logout() {
     this.authService.logout();
-    this.changeButtonsVisability(true);
     this.showAdminInterface = false;
     this.marked = false;
   }
-  changeButtonsVisability(isVisible: boolean) {
-    this.isBtnVisability = isVisible;
+  changeBtnVisability(){
+    this.authService.user.subscribe(
+        user => {
+          if (user === this.authService.emptyUser) {
+            this.isBtnVisability = true;
+          }
+          else {
+            this.isBtnVisability = false;
+            return;
+          }
+        });
+  }
+  autoLogin(){
+      if (localStorage.length > 0) {
+        this.authService.autoLogin();
+      }
   }
 }

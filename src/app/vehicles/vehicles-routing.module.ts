@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.guard';
 import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
-import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { VehicleSelectedComponent } from './vehicle-selected/vehicle-selected.component';
 import { VehiclesComponent } from './vehicles.component';
 

@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 <img src='https://img.shields.io/static/v1.svg?label=&message=Angular&color=D6002F'> <img src='https://img.shields.io/static/v1.svg?label=&message=Typescript&color=0076C6'> <img src='https://img.shields.io/static/v1.svg?label=&message=Bootstrap&color=533B78'> <img src='https://img.shields.io/static/v1.svg?label=&message=npm&color=C23435'> <img src='https://img.shields.io/static/v1.svg?label=&message=Firebase&color=F7A00E'>
 
-https://forkarol-2f16a.web.app/vehicles
+https://karmoto.pl
 
 Mobile view
 
@@ -43,10 +43,17 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## Load all external packages
+Run 'npm install' to download all packages.
+
+## It is important to use proper Nodejs version.
+https://nodejs.org/download/release/v14.21.3/
+
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+"#forKarol" 
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 "# forKarol" 
-
-## Load all external packages
-Run 'npm install' to download all packages.
