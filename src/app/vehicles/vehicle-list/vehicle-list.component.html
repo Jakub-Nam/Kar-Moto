@@ -19,7 +19,7 @@
                 <div class="card-body py-0 px-2">
                   <figcaption>
                     <h2 class="card-title mb-1 my-2">{{ vehicle.name | titlecase }}</h2>
-                    <p class="card-text mb-1">Przebieg: {{ vehicle.carMileage }}km</p>
+                    <p class="card-text mb-1" *ngIf="vehicle.carMileage">Przebieg: {{ vehicle.carMileage }}km</p>
                     <p class="card-text mb-0 pt-lg-2">
                       <small class="text-muted ">{{ vehicle.brand }}</small>
                     </p>
