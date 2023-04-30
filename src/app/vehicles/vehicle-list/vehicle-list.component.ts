@@ -75,6 +75,7 @@ export class VehicleListComponent implements OnInit {
     this.vehicleDbService.fetchAllVehicles()
       .subscribe
       (response => {
+        console.log(response.length)
         if (!response.length) {
           this.vehicles = [];
           this.zeroVehicles = true;
