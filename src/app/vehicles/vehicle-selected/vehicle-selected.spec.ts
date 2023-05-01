@@ -1,13 +1,9 @@
-import { DocumentChangeType } from '@firebase/firestore-types';
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { of } from 'rxjs';
 import { Vehicle } from 'src/app/shared/interfaces/vehicle';
 import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { VehicleSelectedComponent } from './vehicle-selected.component';
-import { DocumentData } from '@angular/fire/firestore/interfaces';
 
 describe('VehicleSelectedComponent', () => {
     let component: VehicleSelectedComponent;
@@ -29,9 +25,15 @@ describe('VehicleSelectedComponent', () => {
         TestBed.configureTestingModule({
             declarations: [VehicleSelectedComponent],
             providers: [
-                { provide: ActivatedRoute, useValue: activatedRouteStub },
+                {
+                    provide: ActivatedRoute,
+                    useValue: activatedRouteStub
+                },
                 NgbCarouselConfig,
-                { provide: VehicleDbService, useValue: vehicleDbServiceSpyObj }
+                {
+                    provide: VehicleDbService,
+                    useValue: vehicleDbServiceSpyObj
+                }
             ]
         }).compileComponents();
 
@@ -45,14 +47,6 @@ describe('VehicleSelectedComponent', () => {
     });
 
     it('should fetch main photo', () => {
-        // brand: string;
-        // carMileage: number;
-        // name: string;
-        // path: string;
-        // downloadURL: string;
-        // price: number;
-        // timestamp: number;
-
         const mockVehicle: Vehicle = {
             brand: 'Toyota',
             carMileage: 1000,
@@ -69,10 +63,10 @@ describe('VehicleSelectedComponent', () => {
     });
 
     it('should fetch additional vehicle photos', () => {
-        const mockURLs: Array<{ type: DocumentChangeType; payload: DocumentData }> = [      { type: 'added', payload: { imageUrl: 'image1.jpg' } },      { type: 'added', payload: { imageUrl: 'image2.jpg' } }    ];
-        vehicleDbServiceSpy.fetchAdditionalVehiclePhotos.and.returnValue(of(mockURLs));
+        const mockResponse: Array<{ downloadURL: string; payload: string; }> = [{ downloadURL: 'asdadasd', payload: 'asdasdasd'}];
+        vehicleDbServiceSpy.fetchAdditionalVehiclePhotos.and.returnValue(of(mockResponse));
         component.fetchAdditionalVehiclePhotos('12345');
-        expect(component.vehicleURLs).toEqual(mockURLs);
+        expect(component.vehicleURLs).toEqual(mockResponse);
         expect(vehicleDbServiceSpy.fetchAdditionalVehiclePhotos).toHaveBeenCalledWith('12345');
     });
 

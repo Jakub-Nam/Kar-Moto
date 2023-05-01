@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction, DocumentData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -33,12 +33,22 @@ export class VehicleDbService {
   //     .snapshotChanges();
   // }
   fetchAdditionalVehiclePhotos(path: string) {
-    return this.db.collection('vehicleAdditionalPhotos').doc(path).collection('photos')
+    return this.db.collection(path)
       .snapshotChanges()
       .pipe(
-        map(actions => actions.map(a => ({ type: a.type, payload: a.payload.doc.data() })))
+        map(data => {
+          let dataArray = [];
+          for (let i = 0; i < data.length; i++) {
+            dataArray.push(data[i].payload.doc.data())
+          }
+          console.log(dataArray)
+          return dataArray;
+
+        }
+        )
       );
   }
+
 
   deleteMainPhotoInStorage(path: string) {
     return this.storage.ref(path).delete().toPromise();

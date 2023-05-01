@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class VehicleSelectedComponent implements OnInit {
   vehicle?: Vehicle;
-  vehicleURLs?: Array<object>;
+  vehicleURLs?: unknown[];
   timestamp?: number;
 
   constructor(

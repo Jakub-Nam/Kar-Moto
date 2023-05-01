@@ -3,7 +3,6 @@ exports.__esModule = true;
 var testing_1 = require("@angular/core/testing");
 var router_1 = require("@angular/router");
 var ng_bootstrap_1 = require("@ng-bootstrap/ng-bootstrap");
-var rxjs_1 = require("rxjs");
 var vehicle_db_service_1 = require("src/app/shared/vehicle-db.service");
 var vehicle_selected_component_1 = require("./vehicle-selected.component");
 describe('VehicleSelectedComponent', function () {
@@ -25,9 +24,15 @@ describe('VehicleSelectedComponent', function () {
         testing_1.TestBed.configureTestingModule({
             declarations: [vehicle_selected_component_1.VehicleSelectedComponent],
             providers: [
-                { provide: router_1.ActivatedRoute, useValue: activatedRouteStub },
+                {
+                    provide: router_1.ActivatedRoute,
+                    useValue: activatedRouteStub
+                },
                 ng_bootstrap_1.NgbCarouselConfig,
-                { provide: vehicle_db_service_1.VehicleDbService, useValue: vehicleDbServiceSpyObj }
+                {
+                    provide: vehicle_db_service_1.VehicleDbService,
+                    useValue: vehicleDbServiceSpyObj
+                }
             ]
         }).compileComponents();
         fixture = testing_1.TestBed.createComponent(vehicle_selected_component_1.VehicleSelectedComponent);
@@ -38,13 +43,6 @@ describe('VehicleSelectedComponent', function () {
         expect(component).toBeTruthy();
     });
     it('should fetch main photo', function () {
-        // brand: string;
-        // carMileage: number;
-        // name: string;
-        // path: string;
-        // downloadURL: string;
-        // price: number;
-        // timestamp: number;
         var mockVehicle = {
             brand: 'Toyota',
             carMileage: 1000,
@@ -54,16 +52,16 @@ describe('VehicleSelectedComponent', function () {
             price: 5,
             timestamp: 15
         };
-        vehicleDbServiceSpy.fetchMainPhoto.and.returnValue(rxjs_1.of(mockVehicle));
+        vehicleDbServiceSpy.fetchMainPhoto.and.returnValue(of(mockVehicle));
         component.fetchMainPhoto('12345');
         expect(component.vehicle).toEqual(mockVehicle);
         expect(vehicleDbServiceSpy.fetchMainPhoto).toHaveBeenCalledWith('12345');
     });
     it('should fetch additional vehicle photos', function () {
-        var mockURLs = [{ type: 'added', payload: { imageUrl: 'image1.jpg' } }, { type: 'added', payload: { imageUrl: 'image2.jpg' } }];
-        vehicleDbServiceSpy.fetchAdditionalVehiclePhotos.and.returnValue(rxjs_1.of(mockURLs));
+        var mockResponse = [{ downloadURL: 'asdadasd', payload: 'asdasdasd' }];
+        vehicleDbServiceSpy.fetchAdditionalVehiclePhotos.and.returnValue(of(mockResponse));
         component.fetchAdditionalVehiclePhotos('12345');
-        expect(component.vehicleURLs).toEqual(mockURLs);
+        expect(component.vehicleURLs).toEqual(mockResponse);
         expect(vehicleDbServiceSpy.fetchAdditionalVehiclePhotos).toHaveBeenCalledWith('12345');
     });
 });
