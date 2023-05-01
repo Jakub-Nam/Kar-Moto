@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { AngularFirestore, DocumentChangeAction, DocumentData } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -28,10 +27,6 @@ export class VehicleDbService {
     return this.db.collection('vehicles').doc(`a${path}`).valueChanges();
   }
 
-  // fetchAdditionalVehiclePhotos(path: string) {
-  //   return this.db.collection(path)
-  //     .snapshotChanges();
-  // }
   fetchAdditionalVehiclePhotos(path: string) {
     return this.db.collection(path)
       .snapshotChanges()
@@ -48,7 +43,6 @@ export class VehicleDbService {
         )
       );
   }
-
 
   deleteMainPhotoInStorage(path: string) {
     return this.storage.ref(path).delete().toPromise();
