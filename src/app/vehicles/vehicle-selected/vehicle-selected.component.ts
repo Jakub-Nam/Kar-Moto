@@ -11,9 +11,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./vehicle-selected.component.css']
 })
 export class VehicleSelectedComponent implements OnInit {
-  vehicle!: Vehicle;
-  vehicleURLs!: Array<object>;
-  timestamp!: number;
+  vehicle?: Vehicle;
+  vehicleURLs?: unknown[];
+  timestamp?: number;
 
   constructor(
     private vehicleDbService: VehicleDbService,

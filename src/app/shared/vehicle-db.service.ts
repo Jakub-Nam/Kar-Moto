@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,19 @@ export class VehicleDbService {
 
   fetchAdditionalVehiclePhotos(path: string) {
     return this.db.collection(path)
-      .snapshotChanges();
+      .snapshotChanges()
+      .pipe(
+        map(data => {
+          let dataArray = [];
+          for (let i = 0; i < data.length; i++) {
+            dataArray.push(data[i].payload.doc.data())
+          }
+          console.log(dataArray)
+          return dataArray;
+
+        }
+        )
+      );
   }
 
   deleteMainPhotoInStorage(path: string) {

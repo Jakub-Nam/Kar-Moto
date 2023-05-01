@@ -96,6 +96,7 @@ var VehicleListComponent = /** @class */ (function () {
         var _this = this;
         this.vehicleDbService.fetchAllVehicles()
             .subscribe(function (response) {
+            console.log(response.length);
             if (!response.length) {
                 _this.vehicles = [];
                 _this.zeroVehicles = true;

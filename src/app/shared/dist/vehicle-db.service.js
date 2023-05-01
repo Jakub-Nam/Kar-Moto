@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.VehicleDbService = void 0;
 var core_1 = require("@angular/core");
+var operators_1 = require("rxjs/operators");
 var VehicleDbService = /** @class */ (function () {
     function VehicleDbService(storage, db) {
         this.storage = storage;
@@ -27,7 +28,15 @@ var VehicleDbService = /** @class */ (function () {
     };
     VehicleDbService.prototype.fetchAdditionalVehiclePhotos = function (path) {
         return this.db.collection(path)
-            .snapshotChanges();
+            .snapshotChanges()
+            .pipe(operators_1.map(function (data) {
+            var dataArray = [];
+            for (var i = 0; i < data.length; i++) {
+                dataArray.push(data[i].payload.doc.data());
+            }
+            console.log(dataArray);
+            return dataArray;
+        }));
     };
     VehicleDbService.prototype.deleteMainPhotoInStorage = function (path) {
         return this.storage.ref(path)["delete"]().toPromise();
