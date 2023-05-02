@@ -10,7 +10,6 @@ exports.VehiclesModule = void 0;
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var router_1 = require("@angular/router");
-var dropzone_directive_1 = require("./dropzone.directive");
 var additional_photos_component_1 = require("./vehicle-add/additional-photos/additional-photos.component");
 var vehicle_add_component_1 = require("./vehicle-add/vehicle-add.component");
 var vehicle_filter_component_1 = require("./vehicle-filter/vehicle-filter.component");
@@ -19,8 +18,8 @@ var vehicles_component_1 = require("./vehicles.component");
 var ngx_dropzone_1 = require("ngx-dropzone");
 var ngx_image_compress_1 = require("ngx-image-compress");
 var forms_1 = require("@angular/forms");
-var filter_brand_pipe_1 = require("./vehicle-filter/filters/filter-brand.pipe");
-var filter_price_low_pipe_1 = require("./vehicle-filter/filters/filter-price-low.pipe");
+var brand_pipe_1 = require("./vehicle-filter/filters/brand.pipe");
+var lowest_price_pipe_1 = require("./vehicle-filter/filters/lowest-price.pipe");
 var highest_price_pipe_1 = require("./vehicle-filter/filters/highest-price.pipe");
 var lowest_mileage_pipe_1 = require("./vehicle-filter/filters/lowest-mileage.pipe");
 var highest_mileage_pipe_1 = require("./vehicle-filter/filters/highest-mileage.pipe");
@@ -49,11 +48,11 @@ var VehiclesModule = /** @class */ (function () {
                 vehicles_component_1.VehiclesComponent,
                 vehicle_add_component_1.VehicleAddComponent,
                 additional_photos_component_1.AdditionalPhotosComponent,
-                dropzone_directive_1.DropzoneDirective,
+                // DropzoneDirective,
                 vehicle_selected_component_1.VehicleSelectedComponent,
                 vehicle_filter_component_1.VehicleFilterComponent,
-                filter_brand_pipe_1.FilterBrandPipe,
-                filter_price_low_pipe_1.FilterPriceLowPipe,
+                brand_pipe_1.BrandPipe,
+                lowest_price_pipe_1.LowestPricePipe,
                 highest_price_pipe_1.HighestPricePipe,
                 lowest_mileage_pipe_1.LowestMileagePipe,
                 highest_mileage_pipe_1.HighestMileagePipe,

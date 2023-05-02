@@ -10,8 +10,8 @@ import { VehiclesComponent } from './vehicles.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FilterBrandPipe } from './vehicle-filter/filters/filter-brand.pipe';
-import { FilterPriceLowPipe } from './vehicle-filter/filters/filter-price-low.pipe';
+import { BrandPipe } from './vehicle-filter/filters/brand.pipe';
+import { LowestPricePipe } from './vehicle-filter/filters/lowest-price.pipe';
 import { HighestPricePipe } from './vehicle-filter/filters/highest-price.pipe';
 import { LowestMileagePipe } from './vehicle-filter/filters/lowest-mileage.pipe';
 import { HighestMileagePipe } from './vehicle-filter/filters/highest-mileage.pipe';
@@ -41,8 +41,8 @@ const materialComponents = [
         // DropzoneDirective,
         VehicleSelectedComponent,
         VehicleFilterComponent,
-        FilterBrandPipe,
-        FilterPriceLowPipe,
+        BrandPipe,
+        LowestPricePipe,
         HighestPricePipe,
         LowestMileagePipe,
         HighestMileagePipe,

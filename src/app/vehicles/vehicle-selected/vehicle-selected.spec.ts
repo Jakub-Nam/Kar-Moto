@@ -4,6 +4,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Vehicle } from 'src/app/shared/interfaces/vehicle';
 import { VehicleDbService } from 'src/app/shared/vehicle-db.service';
 import { VehicleSelectedComponent } from './vehicle-selected.component';
+import { of } from 'rxjs';
 
 describe('VehicleSelectedComponent', () => {
     let component: VehicleSelectedComponent;
@@ -63,11 +64,11 @@ describe('VehicleSelectedComponent', () => {
     });
 
     it('should fetch additional vehicle photos', () => {
-        const mockResponse: Array<{ downloadURL: string; payload: string; }> = [{ downloadURL: 'asdadasd', payload: 'asdasdasd'}];
+        const mockResponse: Array<{ downloadURL: string; payload: string; }> = [{ downloadURL: 'somePath', payload: 'someData'}];
         vehicleDbServiceSpy.fetchAdditionalVehiclePhotos.and.returnValue(of(mockResponse));
-        component.fetchAdditionalVehiclePhotos('12345');
+        component.fetchAdditionalVehiclePhotos('somePath1');
         expect(component.vehicleURLs).toEqual(mockResponse);
-        expect(vehicleDbServiceSpy.fetchAdditionalVehiclePhotos).toHaveBeenCalledWith('12345');
+        expect(vehicleDbServiceSpy.fetchAdditionalVehiclePhotos).toHaveBeenCalledWith('somePath1');
     });
 
 });
