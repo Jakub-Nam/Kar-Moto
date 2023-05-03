@@ -47,3 +47,4 @@ Thumbs.db
 environment
 environment.ts
 .firebase
+src/app/vehicles/vehicle-filter/dist/vehicle.filter.spec.js

@@ -1,31 +1,30 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { DropzoneDirective } from './dropzone.directive';
 import { AdditionalPhotosComponent } from './vehicle-add/additional-photos/additional-photos.component';
-import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
-import { VehicleFilterComponent } from './vehicle-filter/vehicle-filter.component';
-import { VehicleSelectedComponent } from './vehicle-selected/vehicle-selected.component';
-import { VehiclesComponent } from './vehicles.component';
-import { NgxDropzoneModule } from 'ngx-dropzone';
-import { NgxImageCompressService } from 'ngx-image-compress';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrandPipe } from './vehicle-filter/filters/brand.pipe';
-import { LowestPricePipe } from './vehicle-filter/filters/lowest-price.pipe';
-import { HighestPricePipe } from './vehicle-filter/filters/highest-price.pipe';
-import { LowestMileagePipe } from './vehicle-filter/filters/lowest-mileage.pipe';
-import { HighestMileagePipe } from './vehicle-filter/filters/highest-mileage.pipe';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { MatSliderModule } from '@angular/material/slider';
+import { BrandPipe } from './vehicle-filter/filters/brand.pipe';
+import { CommonModule } from '@angular/common';
+import { environment } from './../../environment/environment';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HighestMileagePipe } from './vehicle-filter/filters/highest-mileage.pipe';
+import { HighestPricePipe } from './vehicle-filter/filters/highest-price.pipe';
+import { LowestMileagePipe } from './vehicle-filter/filters/lowest-mileage.pipe';
+import { LowestPricePipe } from './vehicle-filter/filters/lowest-price.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { environment } from './../../environment/environment';
+import { MatSliderModule } from '@angular/material/slider';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { VehiclesRoutingModule } from './vehicles-routing.module';
-import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
+import { NgModule } from '@angular/core';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { VehicleAddComponent } from './vehicle-add/vehicle-add.component';
+import { VehicleFilterComponent } from './vehicle-filter/vehicle-filter.component';
+import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
+import { VehiclesComponent } from './vehicles.component';
+import { VehicleSelectedComponent } from './vehicle-selected/vehicle-selected.component';
+import { VehiclesRoutingModule } from './vehicles-routing.module';
 
 const materialComponents = [
     MatSliderModule,
@@ -35,31 +34,30 @@ const materialComponents = [
 
 @NgModule({
     declarations: [
-        VehiclesComponent,
-        VehicleAddComponent,
         AdditionalPhotosComponent,
-        // DropzoneDirective,
-        VehicleSelectedComponent,
-        VehicleFilterComponent,
         BrandPipe,
-        LowestPricePipe,
+        HighestMileagePipe,
         HighestPricePipe,
         LowestMileagePipe,
-        HighestMileagePipe,
-        VehicleListComponent
+        LowestPricePipe,
+        VehicleAddComponent,
+        VehicleFilterComponent,
+        VehicleListComponent,
+        VehiclesComponent,
+        VehicleSelectedComponent,
     ],
     imports: [
-        CommonModule,
-        NgxDropzoneModule,
-        FormsModule,
-        ReactiveFormsModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFirestoreModule,
+        CommonModule,
+        FontAwesomeModule,
+        FormsModule,
         materialComponents,
         NgbModule,
-        FontAwesomeModule,
-        VehiclesRoutingModule,
-        SharedModule
+        NgxDropzoneModule,
+        ReactiveFormsModule,
+        SharedModule,
+        VehiclesRoutingModule
     ],
     providers: [NgxImageCompressService],
     exports: [RouterModule]
