@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { VehicleDbService } from '../../shared/vehicle-db.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from '../../auth/auth.service';
-import { Filter } from '../vehicle-filter/filter.model';
-import { Vehicle } from './../../shared/interfaces/vehicle';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Filter } from '../vehicle-filter/filter.model';
 import { User } from '../../auth/user.model';
+import { Vehicle } from './../../shared/interfaces/vehicle';
+import { VehicleDbService } from '../../shared/vehicle-db.service';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -65,24 +65,25 @@ export class VehicleListComponent implements OnInit {
       });
   }
 
-  noneVehicles() {
-    if (this.vehicles.length === 0) {
-      this.zeroVehicles = true;
-    }
+  filter($event: Filter) {
+    this.filters.brand = $event.brand;
+    this.filters.priceLow = $event.priceLow;
+    this.filters.highestPrice = $event.highestPrice;
+    this.filters.lowestMileage = $event.lowestMileage;
+    this.filters.highestMileage = $event.highestMileage;
   }
 
   fetchAllVehicles() {
     this.vehicleDbService.fetchAllVehicles()
       .subscribe
       (response => {
-        console.log(response.length)
         if (!response.length) {
           this.vehicles = [];
           this.zeroVehicles = true;
           return;
         }
-        response.forEach(vehicleData => {
-          const vehicle: Vehicle = vehicleData.payload.doc.data() as Vehicle;
+        response.forEach(data => {
+          const vehicle: Vehicle = data as Vehicle;
           this.vehicles.push(vehicle);
         });
         this.zeroVehicles = false;
@@ -90,14 +91,6 @@ export class VehicleListComponent implements OnInit {
       err => {
         window.alert('Wystąpił błąd podczas wczytywania danych');
       });
-  }
-
-  filter($event: Filter) {
-    this.filters.brand = $event.brand;
-    this.filters.priceLow = $event.priceLow;
-    this.filters.highestPrice = $event.highestPrice;
-    this.filters.lowestMileage = $event.lowestMileage;
-    this.filters.highestMileage = $event.highestMileage;
   }
 
   toggleDeleteAlert(vehicle: Vehicle, event: Event) {
@@ -190,4 +183,9 @@ export class VehicleListComponent implements OnInit {
     this.errorMsg = '';
   }
 
+  noneVehicles() {
+    if (this.vehicles.length === 0) {
+      this.zeroVehicles = true;
+    }
+  }
 }

@@ -21,8 +21,19 @@ export class VehicleDbService {
   fetchAllVehicles() {
     return this.db.collection('vehicles', ref => ref
       .orderBy('timestamp', 'desc'))
-      .snapshotChanges();
+      .snapshotChanges()
+      .pipe(
+        map(data => {
+          let dataArray = [];
+          for (let i = 0; i < data.length; i++) {
+            dataArray.push(data[i].payload.doc.data())
+          }
+          return dataArray;
+        }
+        )
+      );
   }
+  
   fetchMainPhoto(path: string) {
     return this.db.collection('vehicles').doc(`a${path}`).valueChanges();
   }
@@ -36,9 +47,7 @@ export class VehicleDbService {
           for (let i = 0; i < data.length; i++) {
             dataArray.push(data[i].payload.doc.data())
           }
-          console.log(dataArray)
           return dataArray;
-
         }
         )
       );
