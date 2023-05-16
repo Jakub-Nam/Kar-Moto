@@ -123,7 +123,6 @@ export class VehicleListComponent implements OnInit {
           const path = doc.data().path;
           const storageRef = this.vehicleDbService.storage.ref(path);
           storageRef.delete();
-
           this.deletedSecondaryPhotos = true;
         });
       })
