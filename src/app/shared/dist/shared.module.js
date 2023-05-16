@@ -7,20 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.SharedModule = void 0;
-var core_1 = require("@angular/core");
+var alert_component_1 = require("./alert/alert.component");
 var common_1 = require("@angular/common");
-var slider_1 = require("@angular/material/slider");
+var angular_fontawesome_1 = require("@fortawesome/angular-fontawesome");
 var button_1 = require("@angular/material/button");
 var input_1 = require("@angular/material/input");
 var select_1 = require("@angular/material/select");
-var angular_fontawesome_1 = require("@fortawesome/angular-fontawesome");
-var alert_component_1 = require("./alert/alert.component");
+var slider_1 = require("@angular/material/slider");
+var core_1 = require("@angular/core");
 var placeholder_directive_1 = require("./placeholder/placeholder.directive");
 var angularMaterial = [
-    slider_1.MatSliderModule,
-    input_1.MatInputModule,
     button_1.MatButtonModule,
-    select_1.MatSelectModule
+    input_1.MatInputModule,
+    select_1.MatSelectModule,
+    slider_1.MatSliderModule
 ];
 var SharedModule = /** @class */ (function () {
     function SharedModule() {
@@ -32,18 +32,17 @@ var SharedModule = /** @class */ (function () {
                 placeholder_directive_1.PlaceholderDirective
             ],
             imports: [
+                angularMaterial,
                 common_1.CommonModule,
-                angular_fontawesome_1.FontAwesomeModule,
-                angularMaterial
+                angular_fontawesome_1.FontAwesomeModule
             ],
             exports: [
                 alert_component_1.AlertComponent,
+                angularMaterial,
                 common_1.CommonModule,
                 angular_fontawesome_1.FontAwesomeModule,
-                angularMaterial,
                 placeholder_directive_1.PlaceholderDirective
             ]
-            // entryComponents: [AlertComponent]
         })
     ], SharedModule);
     return SharedModule;

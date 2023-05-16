@@ -48,3 +48,9 @@ environment
 environment.ts
 .firebase
 src/app/vehicles/vehicle-filter/dist/vehicle.filter.spec.js
+src/app/vehicles/vehicle-list/dist/vehicle-list.component.js
+src/app/shared/dist/vehicle-db.service.js
+src/app/vehicles/vehicle-list/dist/vehicle-list.spec.js
+src/app/shared/dist/shared.module.js
+src/app/shared/dist/vehicle-db.service.js
+src/app/vehicles/vehicle-list/dist/vehicle-list.component.js

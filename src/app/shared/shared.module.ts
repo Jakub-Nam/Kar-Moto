@@ -1,19 +1,18 @@
-import { NgModule } from '@angular/core';
+import { AlertComponent } from './alert/alert.component';
 import { CommonModule } from '@angular/common';
-
-import { MatSliderModule } from '@angular/material/slider';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AlertComponent } from './alert/alert.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { NgModule } from '@angular/core';
 import { PlaceholderDirective } from './placeholder/placeholder.directive';
 
 const angularMaterial = [
-    MatSliderModule,
-    MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatInputModule,
+    MatSelectModule,
+    MatSliderModule
 ];
 
 @NgModule({
@@ -23,17 +22,17 @@ const angularMaterial = [
 
     ],
     imports: [
+        angularMaterial,
         CommonModule,
-        FontAwesomeModule,
-        angularMaterial
+        FontAwesomeModule
     ],
     exports: [
         AlertComponent,
+        angularMaterial,
         CommonModule,
         FontAwesomeModule,
-        angularMaterial,
         PlaceholderDirective
     ]
-    // entryComponents: [AlertComponent]
+
 })
 export class SharedModule { }

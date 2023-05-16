@@ -87,36 +87,30 @@ var VehicleListComponent = /** @class */ (function () {
             window.alert('Wystąpił błąd podczas wczytywania danych');
         });
     };
-    VehicleListComponent.prototype.noneVehicles = function () {
-        if (this.vehicles.length === 0) {
-            this.zeroVehicles = true;
-        }
-    };
-    VehicleListComponent.prototype.fetchAllVehicles = function () {
-        var _this = this;
-        this.vehicleDbService.fetchAllVehicles()
-            .subscribe(function (response) {
-            console.log(response.length);
-            if (!response.length) {
-                _this.vehicles = [];
-                _this.zeroVehicles = true;
-                return;
-            }
-            response.forEach(function (vehicleData) {
-                var vehicle = vehicleData.payload.doc.data();
-                _this.vehicles.push(vehicle);
-            });
-            _this.zeroVehicles = false;
-        }, function (err) {
-            window.alert('Wystąpił błąd podczas wczytywania danych');
-        });
-    };
     VehicleListComponent.prototype.filter = function ($event) {
         this.filters.brand = $event.brand;
         this.filters.priceLow = $event.priceLow;
         this.filters.highestPrice = $event.highestPrice;
         this.filters.lowestMileage = $event.lowestMileage;
         this.filters.highestMileage = $event.highestMileage;
+    };
+    VehicleListComponent.prototype.fetchAllVehicles = function () {
+        var _this = this;
+        this.vehicleDbService.fetchAllVehicles()
+            .subscribe(function (response) {
+            if (!response.length) {
+                _this.vehicles = [];
+                _this.zeroVehicles = true;
+                return;
+            }
+            response.forEach(function (data) {
+                var vehicle = data;
+                _this.vehicles.push(vehicle);
+            });
+            _this.zeroVehicles = false;
+        }, function (err) {
+            window.alert('Wystąpił błąd podczas wczytywania danych');
+        });
     };
     VehicleListComponent.prototype.toggleDeleteAlert = function (vehicle, event) {
         event.preventDefault();
@@ -210,6 +204,11 @@ var VehicleListComponent = /** @class */ (function () {
     };
     VehicleListComponent.prototype.hideErrorAlert = function () {
         this.errorMsg = '';
+    };
+    VehicleListComponent.prototype.noneVehicles = function () {
+        if (this.vehicles.length === 0) {
+            this.zeroVehicles = true;
+        }
     };
     VehicleListComponent = __decorate([
         core_1.Component({

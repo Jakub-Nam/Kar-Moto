@@ -21,7 +21,14 @@ var VehicleDbService = /** @class */ (function () {
     VehicleDbService.prototype.fetchAllVehicles = function () {
         return this.db.collection('vehicles', function (ref) { return ref
             .orderBy('timestamp', 'desc'); })
-            .snapshotChanges();
+            .snapshotChanges()
+            .pipe(operators_1.map(function (data) {
+            var dataArray = [];
+            for (var i = 0; i < data.length; i++) {
+                dataArray.push(data[i].payload.doc.data());
+            }
+            return dataArray;
+        }));
     };
     VehicleDbService.prototype.fetchMainPhoto = function (path) {
         return this.db.collection('vehicles').doc("a" + path).valueChanges();
@@ -34,7 +41,6 @@ var VehicleDbService = /** @class */ (function () {
             for (var i = 0; i < data.length; i++) {
                 dataArray.push(data[i].payload.doc.data());
             }
-            console.log(dataArray);
             return dataArray;
         }));
     };
