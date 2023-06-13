@@ -15,8 +15,8 @@ describe('Vehicle-db', function () {
         testing_1.TestBed.configureTestingModule({
             providers: [
                 vehicle_db_service_1.VehicleDbService,
-                { provide: firestore_1.AngularFirestore, useValue: angularFirestoreSpy },
-                { provide: storage_1.AngularFireStorage, useValue: angularFirestoreSpy }
+                { provide: storage_1.AngularFireStorage, useValue: angularFireStorageSpy },
+                { provide: firestore_1.AngularFirestore, useValue: angularFirestoreSpy }
             ]
         });
         vehicleDb = testing_1.TestBed.inject(vehicle_db_service_1.VehicleDbService);

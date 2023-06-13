@@ -17,8 +17,8 @@ describe('Vehicle-db', () => {
         TestBed.configureTestingModule({
             providers: [
                 VehicleDbService,
-                { provide: AngularFirestore, useValue: angularFirestoreSpy },
-                { provide: AngularFireStorage, useValue: angularFirestoreSpy }
+                { provide: AngularFireStorage, useValue: angularFireStorageSpy },
+                { provide: AngularFirestore, useValue: angularFirestoreSpy }
             ]
         })
         vehicleDb = TestBed.inject(VehicleDbService);
