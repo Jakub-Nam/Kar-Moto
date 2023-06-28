@@ -1,6 +1,6 @@
 import { AdditionalPhotosComponent } from './vehicle-add/additional-photos/additional-photos.component';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { BrandPipe } from './vehicle-filter/filters/brand.pipe';
 import { CommonModule } from '@angular/common';
 import { environment } from './../../environment/environment';

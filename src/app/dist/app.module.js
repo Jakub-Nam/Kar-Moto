@@ -15,12 +15,12 @@ var app_component_1 = require("./app.component");
 var header_component_1 = require("./header/header.component");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/common/http");
-var fire_1 = require("@angular/fire");
-var firestore_1 = require("@angular/fire/firestore");
-var storage_1 = require("@angular/fire/storage");
+var compat_1 = require("@angular/fire/compat");
+var firestore_1 = require("@angular/fire/compat/firestore");
+var storage_1 = require("@angular/fire/compat/storage");
 var environment_1 = require("./../environment/environment");
 var footer_component_1 = require("./footer/footer.component");
-var auth_1 = require("@angular/fire/auth");
+var auth_1 = require("@angular/fire/compat/auth");
 var page_not_found_component_1 = require("./page-not-found/page-not-found.component");
 var auth_guard_guard_1 = require("./auth/auth-guard.guard");
 var app_routing_module_1 = require("./app-routing.module");
@@ -43,7 +43,7 @@ var AppModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
                 http_1.HttpClientModule,
-                fire_1.AngularFireModule.initializeApp(environment_1.environment.firebaseConfig),
+                compat_1.AngularFireModule.initializeApp(environment_1.environment.firebaseConfig),
                 firestore_1.AngularFirestoreModule,
                 storage_1.AngularFireStorageModule,
                 auth_1.AngularFireAuthModule,

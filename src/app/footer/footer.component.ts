@@ -9,15 +9,15 @@ import { Profile } from '../shared/interfaces/profile';
 })
 export class FooterComponent implements OnInit {
 
-  profileData: Profile =  {
+  profileData: Profile = {
     name: '',
     email: '',
     phoneNumber: 0,
     street: '',
     postCode: '',
     city: ''
-}
-;
+  }
+    ;
 
   constructor(private vehicleDbService: VehicleDbService) { }
 
@@ -27,13 +27,13 @@ export class FooterComponent implements OnInit {
   fetchProfileData() {
     return this.vehicleDbService.fetchProfileData()
       .subscribe(
-        next => {
+        (next: Profile) => {
           if (!next) {
             window.alert('Problem with fetch profile data');
           }
           this.profileData = next as Profile;
         },
-        error => {
+        (error: any) => {
           window.alert('There is a error with fetch profile data!');
         });
   }

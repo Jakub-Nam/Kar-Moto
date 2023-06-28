@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.VehiclesModule = void 0;
 var additional_photos_component_1 = require("./vehicle-add/additional-photos/additional-photos.component");
-var fire_1 = require("@angular/fire");
-var firestore_1 = require("@angular/fire/firestore");
+var compat_1 = require("@angular/fire/compat");
+var firestore_1 = require("@angular/fire/compat/firestore");
 var brand_pipe_1 = require("./vehicle-filter/filters/brand.pipe");
 var common_1 = require("@angular/common");
 var environment_1 = require("./../../environment/environment");
@@ -58,7 +58,7 @@ var VehiclesModule = /** @class */ (function () {
                 vehicle_selected_component_1.VehicleSelectedComponent,
             ],
             imports: [
-                fire_1.AngularFireModule.initializeApp(environment_1.environment.firebaseConfig),
+                compat_1.AngularFireModule.initializeApp(environment_1.environment.firebaseConfig),
                 firestore_1.AngularFirestoreModule,
                 common_1.CommonModule,
                 angular_fontawesome_1.FontAwesomeModule,
